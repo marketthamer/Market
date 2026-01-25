@@ -149,6 +149,25 @@
             'ألبان': ['لبن', 'جبن', 'حليب']
         };
 
+        // مصفوفة لربط الأقسام بصورها الصحيحة حسب طلبك
+        const subMenuIcons = {
+            'بسكويت': 'imgs_icon/bskt.jpg',
+            'نستلة': 'imgs_icon/nsatala.jpg',
+            'كيك': 'imgs_icon/cake.jpg',
+            'شوكولاته': 'imgs_icon/choco.jpg',
+            'جلاتين': 'imgs_icon/jelle.jpg',
+            'معجون طماطم': 'imgs_icon/tomato.jpg',
+            'صلصة': 'imgs_icon/salsa.jpg',
+            'مخللات': 'imgs_icon/mukhalal.jpg',
+            'غازيات': 'imgs_icon/gaz.jpg',
+            'عصائر': 'imgs_icon/aser.jpg',
+            'طاقة': 'imgs_icon/power.jpg',
+            'مخبوزات': 'imgs_icon/bread.jpg',
+            'حليب': 'imgs_icon/milk.jpg',
+            'جبن': 'imgs_icon/jubn.jpg',
+            'لبن': 'imgs_icon/alban.jpg',
+        };
+
         const data = {
             'شاي وقهوة': [
                 { id: 12, name: 'شاي أحمد تيباك', weight: 'صغير', price: 1250, img: 'imgs_tea/ahmedback.jpg' },
@@ -406,46 +425,32 @@
                 setTimeout(() => { closeModals(); document.getElementById('login-modal').style.display = 'flex'; }, 1000);
                 return;
             }
-
             const btn = document.getElementById('submit-order-btn');
             btn.disabled = true;
             btn.innerText = "جاري الإرسال...";
-
             let total = 0;
             const orderDetails = cart.map(i => {
                 total += i.price * i.qty;
                 return `${i.name} (كمية: ${i.qty}) - السعر: ${i.price * i.qty} د.ع`;
             }).join('\n');
-
             const formData = new FormData();
             formData.append("اسم الزبون", currentUser.name);
             formData.append("رقم الهاتف", currentUser.phone);
             formData.append("العنوان", currentUser.area);
             formData.append("تفاصيل الطلب", orderDetails);
             formData.append("المجموع الكلي", total + " د.ع");
-
             try {
-                // التحديث الجديد لرابط Formspree
                 const response = await fetch("https://formspree.io/f/xpqdajzo", {
                     method: "POST",
                     body: formData,
                     headers: { 'Accept': 'application/json' }
                 });
-
                 if (response.ok) {
                     alert(`شكراً لك ${currentUser.name}! تم استلام طلبك بنجاح.`);
-                    cart = []; 
-                    updateCartUI(); 
-                    closeModals();
-                } else {
-                    showToast("حدث خطأ أثناء الإرسال ❌");
-                }
-            } catch (error) {
-                showToast("تأكد من اتصالك بالإنترنت ⚠️");
-            } finally {
-                btn.disabled = false;
-                btn.innerText = "تأكيد وإرسال الطلب";
-            }
+                    cart = []; updateCartUI(); closeModals();
+                } else { showToast("حدث خطأ أثناء الإرسال ❌"); }
+            } catch (error) { showToast("تأكد من اتصالك بالإنترنت ⚠️"); }
+            finally { btn.disabled = false; btn.innerText = "تأكيد وإرسال الطلب"; }
         }
 
         function updateUserUI() {
@@ -464,7 +469,15 @@
             document.getElementById('main-ui').style.display = 'none';
             document.getElementById('sub-ui').style.display = 'block';
             const list = document.getElementById('sub-list');
-            list.innerHTML = (subMenus[main] || []).map(sub => `<div class="cat-card" onclick="openCat('${sub}', '${main}')"><img src="imgs_icon/mawad.jpg"><h3>${sub}</h3></div>`).join('');
+            list.innerHTML = (subMenus[main] || []).map(sub => {
+                // اختيار الصورة بناءً على اسم القسم الفرعي من مصفوفة subMenuIcons
+                const icon = subMenuIcons[sub] || 'imgs_icon/mawad.jpg';
+                return `
+                <div class="cat-card" onclick="openCat('${sub}', '${main}')">
+                    <img src="${icon}">
+                    <h3>${sub}</h3>
+                </div>`;
+            }).join('');
         }
 
         function openCat(cat, parent = null) {
@@ -502,8 +515,7 @@
             const exist = cart.find(i => i.id === id);
             if(exist) exist.qty += qty; else cart.push({...p, qty: qty});
             animateFly(fromModal ? `modal-img-${id}` : `im-${id}`, p.img);
-            updateCartUI(); 
-            showToast("تمت الإضافة ✅");
+            updateCartUI(); showToast("تمت الإضافة ✅");
             if(fromModal) closeModals();
         }
 
