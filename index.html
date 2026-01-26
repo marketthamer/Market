@@ -596,23 +596,65 @@
     <span>تواصل مع الدعم</span>
 </a>
 
+<div class="candy-container" id="candyContainer"></div>
+
 <style>
-    /* تعديل زر الصعود للأعلى الأصلي ليكون فوق الواتساب */
+    .candy-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: -1; 
+        overflow: hidden;
+    }
+    .candy {
+        position: absolute;
+        top: -30px;
+        font-size: 20px;
+        animation: fall linear infinite;
+        user-select: none;
+    }
+    @keyframes fall {
+        to { transform: translateY(110vh) rotate(360deg); }
+    }
+</style>
+
+<script>
+    function createCandy() {
+        const container = document.getElementById('candyContainer');
+        const candyEmojis = ['🍬', '🍭', '🍩', '🍫', '🧁'];
+        const candy = document.createElement('div');
+        candy.classList.add('candy');
+        candy.innerText = candyEmojis[Math.floor(Math.random() * candyEmojis.length)];
+        candy.style.left = Math.random() * 100 + 'vw';
+        candy.style.animationDuration = (Math.random() * 3 + 5) + 's';
+        candy.style.opacity = Math.random() * 0.4 + 0.2;
+        candy.style.fontSize = (Math.random() * 10 + 15) + 'px';
+        container.appendChild(candy);
+        setTimeout(() => { candy.remove(); }, 8000);
+    }
+    setInterval(createCandy, 600); // إنشاء قطعة كل 0.6 ثانية
+</script>
+
+
+<style>
+    /* رفع زر الصعود الأصلي ليكون فوق الواتساب */
     #scrollTopBtn {
-        bottom: 95px !important; /* رفعه للأعلى مسافة كافية */
-        left: 20px !important;   /* وضعه في جهة اليسار */
-        right: auto !important;  /* إلغاء أي تنسيق جهة اليمين */
-        background: #f59e0b !important; /* لون يتناسب مع متجرك */
-        box-shadow: 0 4px 10px rgba(0,0,0,0.3) !important;
+        bottom: 95px !important; 
+        left: 20px !important;
+        right: auto !important;
+        z-index: 9998 !important;
     }
 
-    /* تنسيق زر الواتساب الجديد */
+    /* تنسيق زر الواتساب */
     .whatsapp-float {
         position: fixed;
-        bottom: 25px; /* مكانه في الزاوية السفلى */
-        left: 20px;   /* جهة اليسار */
+        bottom: 25px;
+        left: 20px;
         background-color: #25d366;
-        color: #FFF !important;
+        color: white !important;
         border-radius: 50px;
         padding: 10px 18px;
         display: flex;
@@ -620,25 +662,17 @@
         gap: 8px;
         text-decoration: none;
         font-weight: bold;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.4);
         z-index: 9999;
         direction: rtl;
-        transition: all 0.3s ease;
+        transition: 0.3s;
     }
+    .whatsapp-float:hover { transform: scale(1.05); }
+    .whatsapp-float i { font-size: 22px; }
 
-    .whatsapp-float:hover {
-        transform: scale(1.05);
-        background-color: #1eb954;
-    }
-
-    .whatsapp-float i {
-        font-size: 22px;
-    }
-
-    /* للهواتف الصغيرة */
     @media (max-width: 480px) {
-        .whatsapp-float span { font-size: 13px; }
         .whatsapp-float { padding: 8px 15px; left: 15px; bottom: 20px; }
+        .whatsapp-float span { font-size: 13px; }
         #scrollTopBtn { bottom: 85px !important; left: 15px !important; }
     }
 </style>
