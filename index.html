@@ -132,8 +132,19 @@
     <script>
         // مصفوفة الديون السابقة
         const userDebts = {
-            "07700000000": "20,000",
-            "07800000000": "12,500"
+            "07700000000": "0000",
+            "07800000000": "0000"
+            "07710000000": "0000",
+            "07820000000": "0000"
+            "07730000000": "0000",
+            "07840000000": "0000"
+            "07750000000": "0000",
+            "07860000000": "0000"
+            "07770000000": "0000",
+            "07880000000": "0000"
+            "07790000000": "0000",
+            "07850000000": "0000"
+           
         };
 
         // الـ ID الخاص بـ Formspree (استبدله بالخاص بك)
@@ -385,6 +396,16 @@
             const pass = document.getElementById('up-pass').value.trim();
             
             if(!name || !phone || !area || !pass) return showToast("يرجى ملئ كافة الحقول ⚠️");
+
+            // التحقق إذا كان الرقم مسجلاً مسبقاً
+            let accounts = JSON.parse(localStorage.getItem('accounts')) || [];
+            const existingUser = accounts.find(acc => acc.phone === phone);
+            if(existingUser) {
+                showToast("هذا الرقم مسجل مسبقاً! ⚠️");
+                alert("عذراً، هذا الرقم لديه حساب بالفعل. يرجى تسجيل الدخول.");
+                switchAuth('in');
+                return;
+            }
             
             const btn = document.getElementById('reg-btn');
             btn.innerText = "جاري إرسال البيانات...";
@@ -406,7 +427,6 @@
 
                 if (response.ok) {
                     alert(`تم تفعيل حسابك سجل دخولك.`);
-                    let accounts = JSON.parse(localStorage.getItem('accounts')) || [];
                     accounts.push({ name, phone, area, pass });
                     localStorage.setItem('accounts', JSON.stringify(accounts));
                     switchAuth('in');
