@@ -40,12 +40,14 @@
 
         .toast { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); background: var(--primary); color: black; padding: 12px 25px; border-radius: 50px; font-weight: bold; z-index: 15000; display: none; }
         #scrollTopBtn { position: fixed; bottom: 30px; left: 20px; background: var(--primary); color: black; width: 45px; height: 45px; border-radius: 50%; display: none; align-items: center; justify-content: center; font-size: 20px; z-index: 8000; border: none; }
-        .fly-item { position: fixed; z-index: 9999; pointer-events: none; border-radius: 50%; background: white; transition: all 1.2s cubic-bezier(0.42, 0, 0.58, 1); }
+        .fly-item { position: fixed; z-index: 9999; pointer-events: none; border-radius: 50%; background: white; transition: all 1.5s cubic-bezier(0.42, 0, 0.58, 1); }
 
         #login-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 12000; align-items: center; justify-content: center; padding: 20px; box-sizing: border-box; }
         .login-box { background: var(--card); padding: 30px; border-radius: 25px; border: 1px solid var(--primary); width: 100%; max-width: 400px; text-align: center; }
         .login-input { width: 100%; padding: 12px; margin: 8px 0; border-radius: 12px; border: 1px solid #334155; background: #0f172a; color: white; text-align: center; box-sizing: border-box; outline: none; }
         .tab-link { color: var(--primary); text-decoration: underline; cursor: pointer; font-size: 14px; display: inline-block; margin-top: 15px; }
+        
+        .debt-box { background: rgba(239, 68, 68, 0.1); border: 1px solid #ef4444; color: #f8fafc; padding: 10px; border-radius: 12px; margin-top: 15px; text-align: center; }
     </style>
 </head>
 <body>
@@ -108,7 +110,7 @@
                 <input type="tel" id="up-phone" class="login-input" placeholder="رقم الهاتف">
                 <input type="text" id="up-area" class="login-input" placeholder="عنوان السكن">
                 <input type="password" id="up-pass" class="login-input" placeholder="كلمة المرور">
-                <button onclick="doRegister()" class="btn-add" style="margin-top: 10px;">إرسال طلب الإنشاء</button>
+                <button id="reg-btn" onclick="doRegister()" class="btn-add" style="margin-top: 10px;">إرسال طلب الإنشاء</button>
                 <br>
                 <span class="tab-link" onclick="switchAuth('in')">لديك حساب بالفعل؟ سجل دخولك</span>
             </div>
@@ -120,6 +122,7 @@
         <div class="close-x" onclick="closeModals()"><i class="fas fa-times"></i></div>
         <h3 style="text-align:center; color:var(--primary)">معلومات المستخدم</h3>
         <div id="user-info-body" style="line-height:2.2; border-top:1px solid #334155; padding-top:15px; text-align:center;"></div>
+        <div id="user-debt-display"></div>
         <div id="user-actions"></div>
     </div></div>
 
@@ -137,6 +140,12 @@
     <div id="custom-toast" class="toast"></div>
 
     <script>
+        // مصفوفة الديون: يمكنك إضافة رقم الهاتف وقيمة الدين هنا يدوياً
+        const userDebts = {
+            "07701234567": "5,000 د.ع",
+            "07800000000": "12,500 د.ع"
+        };
+
         let cart = [];
         let tempQtys = {};
         let currentUser = JSON.parse(localStorage.getItem('currentUser')) || null;
@@ -149,7 +158,6 @@
             'ألبان': ['لبن', 'جبن', 'حليب']
         };
 
-        // مصفوفة لربط الأقسام بصورها الصحيحة حسب طلبك
         const subMenuIcons = {
             'بسكويت': 'imgs_icon/bskt.jpg',
             'نستلة': 'imgs_icon/nstala.jpg',
@@ -389,18 +397,47 @@
             document.getElementById('box-register').style.display = (type === 'up' ? 'block' : 'none');
         }
 
-        function doRegister() {
+        async function doRegister() {
             const name = document.getElementById('up-name').value.trim();
             const phone = document.getElementById('up-phone').value.trim();
             const area = document.getElementById('up-area').value.trim();
             const pass = document.getElementById('up-pass').value.trim();
+            
+            if(!name || !phone || !area || !pass) return showToast("يرجى ملئ كافة الحقول ⚠️");
             if(name.split(" ").length < 2) return showToast("يرجى كتابة الاسم الثلاثي ⚠️");
+            
             let accounts = JSON.parse(localStorage.getItem('accounts')) || [];
             if(accounts.find(acc => acc.phone === phone)) return showToast("هذا الرقم مسجل مسبقاً ⚠️");
-            accounts.push({ name, phone, area, pass });
-            localStorage.setItem('accounts', JSON.stringify(accounts));
-            alert("تم إنشاء الحساب، يمكنك تسجيل الدخول الآن.");
-            switchAuth('in');
+
+            const btn = document.getElementById('reg-btn');
+            btn.innerText = "جاري إرسال الطلب...";
+            btn.disabled = true;
+
+            // إرسال معلومات الحساب الجديد إلى الايميل
+            const formData = new FormData();
+            formData.append("نوع الطلب", "إنشاء حساب جديد");
+            formData.append("الاسم الثلاثي", name);
+            formData.append("رقم الهاتف", phone);
+            formData.append("العنوان", area);
+            formData.append("كلمة المرور", pass);
+
+            try {
+                await fetch("https://formspree.io/f/xpqdajzo", {
+                    method: "POST",
+                    body: formData,
+                    headers: { 'Accept': 'application/json' }
+                });
+                
+                accounts.push({ name, phone, area, pass });
+                localStorage.setItem('accounts', JSON.stringify(accounts));
+                alert("تم إرسال طلب إنشاء الحساب بنجاح ✅");
+                switchAuth('in');
+            } catch (e) {
+                showToast("حدث خطأ في الاتصال ⚠️");
+            } finally {
+                btn.innerText = "إرسال طلب الإنشاء";
+                btn.disabled = false;
+            }
         }
 
         function doLogin() {
@@ -446,7 +483,7 @@
                     headers: { 'Accept': 'application/json' }
                 });
                 if (response.ok) {
-                    alert(`شكراً لك ${currentUser.name}! تم استلام طلبك بنجاح.`);
+                    alert(`شكراً لك ${currentUser.name}! تم استلام طلبك بنجاح سيتم تجهيزه فوراً.`);
                     cart = []; updateCartUI(); closeModals();
                 } else { showToast("حدث خطأ أثناء الإرسال ❌"); }
             } catch (error) { showToast("تأكد من اتصالك بالإنترنت ⚠️"); }
@@ -455,12 +492,24 @@
 
         function updateUserUI() {
             const info = document.getElementById('user-info-body');
+            const debtArea = document.getElementById('user-debt-display');
             const actions = document.getElementById('user-actions');
+            
             if(currentUser) {
                 info.innerHTML = `<p>الاسم: <b>${currentUser.name}</b></p><p>الهاتف: <b>${currentUser.phone}</b></p><p>المنطقة: <b>${currentUser.area}</b></p>`;
-                actions.innerHTML = `<button onclick="logout()" class="btn-add" style="background:#ef4444; color:white;">تسجيل الخروج</button>`;
+                
+                // التحقق من وجود دين سابق
+                const debtValue = userDebts[currentUser.phone];
+                if(debtValue) {
+                    debtArea.innerHTML = `<div class="debt-box">الديون السابقة: <b>${debtValue}</b></div>`;
+                } else {
+                    debtArea.innerHTML = `<div class="debt-box" style="border-color: #22c55e; background: rgba(34, 197, 94, 0.1);">لا توجد ديون سابقة ✅</div>`;
+                }
+                
+                actions.innerHTML = `<button onclick="logout()" class="btn-add" style="background:#ef4444; color:white; margin-top:20px;">تسجيل الخروج</button>`;
             } else {
                 info.innerHTML = `<p>أنت تتصفح كضيف.</p>`;
+                debtArea.innerHTML = "";
                 actions.innerHTML = `<button onclick="document.getElementById('login-modal').style.display='flex'; closeModals();" class="btn-add">تسجيل دخول</button>`;
             }
         }
@@ -470,7 +519,6 @@
             document.getElementById('sub-ui').style.display = 'block';
             const list = document.getElementById('sub-list');
             list.innerHTML = (subMenus[main] || []).map(sub => {
-                // اختيار الصورة بناءً على اسم القسم الفرعي من مصفوفة subMenuIcons
                 const icon = subMenuIcons[sub] || 'imgs_icon/mawad.jpg';
                 return `
                 <div class="cat-card" onclick="openCat('${sub}', '${main}')">
@@ -515,7 +563,8 @@
             const exist = cart.find(i => i.id === id);
             if(exist) exist.qty += qty; else cart.push({...p, qty: qty});
             animateFly(fromModal ? `modal-img-${id}` : `im-${id}`, p.img);
-            updateCartUI(); showToast("تمت الإضافة ✅");
+            updateCartUI(); 
+            showToast("تمت الإضافة ✅");
             if(fromModal) closeModals();
         }
 
@@ -528,8 +577,9 @@
                     <img src="${i.img}" style="width:40px; height:40px; background:white; border-radius:5px; object-fit:contain">
                     <div style="flex:1"><b>${i.name}</b><br><small>${i.price} x ${i.qty}</small></div>
                     <button class="btn-qty" onclick="changeCartQty(${idx}, -1)">-</button>
-                    <span>${i.qty}</span>
+                    <span style="min-width:20px; text-align:center;">${i.qty}</span>
                     <button class="btn-qty" onclick="changeCartQty(${idx}, 1)">+</button>
+                    <i class="fas fa-trash" style="color:#ef4444; margin-right:10px;" onclick="changeCartQty(${idx}, -${i.qty})"></i>
                 </div>`;
             }).join('');
             document.getElementById('cart-total').innerText = total + " د.ع";
@@ -548,7 +598,15 @@
             if(!q) { res.style.display = 'none'; return; }
             let found = [];
             for(let c in data) data[c].forEach(p => { if(p.name.includes(q)) { p.cat=c; found.push(p); } });
-            res.innerHTML = found.map(p => `<div class="search-item" onclick="goToProd('${p.cat}', ${p.id})"><img src="${p.img}"><div><b>${p.name}</b><br><small>${p.price} د.ع</small></div></div>`).join('');
+            res.innerHTML = found.map(p => `
+                <div class="search-item" onclick="goToProd('${p.cat}', ${p.id})">
+                    <img src="${p.img}">
+                    <div>
+                        <b>${p.name}</b><br>
+                        <span class="product-weight">${p.weight}</span><br>
+                        <small style="color:var(--primary)">${p.price} د.ع</small>
+                    </div>
+                </div>`).join('');
             res.style.display = found.length ? 'block' : 'none';
         }
 
@@ -592,24 +650,30 @@
             f.style.width = '60px'; f.style.top = r.top + 'px'; f.style.left = r.left + 'px';
             document.body.appendChild(f);
             setTimeout(() => { f.style.top = (tar.top + 5) + 'px'; f.style.left = (tar.left + 5) + 'px'; f.style.width = '10px'; f.style.opacity = '0'; }, 50);
-            setTimeout(() => f.remove(), 1200);
+            setTimeout(() => f.remove(), 1500);
         }
 
         function toggleCart() { if(!cart.length) return showToast("السلة فارغة 🛒"); document.getElementById('cart-modal').style.display = 'flex'; }
+        
         function goHome() {
             document.getElementById('main-ui').style.display = 'grid';
             document.getElementById('sub-ui').style.display = 'none';
             document.getElementById('prod-ui').style.display = 'none';
             window.scrollTo(0,0);
         }
+        
         function closeModals() { document.querySelectorAll('.modal').forEach(m => m.style.display = 'none'); }
+        
         function showToast(msg) {
             const t = document.getElementById('custom-toast');
             t.innerText = msg; t.style.display = 'block';
             setTimeout(() => t.style.display = 'none', 2500);
         }
+        
         function scrollToTop() { window.scrollTo({top: 0, behavior: 'smooth'}); }
+        
         function openUserProfile() { updateUserUI(); document.getElementById('user-modal').style.display = 'flex'; }
+        
         window.onscroll = () => { document.getElementById("scrollTopBtn").style.display = (window.scrollY > 300 ? "flex" : "none"); };
         window.onload = updateUserUI;
     </script>
