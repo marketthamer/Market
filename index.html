@@ -8,7 +8,7 @@
     <style>
         :root { --primary: #f59e0b; --bg: #0f172a; --card: #1e293b; --text: #f8fafc; --text-muted: #94a3b8; }
         html { scroll-behavior: smooth; }
-        body { font-family: 'Segoe UI', Tahoma, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 15px; text-align: right; overflow-x: hidden; user-select: none; }
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 15px; text-align: right; overflow-x: hidden; user-select: none; touch-action: manipulation; }
         header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
         .search-container { position: relative; margin-bottom: 15px; }
         .search-input { width: 100%; padding: 12px 40px 12px 15px; border-radius: 15px; border: none; background: var(--card); color: white; box-sizing: border-box; outline: none; }
@@ -30,23 +30,49 @@
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 9000; align-items: center; justify-content: center; }
         .modal-content { background: var(--card); width: 90%; max-width: 400px; padding: 25px; border-radius: 25px; border: 1px solid var(--primary); max-height: 80vh; overflow-y: auto; position: relative; }
         .close-x { position: absolute; top: 15px; right: 20px; font-size: 24px; color: var(--text-muted); cursor: pointer; z-index: 10; }
-        .toast { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); background: var(--primary); color: black; padding: 12px 25px; border-radius: 50px; font-weight: bold; z-index: 15000; display: none; }
-        #scrollTopBtn { position: fixed; bottom: 30px; left: 20px; background: var(--primary); color: black; width: 45px; height: 45px; border-radius: 50%; display: none; align-items: center; justify-content: center; font-size: 20px; z-index: 8000; border: none; }
-        .fly-item { position: fixed; z-index: 9999; pointer-events: none; border-radius: 50%; background: white; transition: all 1.5s cubic-bezier(0.42, 0, 0.58, 1); }
+        /* تصميم الإشعار الزجاجي الجديد */
+        .toast { position: fixed; top: 30px; left: 50%; transform: translateX(-50%); background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.2); color: white; padding: 15px 30px; border-radius: 25px; font-weight: 600; z-index: 15000; display: none; box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3); text-align: center; animation: fadeInDown 0.4s ease; }
+        @keyframes fadeInDown { from { opacity: 0; transform: translate(-50%, -20px); } to { opacity: 1; transform: translate(-50%, 0); } }
+        #scrollTopBtn { position: fixed; bottom: 75px; left: 20px; background: var(--primary); color: black; width: 45px; height: 45px; border-radius: 50%; display: none; align-items: center; justify-content: center; font-size: 20px; z-index: 8000; border: none; }
+        .fly-item { position: fixed; z-index: 9999; pointer-events: none; border-radius: 50%; background: white; border: 2px solid var(--primary); box-shadow: 0 0 10px rgba(245, 158, 11, 0.5); }
         #login-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 12000; align-items: center; justify-content: center; padding: 20px; box-sizing: border-box; }
         .login-box { background: var(--card); padding: 30px; border-radius: 25px; border: 1px solid var(--primary); width: 100%; max-width: 400px; text-align: center; }
         .login-input { width: 100%; padding: 12px; margin: 8px 0; border-radius: 12px; border: 1px solid #334155; background: #0f172a; color: white; text-align: center; box-sizing: border-box; outline: none; }
         .tab-link { color: var(--primary); text-decoration: underline; cursor: pointer; font-size: 14px; display: inline-block; margin-top: 15px; }
         .debt-box { background: rgba(239, 68, 68, 0.1); border: 1px solid #ef4444; color: #f8fafc; padding: 10px; border-radius: 12px; margin-top: 15px; text-align: center; }
+
+        /* تنسيقات شاشة الترحيب (Splash Screen) */
+        #splash-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg); z-index: 20000; display: flex; justify-content: center; align-items: center; transition: opacity 0.8s ease-out; }
+        .splash-content { text-align: center; }
+        /* أيقونة السلة مع حركة الانطلاق السريع */
+        .splash-icon { font-size: 90px; color: var(--primary); margin-bottom: 20px; display: inline-block; animation: rushIn 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
+        /* النص الترحيبي */
+        .splash-text { font-size: 26px; color: white; margin: 0; opacity: 0; animation: fadeInUp 0.8s 0.5s forwards; font-family: 'Segoe UI', sans-serif; font-weight: bold; letter-spacing: 0.5px; }
+        
+        @keyframes rushIn {
+            0% { transform: translateX(150px) skewX(-20deg); opacity: 0; }
+            60% { transform: translateX(-15px) skewX(10deg); opacity: 1; }
+            80% { transform: translateX(5px) skewX(-5deg); }
+            100% { transform: translateX(0) skewX(0); }
+        }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
+    
+    <!-- عنصر شاشة الترحيب -->
+    <div id="splash-screen">
+        <div class="splash-content">
+            <i class="fas fa-cart-shopping splash-icon"></i>
+            <h1 class="splash-text">أهلاً بك في أسواق ثامر</h1>
+        </div>
+    </div>
 
     <div id="app-content">
         <header>
             <div onclick="openUserProfile()" style="font-size:28px; color:var(--primary); cursor:pointer;"><i class="fas fa-user-circle"></i></div>
             <h2 style="margin:0;">أسواق ثامر</h2>
-            <div id="cart-btn" onclick="toggleCart()" style="position:relative; cursor:pointer;">
+            <div id="cart-btn" onclick="toggleCart()" style="position:relative; cursor:pointer; transition: transform 0.2s;">
                 <i class="fas fa-shopping-basket" style="font-size:26px; color:var(--primary)"></i>
                 <span id="cart-count" style="position:absolute; top:-5px; right:-5px; background:red; border-radius:50%; padding:2px 7px; font-size:11px; font-weight:bold;">0</span>
             </div>
@@ -134,8 +160,18 @@
         <h3 style="text-align:center;">🛒 سلة التسوق</h3>
         <div id="cart-items" style="max-height:250px; overflow-y:auto;"></div>
         <h3 id="cart-total" style="text-align:center; color:var(--primary); margin: 20px 0;">0 د.ع</h3>
-        <button id="submit-order-btn" onclick="attemptOrder()" class="btn-add">تأكيد وإرسال الطلب</button>
+        <div style="display: flex; gap: 8px; align-items: center;">
+            <button id="submit-order-btn" onclick="attemptOrder()" class="btn-add" style="flex: 1;">تأكيد وإرسال الطلب</button>
+            <button id="loc-btn" onclick="getLocation()" class="btn-add" style="display: none; width: auto; background: #3b82f6; font-size: 11px; padding: 0 10px; height: 44px;">📍 اضغط لتحديد الموقع</button>
+        </div>
+        <p id="free-del-note" style="display: none; text-align: center; color: #4ade80; font-size: 12px; margin-top: 10px; border: 1px dashed #4ade80; padding: 5px; border-radius: 8px;">✨ الطلب بمبلغ 15000 فما فوق يكون التوصيل مجاني</p>
     </div></div>
+
+    <!-- نافذة عرض الصورة بالحجم الكامل -->
+    <div id="img-viewer" class="modal" onclick="this.style.display='none'" style="z-index: 25000; background: rgba(0,0,0,0.95);">
+        <div class="close-x" style="position: fixed; top: 20px; right: 20px; color: white; font-size: 30px;">&times;</div>
+        <img id="full-image-src" style="max-width: 95%; max-height: 80vh; border-radius: 10px; object-fit: contain;">
+    </div>
 
     <button id="scrollTopBtn" onclick="scrollToTop()"><i class="fas fa-arrow-up"></i></button>
     <div id="custom-toast" class="toast"></div>
@@ -154,6 +190,7 @@
         let cart = [];
         let tempQtys = {};
         let currentUser = JSON.parse(localStorage.getItem('currentUser')) || null;
+        let locationLink = "";
 
         const subMenus = {
             'حلويات': ['بسكويت', 'شوكولاته', 'نستلة', 'كيك', 'جلاتين'],
@@ -163,8 +200,8 @@
             'ألبان': ['لبن', 'جبن', 'حليب']
         };
 
-        const subMenuIcons = {
-            'بسكويت': 'imgs_icon/bskt.jpg', 'نستلة': 'imgs_icon/nstala.jpg', 'كيك': 'imgs_icon/cake.jpg', 'شوكولاته': 'imgs_icon/choco.jpg', 'جلاتين': 'imgs_icon/jelle.jpg',
+         const subMenuIcons = {
+            'بسكويت': 'imgs_icon/bskt.jpg', 'نستلة': 'imgs_icon/nstala.jpg', 'عروض وتخفيضات': 'imgs_icon/sale.jpg', 'كيك': 'imgs_icon/cake.jpg', 'شوكولاته': 'imgs_icon/choco.jpg', 'جلاتين': 'imgs_icon/jelle.jpg',
             'معجون طماطم': 'imgs_icon/tomato.jpg', 'صلصة': 'imgs_icon/salsa.jpg', 'مخللات': 'imgs_icon/mukhalal.jpg', 'غازيات': 'imgs_icon/gaz.jpg', 'عصائر': 'imgs_icon/aser.jpg',
             'طاقة': 'imgs_icon/power.jpg', 'مخبوزات': 'imgs_icon/bread.jpg', 'حليب': 'imgs_icon/milk.jpg', 'جبن': 'imgs_icon/jubn.jpg', 'لبن': 'imgs_icon/alban.jpg',
         };
@@ -703,6 +740,14 @@
         }
 
         async function attemptOrder() {
+    // التحقق من وقت الافتتاح (من 4 مساءً إلى 10 مساءً)
+    const now = new Date();
+    const hour = now.getHours();
+    if (hour < 16 || hour >= 22) {
+        alert("⛔ الأسواق مغلقة الآن\n🕒 أوقات العمل: من الساعة 4 مساءً إلى الساعة 10 مساءً");
+        return;
+    }
+
     if(!currentUser) { showToast("سجل دخولك أولاً 🛍️"); return; }
     const btn = document.getElementById('submit-order-btn');
     btn.disabled = true; btn.innerText = "...جاري الإرسال";
@@ -716,7 +761,8 @@
         الزبون: currentUser.name,
         الهاتف: currentUser.phone,
         الطلب: orderDetails,
-        المجموع: total + " د.ع"
+        المجموع: total + " د.ع",
+        الموقع: locationLink ? locationLink : "لم يتم التحديد"
     };
 
     try {
@@ -727,7 +773,7 @@
         });
         if (response.status == 200) {
             alert("✅ تم استلام طلبك، سيتم التجهيز فوراً");
-            cart = []; updateCartUI(); closeModals();
+            cart = []; locationLink = ""; updateCartUI(); closeModals();
         } else {
             showToast("⚠️ فشل في الإرسال");
         }
@@ -736,6 +782,7 @@
 }
 
         function showSubMenu(main) {
+            window.scrollTo(0, 0);
             document.getElementById('main-ui').style.display = 'none';
             document.getElementById('sub-ui').style.display = 'block';
             const list = document.getElementById('sub-list');
@@ -746,6 +793,7 @@
         }
 
         function openCat(cat, parent = null) {
+            window.scrollTo(0, 0);
             document.getElementById('main-ui').style.display = 'none';
             document.getElementById('sub-ui').style.display = 'none';
             document.getElementById('prod-ui').style.display = 'block';
@@ -796,16 +844,70 @@
                 </div>`;
             }).join('');
             document.getElementById('cart-total').innerText = total + " د.ع";
+            
+            // منطق التوصيل المجاني وتحديد الموقع
+            if (total >= 15000) {
+                document.getElementById('loc-btn').style.display = 'block';
+                document.getElementById('free-del-note').style.display = 'block';
+            } else {
+                document.getElementById('loc-btn').style.display = 'none';
+                document.getElementById('free-del-note').style.display = 'none';
+            }
         }
 
         function changeCartQty(idx, d) { cart[idx].qty += d; if(cart[idx].qty <= 0) cart.splice(idx, 1); updateCartUI(); if(!cart.length) closeModals(); }
 
+        // دالة لتوحيد الحروف العربية (معالجة الهاء والتاء والهمزات)
+        function normalizeArabic(text) {
+            return text.replace(/[أإآ]/g, 'ا').replace(/[ة]/g, 'ه').replace(/[ى]/g, 'ي');
+        }
+
+        function getLocation() {
+            if (navigator.geolocation) {
+                showToast("جاري تحديد الموقع...");
+                navigator.geolocation.getCurrentPosition((position) => {
+                    locationLink = `https://www.google.com/maps?q=${position.coords.latitude},${position.coords.longitude}`;
+                    alert("✅ تم حفظ موقعك بنجاح، سيتم إرساله مع الطلب.");
+                }, () => { alert("⚠️ تعذر الوصول للموقع، يرجى تفعيل الـ GPS."); });
+            } else { alert("المتصفح لا يدعم تحديد الموقع."); }
+        }
+
+        // كلمات مفتاحية ذكية لتوجيه البحث
+        const searchKeywords = {
+            'تمن': 'رز',
+            'جكاير': 'سكائر',
+            'دخان': 'سكائر',
+            'عصير': 'عصائر',
+            'مشروب': 'غازيات',
+            'بيبسي': 'غازيات',
+            'كاكاو': 'شوكولاته',
+            'نستله': 'نستلة',
+            'منظف': 'منظفات سائلة',
+            'معجون': 'معجون طماطم'
+        };
+
         function handleSearch() {
-            const q = document.getElementById('sb').value.toLowerCase();
+            let q = document.getElementById('sb').value.toLowerCase().trim();
             const res = document.getElementById('sr');
             if(!q) { res.style.display = 'none'; return; }
+            
+            q = normalizeArabic(q); // توحيد النص المدخل
             let found = [];
-            for(let c in data) data[c].forEach(p => { if(p.name.includes(q)) { p.cat=c; found.push(p); } });
+            
+            // البحث في المنتجات والأقسام والكلمات المفتاحية
+            for(let c in data) {
+                // التحقق هل الكلمة المدخلة تطابق اسم القسم أو الكلمات المفتاحية لهذا القسم
+                const isCategoryMatch = normalizeArabic(c).includes(q) || (searchKeywords[q] && searchKeywords[q] === c);
+                
+                data[c].forEach(p => { 
+                    // إضافة المنتج إذا تطابق اسمه أو إذا كان البحث يطابق القسم الخاص به
+                    if(normalizeArabic(p.name).includes(q) || isCategoryMatch) { 
+                        p.cat=c; 
+                        found.push(p); 
+                    } 
+                });
+            }
+            
             res.innerHTML = found.map(p => `<div class="search-item" onclick="goToProd('${p.cat}', ${p.id})"><img src="${p.img}"><div><b>${p.name}</b><br><small>${p.price} د.ع</small></div></div>`).join('');
             res.style.display = found.length ? 'block' : 'none';
         }
@@ -818,7 +920,7 @@
             const body = document.getElementById('product-detail-body');
             body.innerHTML = `
                 <div class="close-x" onclick="closeModals()"><i class="fas fa-times"></i></div>
-                <div class="img-box" style="height:150px; background:white; margin-bottom:15px;"><img src="${p.img}" id="modal-img-${p.id}" style="max-height:90%"></div>
+                <div class="img-box" style="height:150px; background:white; margin-bottom:15px;"><img src="${p.img}" id="modal-img-${p.id}" style="max-height:90%" onclick="openFullImg('${p.img}')"></div>
                 <h2 style="text-align:center;">${p.name}</h2>
                 <div style="text-align:center;"><span class="product-weight">${p.weight}</span></div>
                 <h3 style="color:var(--primary); text-align:center;">${p.price} د.ع</h3>
@@ -832,27 +934,71 @@
             document.getElementById('product-detail-modal').style.display = 'flex';
         }
 
+        function openFullImg(src) {
+            document.getElementById('full-image-src').src = src;
+            document.getElementById('img-viewer').style.display = 'flex';
+        }
+
         function updateModalQty(id, d) { tempQtys[id] = Math.max(1, (tempQtys[id] || 1) + d); document.getElementById(`q-modal-${id}`).innerText = tempQtys[id]; }
 
         function animateFly(sourceId, img) {
             const src = document.getElementById(sourceId); if(!src) return;
             const tar = document.getElementById('cart-btn').getBoundingClientRect();
             const r = src.getBoundingClientRect();
+            
+            // حساب المسافة بين المنتج والسلة
+            const dx = tar.left - r.left;
+            const dy = tar.top - r.top;
+            const dist = Math.sqrt(dx*dx + dy*dy);
+            // تحديد الوقت: 3.0 ثانية كحد أدنى + زيادة بناءً على المسافة للحفاظ على البطء
+            const duration = 3.0 + (dist / 500);
+
             const f = document.createElement('img'); f.src = img; f.className = 'fly-item';
-            f.style.width = '60px'; f.style.top = r.top + 'px'; f.style.left = r.left + 'px';
+            f.style.transition = `all ${duration}s cubic-bezier(0.2, 0.8, 0.2, 1)`; // تطبيق الوقت المحسوب
+            // نبدأ الصورة بحجم أكبر قليلاً لتكون واضحة
+            f.style.width = '70px'; f.style.height = '70px'; 
+            f.style.top = r.top + 'px'; f.style.left = r.left + 'px';
+            f.style.objectFit = "cover";
             document.body.appendChild(f);
-            setTimeout(() => { f.style.top = (tar.top + 5) + 'px'; f.style.left = (tar.left + 5) + 'px'; f.style.width = '10px'; f.style.opacity = '0'; }, 50);
-            setTimeout(() => f.remove(), 1500);
+            
+            setTimeout(() => { 
+                // نرسلها لمنتصف أيقونة السلة بالضبط
+                f.style.top = (tar.top + tar.height/2 - 15) + 'px'; 
+                f.style.left = (tar.left + tar.width/2 - 15) + 'px'; 
+                f.style.width = '20px'; f.style.height = '20px'; f.style.opacity = '0.7'; 
+            }, 50);
+            
+            setTimeout(() => { 
+                f.remove();
+                // تأثير اهتزاز السلة عند وصول المنتج
+                const cartBtn = document.getElementById('cart-btn');
+                cartBtn.style.transform = "scale(1.3)";
+                setTimeout(() => cartBtn.style.transform = "scale(1)", 200);
+            }, duration * 1000);
         }
 
         function toggleCart() { if(!cart.length) return showToast("السلة فارغة 🛒"); document.getElementById('cart-modal').style.display = 'flex'; }
         function goHome() { document.getElementById('main-ui').style.display = 'grid'; document.getElementById('sub-ui').style.display = 'none'; document.getElementById('prod-ui').style.display = 'none'; window.scrollTo(0,0); }
         function closeModals() { document.querySelectorAll('.modal').forEach(m => m.style.display = 'none'); }
-        function showToast(msg) { const t = document.getElementById('custom-toast'); t.innerText = msg; t.style.display = 'block'; setTimeout(() => t.style.display = 'none', 2500); }
+        function showToast(msg) { const t = document.getElementById('custom-toast'); t.innerText = msg; t.style.display = 'block'; setTimeout(() => t.style.display = 'none', 3000); }
         function scrollToTop() { window.scrollTo({top: 0, behavior: 'smooth'}); }
         function openUserProfile() { updateUserUI(); document.getElementById('user-modal').style.display = 'flex'; }
         window.onscroll = () => { document.getElementById("scrollTopBtn").style.display = (window.scrollY > 300 ? "flex" : "none"); };
-        window.onload = updateUserUI;
+        
+        // تشغيل شاشة الترحيب عند التحميل
+        let appStarted = false;
+        function startApp() {
+            if(appStarted) return;
+            appStarted = true;
+            window.scrollTo(0, 0);
+            updateUserUI();
+            setTimeout(() => {
+                const splash = document.getElementById('splash-screen');
+                if(splash) { splash.style.opacity = '0'; setTimeout(() => { splash.style.display = 'none'; }, 800); }
+            }, 2000);
+        }
+        window.addEventListener('load', startApp);
+        setTimeout(startApp, 3000); // فتح إجباري في حال تأخر التحميل
     </script>
     <a href="https://wa.me/9647828196586" class="whatsapp-float" target="_blank">
     <i class="fab fa-whatsapp"></i>
@@ -862,6 +1008,28 @@
 <div class="candy-container" id="candyContainer"></div>
 
 <style>
+    /* تنسيق زر الواتساب - تمت إعادته بحجم أصغر */
+    .whatsapp-float {
+        position: fixed;
+        bottom: 15px;
+        left: 20px;
+        background-color: #25d366;
+        color: white !important;
+        border-radius: 50px;
+        padding: 6px 12px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 11px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+        z-index: 9999;
+        transition: 0.3s;
+    }
+    .whatsapp-float:hover { transform: scale(1.05); }
+    .whatsapp-float i { font-size: 16px; }
+
     .candy-container {
         position: fixed;
         top: 0;
@@ -901,48 +1069,13 @@
     setInterval(createCandy, 600); // إنشاء قطعة كل 0.6 ثانية
 </script>
 
+</body>
+</html>t>
 
-<style>
-    /* رفع زر الصعود الأصلي ليكون فوق الواتساب */
-    #scrollTopBtn {
-        bottom: 95px !important; 
-        left: 20px !important;
-        right: auto !important;
-        z-index: 9998 !important;
-    }
+</body>
+</html>
+</body>
+</html>t>
 
-    /* تنسيق زر الواتساب */
-    .whatsapp-float {
-        position: fixed;
-        bottom: 25px;
-        left: 20px;
-        background-color: #25d366;
-        color: white !important;
-        border-radius: 50px;
-        padding: 10px 18px;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        text-decoration: none;
-        font-weight: bold;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.4);
-        z-index: 9999;
-        direction: rtl;
-        transition: 0.3s;
-    }
-    .whatsapp-float:hover { transform: scale(1.05); }
-    .whatsapp-float i { font-size: 22px; }
-
-    @media (max-width: 480px) {
-        .whatsapp-float { padding: 8px 15px; left: 15px; bottom: 20px; }
-        .whatsapp-float span { font-size: 13px; }
-        #scrollTopBtn { bottom: 85px !important; left: 15px !important; }
-    }
-</style>
-
-<a href="https://wa.me/9647828196586" class="whatsapp-float" target="_blank">
-    <i class="fab fa-whatsapp"></i>
-    <span>تواصل مع الدعم</span>
-</a>
 </body>
 </html>
