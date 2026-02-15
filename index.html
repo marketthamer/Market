@@ -99,21 +99,6 @@
             transform: scale(1.05);
         }
 
-        /* قائمة اختيار الألعاب */
-        #games-menu {
-            display: none;
-            flex-direction: column;
-            gap: 15px;
-            animation: fadeIn 0.5s;
-            width: 100%;
-        }
-
-        .menu-btn {
-            width: 100%;
-            justify-content: center;
-            margin: 0;
-        }
-
         /* تنسيقات اللعبة (X-O) */
         #xo-container {
             display: none; /* مخفي افتراضياً */
@@ -161,36 +146,29 @@
             margin-top: 10px;
         }
 
-        /* تنسيقات لعبة الأفعى */
-        #snake-container {
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            animation: fadeIn 0.5s;
+        /* أزرار الصعوبة */
+        .difficulty-controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
         }
 
-        canvas {
-            background: rgba(0, 0, 0, 0.3);
-            border: 2px solid #f39c12;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.5);
-        }
-
-        .snake-controls {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 5px;
-            margin-top: 10px;
-        }
-        
-        .ctrl-btn {
+        .diff-btn {
             background: rgba(255,255,255,0.1);
             border: 1px solid rgba(255,255,255,0.2);
-            color: #fff;
-            padding: 10px;
-            border-radius: 5px;
+            color: #ccc;
+            padding: 5px 15px;
+            border-radius: 15px;
             cursor: pointer;
-            font-size: 1.2rem;
+            font-family: 'Cairo', sans-serif;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+
+        .diff-btn.active, .diff-btn:hover {
+            background: #f39c12;
+            color: #fff;
+            border-color: #f39c12;
         }
 
         @keyframes fadeIn {
@@ -212,7 +190,7 @@
             
             <!-- زر تشغيل اللعبة -->
             <div>
-                <button class="game-btn" onclick="showMenu()">
+                <button class="game-btn" onclick="startXO()">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                         <path d="M21 6H3C1.89 6 1 6.89 1 8V16C1 17.11 1.89 18 3 18H21C22.11 18 23 17.11 23 16V8C23 6.89 22.11 6 21 6ZM6 13C5.45 13 5 12.55 5 12C5 11.45 5.45 11 6 11C6.55 11 7 11.45 7 12C7 12.55 6.55 13 6 13ZM9 13C8.45 13 8 12.55 8 12C8 11.45 8.45 11 9 11C9.55 11 10 11.45 10 12C10 12.55 9.55 13 9 13ZM12 16H18V14H12V16ZM18 10H12V8H18V10Z"/>
                     </svg>
@@ -228,14 +206,6 @@
             </div>
         </div>
         
-        <!-- قائمة اختيار الألعاب -->
-        <div id="games-menu">
-            <h2 style="color:#f39c12;">اختر لعبة</h2>
-            <button class="game-btn menu-btn" onclick="startXO()">لعبة X-O (ضد الكمبيوتر)</button>
-            <button class="game-btn menu-btn" onclick="startSnake()">لعبة الأفعى</button>
-            <button class="back-btn" onclick="hideMenu()">رجوع</button>
-        </div>
-
         <!-- لعبة X-O -->
         <div id="xo-container">
             <h2 style="color:#f39c12; margin:0;">X-O ضد الذكاء</h2>
@@ -251,58 +221,43 @@
                 <div class="cell" onclick="play(8)"></div>
             </div>
             <div id="status" style="margin-bottom:10px; height:20px;"></div>
+            
+            <!-- خيارات الصعوبة -->
+            <div class="difficulty-controls">
+                <button class="diff-btn" id="btn-easy" onclick="setDifficulty('easy')">سهلة</button>
+                <button class="diff-btn active" id="btn-medium" onclick="setDifficulty('medium')">متوسطة</button>
+                <button class="diff-btn" id="btn-hard" onclick="setDifficulty('hard')">صعبة</button>
+            </div>
+
             <div style="display:flex; gap:10px;">
                 <button class="back-btn" onclick="resetXO()" style="background:rgba(243, 156, 18, 0.2); border-color:#f39c12; color:#f39c12;">لعبة جديدة</button>
-                <button class="back-btn" onclick="backToMenu()">القائمة الرئيسية</button>
-            </div>
-        </div>
-
-        <!-- لعبة الأفعى -->
-        <div id="snake-container">
-            <h2 style="color:#f39c12; margin:0 0 10px 0;">لعبة الأفعى</h2>
-            <canvas id="snakeCanvas" width="300" height="300"></canvas>
-            <div class="snake-controls">
-                <div></div>
-                <button class="ctrl-btn" onclick="changeDirection({keyCode:38})">▲</button>
-                <div></div>
-                <button class="ctrl-btn" onclick="changeDirection({keyCode:37})">◄</button>
-                <button class="ctrl-btn" onclick="changeDirection({keyCode:40})">▼</button>
-                <button class="ctrl-btn" onclick="changeDirection({keyCode:39})">►</button>
-            </div>
-            <div style="margin-top:10px; display:flex; gap:10px;">
-                <button class="back-btn" onclick="resetSnake()" style="background:rgba(243, 156, 18, 0.2); border-color:#f39c12; color:#f39c12;">لعبة جديدة</button>
-                <button class="back-btn" onclick="backToMenu()">القائمة الرئيسية</button>
+                <button class="back-btn" onclick="closeGame()">خروج</button>
             </div>
         </div>
     </div>
 
     <script>
-        // --- إدارة القوائم ---
-        function showMenu() {
-            document.getElementById('main-content').style.display = 'none';
-            document.getElementById('games-menu').style.display = 'flex';
-        }
-
-        function hideMenu() {
-            document.getElementById('games-menu').style.display = 'none';
-            document.getElementById('main-content').style.display = 'block';
-        }
-
-        function backToMenu() {
-            document.getElementById('xo-container').style.display = 'none';
-            document.getElementById('snake-container').style.display = 'none';
-            stopSnake(); // إيقاف الأفعى عند الخروج
-            document.getElementById('games-menu').style.display = 'flex';
-        }
-
         // --- منطق لعبة X-O (ضد الكمبيوتر) ---
         let currentPlayer = 'X';
         let gameBoard = ['', '', '', '', '', '', '', '', ''];
         let gameActive = true;
+        let difficulty = 'medium';
 
         function startXO() {
-            document.getElementById('games-menu').style.display = 'none';
+            document.getElementById('main-content').style.display = 'none';
             document.getElementById('xo-container').style.display = 'flex';
+            resetXO();
+        }
+
+        function closeGame() {
+            document.getElementById('xo-container').style.display = 'none';
+            document.getElementById('main-content').style.display = 'block';
+        }
+
+        function setDifficulty(level) {
+            difficulty = level;
+            document.querySelectorAll('.diff-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById('btn-' + level).classList.add('active');
             resetXO();
         }
 
@@ -329,10 +284,23 @@
         function computerMove() {
             if (!gameActive) return;
 
-            // ذكاء بسيط: 1. حاول الفوز، 2. امنع الخصم، 3. العب عشوائي
-            let move = findBestMove('O') || findBestMove('X') || getRandomMove();
+            let move = null;
 
-            if (move !== -1) {
+            if (difficulty === 'easy') {
+                move = getRandomMove();
+            } else if (difficulty === 'medium') {
+                // يحاول الفوز، وإذا لم يستطع يمنع الخصم بنسبة 50%، وإلا عشوائي
+                move = findBestMove('O');
+                if (move === null && Math.random() > 0.5) move = findBestMove('X');
+                if (move === null) move = getRandomMove();
+            } else {
+                // صعب: يحاول الفوز، ثم يمنع الخصم، ثم عشوائي
+                move = findBestMove('O');
+                if (move === null) move = findBestMove('X');
+                if (move === null) move = getRandomMove();
+            }
+
+            if (move !== -1 && move !== null) {
                 gameBoard[move] = 'O';
                 updateCell(move, 'O');
                 if (!checkWinner()) currentPlayer = 'X';
@@ -401,105 +369,6 @@
                 cell.innerText = '';
                 cell.classList.remove('x', 'o');
             }
-        }
-
-        // --- منطق لعبة الأفعى (Snake) ---
-        const canvas = document.getElementById('snakeCanvas');
-        const ctx = canvas.getContext('2d');
-        const box = 15; // حجم المربع
-        let snake = [];
-        let food = {};
-        let d;
-        let gameLoop;
-        let score = 0;
-
-        function startSnake() {
-            document.getElementById('games-menu').style.display = 'none';
-            document.getElementById('snake-container').style.display = 'flex';
-            resetSnake();
-        }
-
-        function resetSnake() {
-            snake = [{ x: 9 * box, y: 10 * box }];
-            food = {
-                x: Math.floor(Math.random() * 19 + 1) * box,
-                y: Math.floor(Math.random() * 19 + 1) * box
-            };
-            score = 0;
-            d = null; // الانتظار حتى يضغط اللاعب
-            clearInterval(gameLoop);
-            gameLoop = setInterval(drawSnake, 100);
-        }
-
-        function stopSnake() {
-            clearInterval(gameLoop);
-        }
-
-        document.addEventListener("keydown", changeDirection);
-
-        function changeDirection(event) {
-            let key = event.keyCode;
-            if (key == 37 && d != "RIGHT") d = "LEFT";
-            else if (key == 38 && d != "DOWN") d = "UP";
-            else if (key == 39 && d != "LEFT") d = "RIGHT";
-            else if (key == 40 && d != "UP") d = "DOWN";
-        }
-
-        function drawSnake() {
-            ctx.fillStyle = "#2c5364"; // مسح الخلفية
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-            for (let i = 0; i < snake.length; i++) {
-                ctx.fillStyle = (i == 0) ? "#f39c12" : "#ffffff"; // رأس الأفعى ذهبي
-                ctx.fillRect(snake[i].x, snake[i].y, box, box);
-                ctx.strokeStyle = "#000";
-                ctx.strokeRect(snake[i].x, snake[i].y, box, box);
-            }
-
-            ctx.fillStyle = "#e74c3c"; // لون الطعام
-            ctx.fillRect(food.x, food.y, box, box);
-
-            let snakeX = snake[0].x;
-            let snakeY = snake[0].y;
-
-            if (d == "LEFT") snakeX -= box;
-            if (d == "UP") snakeY -= box;
-            if (d == "RIGHT") snakeX += box;
-            if (d == "DOWN") snakeY += box;
-
-            // أكل الطعام
-            if (snakeX == food.x && snakeY == food.y) {
-                score++;
-                food = {
-                    x: Math.floor(Math.random() * 19 + 1) * box,
-                    y: Math.floor(Math.random() * 19 + 1) * box
-                };
-            } else {
-                if(d) snake.pop(); // إزالة الذيل إذا لم تأكل وتحركت
-            }
-
-            let newHead = { x: snakeX, y: snakeY };
-
-            // الخسارة (الاصطدام بالجدار أو النفس)
-            if (snakeX < 0 || snakeX >= canvas.width || snakeY < 0 || snakeY >= canvas.height || collision(newHead, snake)) {
-                clearInterval(gameLoop);
-                // رسم نص الخسارة
-                ctx.fillStyle = "white";
-                ctx.font = "30px Cairo";
-                ctx.fillText("انتهت اللعبة", 80, 150);
-                return;
-            }
-
-            if(d) snake.unshift(newHead);
-        }
-
-        function collision(head, array) {
-            for (let i = 0; i < array.length; i++) {
-                if (head.x == array[i].x && head.y == array[i].y) {
-                    return true;
-                }
-            }
-            return false;
         }
     </script>
 </body>
