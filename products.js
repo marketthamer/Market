@@ -387,7 +387,20 @@ const data = {
                 { id: 7029, name: 'لنبة ايراني', weight: 'قطعة', price: 500, img: 'imgs_alban/labna.jpg' },
                 { id: 7030, name: 'جبنة البقرة سليمانية', weight: 'قطعة', price: 500, img: 'imgs_alban/slemaniblue.jpg' }
             ],
-            'لبن': [],
+            'لبن': [
+                { id: 3201, name: 'لبن الامير سادة', weight: 'قطعة', price: 250, img: 'imgs_laban/الامير سادة 250.jpg' },
+                { id: 3202, name: 'لبن الامير ليمون', weight: 'قطعة', price: 250, img: 'imgs_laban/الامير ليمون 250.jpg' },
+                { id: 3203, name: 'لبن الامير نعناع', weight: 'قطعة', price: 250, img: 'imgs_laban/الامير نعناع 250.jpg' },
+                { id: 3204, name: 'لبن الامير مدخن', weight: 'قطعة', price: 250, img: 'imgs_laban/الامير مدخن 250.jpg' },
+                { id: 3205, name: 'لبن دوغ', weight: 'قطعة', price: 500, img: 'imgs_laban/لبن دوغ 500.jpg' },
+                { id: 3206, name: 'لبن جياو', weight: 'قطعة', price: 500, img: 'imgs_laban/لبن جياو 500.jpg' },                     
+                { id: 3207, name: 'زبادي سطل', weight: 'قطعة', price: 1750, img: 'imgs_laban/زبادي سطل.jpg' },
+                { id: 3208, name: 'زبادي مانيزان وسط', weight: 'قطعة', price: 1000, img: 'imgs_laban/زبادي مانيزان 1000.jpg' },
+                { id: 3209, name: 'زبادي الامير صغير', weight: 'قطعة', price: 250, img: 'imgs_laban/زبادي الامير 250.jpg' },
+                { id: 3210, name: 'جاموس ايراني', weight: 'قطعة', price: 1000, img: 'imgs_laban/جاموس ايراني 1000.jpg' },
+                { id: 3211, name: 'سفن دبة', weight: 'قطعة', price: 4000, img: 'imgs_laban/سفن دبة 4000.jpg' },                        
+                { id: 3212, name: 'زبادي كالة صغير', weight: 'قطعة', price: 500, img: 'imgs_laban/زبادي كالة 500.jpg' }                        
+            ],
             'حليب': [],
             'بسكويت': [
                 { id: 6001, name: 'فرخنده دايت دارسين وتفاح', weight: 'باكيت', price: 1000, img: 'imgs_bskt/farkhndaapple.jpg' },
@@ -442,4 +455,5 @@ const data = {
             'زيت وسمن الطعام': [],
             'مخبوزات': []
             
+
         };
