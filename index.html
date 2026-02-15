@@ -75,22 +75,195 @@
             opacity: 0.6;
             margin-top: 20px;
         }
+
+        /* تنسيقات زر اللعبة */
+        .game-btn {
+            background: rgba(243, 156, 18, 0.2);
+            border: 1px solid #f39c12;
+            color: #f39c12;
+            padding: 10px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-family: 'Cairo', sans-serif;
+            font-weight: bold;
+            margin: 10px 0 20px 0;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .game-btn:hover {
+            background: #f39c12;
+            color: #fff;
+            transform: scale(1.05);
+        }
+
+        /* تنسيقات اللعبة (X-O) */
+        #game-container {
+            display: none; /* مخفي افتراضياً */
+            flex-direction: column;
+            align-items: center;
+            animation: fadeIn 0.5s;
+        }
+
+        .board {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .cell {
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .cell:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .cell.x { color: #e74c3c; }
+        .cell.o { color: #3498db; }
+
+        .back-btn {
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.3);
+            color: #fff;
+            padding: 5px 15px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-family: 'Cairo', sans-serif;
+            margin-top: 10px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="icon-wrapper">
-            <!-- أيقونة الترس SVG -->
-            <svg class="gear-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path d="M19.14,12.94c0.04-0.3,0.06-0.61,0.06-0.94c0-0.32-0.02-0.64-0.07-0.94l2.03-1.58c0.18-0.14,0.23-0.41,0.12-0.61 l-1.92-3.32c-0.12-0.22-0.37-0.29-0.59-0.22l-2.39,0.96c-0.5-0.38-1.03-0.7-1.62-0.94L14.4,2.81c-0.04-0.24-0.24-0.41-0.48-0.41 h-3.84c-0.24,0-0.43,0.17-0.47,0.41L9.25,5.35C8.66,5.59,8.12,5.92,7.63,6.29L5.24,5.33c-0.22-0.08-0.47,0-0.59,0.22L2.74,8.87 C2.62,9.08,2.66,9.34,2.86,9.48l2.03,1.58C4.84,11.36,4.8,11.69,4.8,12s0.02,0.64,0.07,0.94l-2.03,1.58 c-0.18,0.14-0.23,0.41-0.12,0.61l1.92,3.32c0.12,0.22,0.37,0.29,0.59,0.22l2.39-0.96c0.5,0.38,1.03,0.7,1.62,0.94l0.36,2.54 c0.05,0.24,0.24,0.41,0.48,0.41h3.84c0.24,0,0.43-0.17,0.47-0.41l0.36-2.54c0.59-0.24,1.13-0.56,1.62-0.94l2.39,0.96 c0.22,0.08,0.47,0,0.59-0.22l1.92-3.32c0.12-0.22,0.07-0.47-0.12-0.61L19.14,12.94z M12,15.6c-1.98,0-3.6-1.62-3.6-3.6 s1.62-3.6,3.6-3.6s3.6,1.62,3.6,3.6S13.98,15.6,12,15.6z"/>
-            </svg>
+        <!-- القسم الرئيسي: رسالة الصيانة -->
+        <div id="main-content">
+            <div class="icon-wrapper">
+                <!-- أيقونة الترس SVG -->
+                <svg class="gear-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M19.14,12.94c0.04-0.3,0.06-0.61,0.06-0.94c0-0.32-0.02-0.64-0.07-0.94l2.03-1.58c0.18-0.14,0.23-0.41,0.12-0.61 l-1.92-3.32c-0.12-0.22-0.37-0.29-0.59-0.22l-2.39,0.96c-0.5-0.38-1.03-0.7-1.62-0.94L14.4,2.81c-0.04-0.24-0.24-0.41-0.48-0.41 h-3.84c-0.24,0-0.43,0.17-0.47,0.41L9.25,5.35C8.66,5.59,8.12,5.92,7.63,6.29L5.24,5.33c-0.22-0.08-0.47,0-0.59,0.22L2.74,8.87 C2.62,9.08,2.66,9.34,2.86,9.48l2.03,1.58C4.84,11.36,4.8,11.69,4.8,12s0.02,0.64,0.07,0.94l-2.03,1.58 c-0.18,0.14-0.23,0.41-0.12,0.61l1.92,3.32c0.12,0.22,0.37,0.29,0.59,0.22l2.39-0.96c0.5,0.38,1.03,0.7,1.62,0.94l0.36,2.54 c0.05,0.24,0.24,0.41,0.48,0.41h3.84c0.24,0,0.43-0.17,0.47-0.41l0.36-2.54c0.59-0.24,1.13-0.56,1.62-0.94l2.39,0.96 c0.22,0.08,0.47,0,0.59-0.22l1.92-3.32c0.12-0.22,0.07-0.47-0.12-0.61L19.14,12.94z M12,15.6c-1.98,0-3.6-1.62-3.6-3.6 s1.62-3.6,3.6-3.6s3.6,1.62,3.6,3.6S13.98,15.6,12,15.6z"/>
+                </svg>
+            </div>
+            
+            <!-- زر تشغيل اللعبة -->
+            <div>
+                <button class="game-btn" onclick="toggleGame()">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M21 6H3C1.89 6 1 6.89 1 8V16C1 17.11 1.89 18 3 18H21C22.11 18 23 17.11 23 16V8C23 6.89 22.11 6 21 6ZM6 13C5.45 13 5 12.55 5 12C5 11.45 5.45 11 6 11C6.55 11 7 11.45 7 12C7 12.55 6.55 13 6 13ZM9 13C8.45 13 8 12.55 8 12C8 11.45 8.45 11 9 11C9.55 11 10 11.45 10 12C10 12.55 9.55 13 9 13ZM12 16H18V14H12V16ZM18 10H12V8H18V10Z"/>
+                    </svg>
+                    العب الآن
+                </button>
+            </div>
+
+            <h1>الموقع تحت الصيانة</h1>
+            <p>نعتذر عن الإزعاج، نقوم حالياً بإجراء بعض التحسينات والتحديثات لتقديم تجربة أفضل لكم.<br>سنعود للعمل قريباً جداً.</p>
+            
+            <div class="footer">
+                &copy; 2024 اسم موقعك. جميع الحقوق محفوظة.
+            </div>
         </div>
-        <h1>الموقع تحت الصيانة</h1>
-        <p>نعتذر عن الإزعاج، نقوم حالياً بإجراء بعض التحسينات والتحديثات لتقديم تجربة أفضل لكم.<br>سنعود للعمل قريباً جداً.</p>
         
-        <div class="footer">
-            &copy; 2024 اسم موقعك. جميع الحقوق محفوظة.
+        <!-- قسم اللعبة (مخفي) -->
+        <div id="game-container">
+            <h2 style="color:#f39c12; margin:0;">لعبة X-O</h2>
+            <div class="board" id="board">
+                <div class="cell" onclick="play(0)"></div>
+                <div class="cell" onclick="play(1)"></div>
+                <div class="cell" onclick="play(2)"></div>
+                <div class="cell" onclick="play(3)"></div>
+                <div class="cell" onclick="play(4)"></div>
+                <div class="cell" onclick="play(5)"></div>
+                <div class="cell" onclick="play(6)"></div>
+                <div class="cell" onclick="play(7)"></div>
+                <div class="cell" onclick="play(8)"></div>
+            </div>
+            <div id="status" style="margin-bottom:10px; height:20px;"></div>
+            <button class="back-btn" onclick="toggleGame()">رجوع للصيانة</button>
+            <button class="back-btn" onclick="resetGame()" style="background:rgba(243, 156, 18, 0.2); border-color:#f39c12; color:#f39c12; margin-right:5px;">لعبة جديدة</button>
         </div>
     </div>
+
+    <script>
+        let currentPlayer = 'X';
+        let gameBoard = ['', '', '', '', '', '', '', '', ''];
+        let gameActive = true;
+
+        function toggleGame() {
+            const main = document.getElementById('main-content');
+            const game = document.getElementById('game-container');
+            
+            if (main.style.display === 'none') {
+                main.style.display = 'block';
+                game.style.display = 'none';
+            } else {
+                main.style.display = 'none';
+                game.style.display = 'flex';
+                resetGame();
+            }
+        }
+
+        function play(index) {
+            if (gameBoard[index] === '' && gameActive) {
+                gameBoard[index] = currentPlayer;
+                document.getElementsByClassName('cell')[index].innerText = currentPlayer;
+                document.getElementsByClassName('cell')[index].classList.add(currentPlayer.toLowerCase());
+                
+                checkWinner();
+                currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+            }
+        }
+
+        function checkWinner() {
+            const winConditions = [
+                [0, 1, 2], [3, 4, 5], [6, 7, 8],
+                [0, 3, 6], [1, 4, 7], [2, 5, 8],
+                [0, 4, 8], [2, 4, 6]
+            ];
+
+            for (let condition of winConditions) {
+                const [a, b, c] = condition;
+                if (gameBoard[a] && gameBoard[a] === gameBoard[b] && gameBoard[a] === gameBoard[c]) {
+                    document.getElementById('status').innerText = `اللاعب ${gameBoard[a]} فاز!`;
+                    gameActive = false;
+                    return;
+                }
+            }
+
+            if (!gameBoard.includes('')) {
+                document.getElementById('status').innerText = 'تعادل!';
+                gameActive = false;
+            }
+        }
+
+        function resetGame() {
+            gameBoard = ['', '', '', '', '', '', '', '', ''];
+            gameActive = true;
+            currentPlayer = 'X';
+            document.getElementById('status').innerText = '';
+            const cells = document.getElementsByClassName('cell');
+            for (let cell of cells) {
+                cell.innerText = '';
+                cell.classList.remove('x', 'o');
+            }
+        }
+    </script>
 </body>
 </html>
