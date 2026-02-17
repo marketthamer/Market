@@ -260,6 +260,33 @@ const data = {
 				{ id: 2044, name: 'ستاكس جبن', weight: 'علبة', price: 750, img: 'imgs_chips/ستاكس جبن.jpg' },
 				{ id: 2045, name: 'ستاكس اعشاب', weight: 'علبة', price: 750, img: 'imgs_chips/ستاكس اعشاب.jpg' }
             ],
+			
+			'لحوم مجمدة':  [
+                { id: 3101, name: 'دجاج ساديا 1100', weight: 'قطعة', price: 5500, img: 'imgs_choclate/no.jpg' },
+                { id: 3103, name: 'ناجتس دجاج بالجبنة ساديا', weight: 'قطعة', price: 3000, img: 'imgs_choclate/b3.jpg' },
+                { id: 3104, name: 'صدر دجاج مقرمش ساديا', weight: 'قطعة', price: 3000, img: 'imgs_choclate/b2.jpg' },
+                { id: 3105, name: 'صوصج دجاج بالجبنة ساديا', weight: 'قطعة', price: 2000, img: 'imgs_choclate/b5.jpg' },
+                { id: 3106, name: 'صوصج دجاج عادي ساديا', weight: 'قطعة', price: 2000, img: 'imgs_choclate/b6.jpg' },
+				{ id: 3107, name: 'اصابع دجاج مقرمشة ساديا', weight: 'قطعة', price: 4000, img: 'imgs_choclate/b6.jpg' },
+				{ id: 3108, name: 'ستيك صدر دجاج ساديا', weight: 'قطعة', price: 1000, img: 'imgs_choclate/b6.jpg' },
+                { id: 3109, name: 'صدر دجاج ساديا 450غ', weight: 'قطعة', price: 3500, img: 'imgs_choclate/no.jpg' },
+                { id: 3110, name: 'كرسبي جيكور', weight: 'قطعة', price: 4500, img: 'imgs_choclate/b9.jpg' },
+                { id: 3111, name: 'كبة مرق جيكور', weight: 'قطعة', price: 3000, img: 'imgs_choclate/.jpg' },
+                { id: 3112, name: 'كبة سندويج صغير جيكور', weight: 'قطعة', price: 2500, img: 'imgs_choclate/.jpg' },
+                { id: 3113, name: 'كبة برغل جيكور', weight: 'قطعة', price: 3000, img: 'imgs_choclate/.jpg' },
+                { id: 3114, name: 'كبة موصلية بالدجاج وسط جيكور', weight: 'قطعة', price: 4000, img: 'imgs_choclate/.jpg' },
+                { id: 3115, name: 'خبز صاج تركي', weight: 'قطعة', price: 2500, img: 'imgs_choclate/.jpg' },
+                { id: 3116, name: 'فلافل جيكور', weight: 'قطعة', price: 2500, img: 'imgs_choclate/.jpg' },
+                { id: 3117, name: 'برجر دجاج جيكور', weight: 'قطعة', price: 3000, img: 'imgs_choclate/.jpg' },
+                { id: 3118, name: 'برجر لحم جيكور', weight: 'قطعة', price: 3000, img: 'imgs_choclate/.jpg' },
+                { id: 3119, name: 'فنكر تركي مرسين', weight: 'قطعة', price: 3500, img: 'imgs_choclate/.jpg' },
+                { id: 3120, name: 'فنكر ايراني', weight: 'قطعة', price: 2500, img: 'imgs_choclate/.jpg' },
+                { id: 3121, name: 'خبز سمبوسة', weight: 'قطعة', price: 1750, img: 'imgs_choclate/b8.jpg' },
+				{ id: 3122, name: 'فلافل جيكور', weight: 'قطعة', price: 2500, img: 'imgs_choclate/.jpg' },
+                { id: 3123, name: 'جبن موزريلا مرسين', weight: 'قطعة', price: 3500, img: 'imgs_choclate/.jpg' },
+                { id: 3124, name: 'لحم مثروم جيكور', weight: 'قطعة', price: 4000, img: 'imgs_choclate/.jpg' }
+				
+			],
             
             'سكائر': [
                 { id: 101, name: 'ماستر ابيض', weight: 'باكيت', price: 1250, img: 'imgs_smoke/ماستر ابيض.jpg' },
@@ -509,11 +536,12 @@ const data = {
                 { id: 8012, name: 'كاجو عائلي', weight: 'كيس كبير', price: 2500, img: 'imgs_muksrat/kajo2500.jpg' }
             ],
             'زيت وسمن نباتي': [
-		     	{ id: 8011, name: 'زيت الدار ', weight: '900 مل', price: 2500, img: 'imgs_oil/زيت الدار 900 غرام.jpg' },
+		     	{ id: 8011, name: 'زيت الدار ', weight: '900 مل', price: 2500, img: 'imgs_oil/زيت الدار 900 مل.jpg' },
                 { id: 8012, name: 'زيت زيتون الطازج', weight: 'زجاج', price: 2500, img: 'imgs_oil/زيت زيتون الطازج 2500.jpg' },
                 { id: 8013, name: 'سمن نباتي جنة', weight: '700 غرام', price: 3500, img: 'imgs_oil/دهن جنة.jpg' },
                 { id: 8014, name: 'سمن نباتي دلال الكويتي', weight: '1 كيلو', price: 4000, img: 'imgs_oil/دهن دلال 4000.jpg' },
-                { id: 8015, name: 'سمن نباتي دلال الكويتي', weight: '2 كيلو', price: 7500, img: 'imgs_oil/دهن دلال 7500.jpg' }
+                { id: 8015, name: 'سمن نباتي دلال الكويتي', weight: '2 كيلو', price: 7500, img: 'imgs_oil/دهن دلال 7500.jpg' },
+				{ id: 8011, name: 'زيت الدار ', weight: '900 مل', price: 2500, img: 'imgs_oil/زيت الدار 1 لتر.jpg' }
 				],
             
         };
