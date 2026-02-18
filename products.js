@@ -80,6 +80,8 @@ const data = {
                 { id: 1006, name: 'اهلنا 900 غرام', weight: '900 غرام', price: 2500, img: 'imgs_liquid/.jpg' },
                 { id: 1007, name: 'اهلنا 4.5 كيلو', weight: '4.5 كيلو', price: 12000, img: 'imgs_liquid/.jpg' }
 				
+	],
+				
 			'مخبوزات': [
                 { id: 1110, name: 'خبز لبناني المطاحن الكويتية', weight: 'كيس', price: 1000, img: 'imgs_bread/.jpg' },
                 { id: 1111, name: 'افندي 900 غرام', weight: '900 غرام', price: 2000, img: 'imgs_bread/.jpg' },
@@ -503,11 +505,32 @@ const data = {
                 { id: 6023, name: 'اوريو صغير', weight: 'قطعة', price: 250, img: 'imgs_bskt/oreo250.jpg' }
             ],
            
-		   'جلاتين': [],
+		    'جلاتين': [],
+		   
+		   
+  		    'شامبو': [
+                
+                { id: 1211, name: 'شامبو هيد اند شولدرز بالنعناع', weight: 'علبة', price: 4500, img: 'imgs_shampo/k9blue.jpg' },         
+                { id: 1212, name: 'شامبو هيد اند شولدرز بالفحم', weight: 'علبة', price: 4500, img: 'imgs_shampo/k9red.jpg' },
+                { id: 1214, name: 'شامبو ايبك', weight: 'علبة', price: 500, img: 'imgs_shampo/k9yellow.jpg' },
+                { id: 1215, name: 'شامبو اطفال', weight: 'علبة', price: 1500, img: 'imgs_shampo/k9purpel.jpg' },
+                { id: 1216, name: 'شامبو كلير الازرق', weight: 'علبة', price: 5000, img: 'imgs_shampo/aspirshred.jpg' },
+                { id: 1217, name: 'شامبو كلير الابيض', weight: 'علبة', price: 5000, img: 'imgs_shampo/tiger.jpg' }
+            ],
+			
+			'بقوليات': [
+                { id: 8101, name: 'عدس', weight: '500 غرام', price: 1250, img: 'imgs_bkoliat/عدس.jpg' },
+                { id: 8102, name: 'ذرة شامية', weight: '500 غرام', price: 1000, img: 'imgs_bkoliat/ذرة شامية.jpg' },
+                { id: 8103, name: 'فاصوليا', weight: '500 غرام', price: 1500, img: 'imgs_bkoliat/فاصوليا.jpg' },
+                { id: 8104, name: 'جريش', weight: '500 غرام', price: 1000, img: 'imgs_bkoliat/جريش.jpg' },
+                { id: 8105, name: 'برغل ناعم', weight: '500 غرام', price: 1000, img: 'imgs_bkoliat/برغل ناعم.jpg' },
+                { id: 8106, name: 'برغل خشن', weight: '500 غرام', price: 1000, img: 'imgs_bkoliat/برغل خشن.jpg' },
+                { id: 8107, name: 'برغل بالشعرية', weight: '500 غرام', price: 1000, img: 'imgs_bkoliat/برغل بالشعرية.jpg' }
+				 ],
         
   		    'طاقة': [
                 
-                { id: 1200, name: 'K9 ازرق', weight: 'علبة', price: 500, img: 'imgs_power/k9blue.jpg' },         
+                { id: 1200, name: 'k9 اخضر', weight: 'علبة', price: 500, img: 'imgs_power/k9 اخضر.jpg' },         
                 { id: 1201, name: 'K9 احمر', weight: 'علبة', price: 500, img: 'imgs_power/k9red.jpg' },
                 { id: 1202, name: 'K9 اصفر', weight: 'علبة', price: 500, img: 'imgs_power/k9yellow.jpg' },
                 { id: 1203, name: 'K9 وردي', weight: 'علبة', price: 500, img: 'imgs_power/k9purpel.jpg' },
