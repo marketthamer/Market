@@ -37,7 +37,10 @@ const data = {
                 { id: 9010, name: 'مونة شوربة دجاج', weight: 'ظرف', price: 1000, img: 'imgs_makrona/شوربة مونة بالدجاج.jpg' },
                 { id: 9011, name: 'مونة شوربة خضار', weight: 'ظرف', price: 1000, img: 'imgs_makrona/شوربة مونة بالخضار.jpg' },
                 { id: 9012, name: 'شوربة الين بالدجاج', weight: 'ظرف', price: 500, img: 'imgs_makrona/شوربة الين بالدجاج.jpg' },
-                { id: 9013, name: 'شوربة ماجي بالفطر', weight: 'ظرف', price: 1250, img: 'imgs_makrona/شوربة ماجي بالفطر.jpg' }
+                { id: 9013, name: 'شوربة ماجي بالفطر', weight: 'ظرف', price: 1250, img: 'imgs_makrona/شوربة ماجي بالفطر.jpg' },
+				{ id: 9014, name: 'شعرية كويتية ملفوفة كبير', weight: 'كيس', price: 1500, img: 'imgs_makrona/شعرية كويتية ملفوفة كبير.jpg' },
+				{ id: 9015, name: 'معكرونة كويتية برينه', weight: 'كيس', price: 1500, img: 'imgs_makrona/معكرونة كويتية برينه.jpg' }
+				
     ],
             'منظفات سائلة': [
                 { id: 5670, name: 'كلور مبيض زيرو', weight: '1000 مل', price: 1500, img: 'imgs_liquid/كلور زيرو 1500.jpg' },
@@ -69,13 +72,19 @@ const data = {
             
     ],
            'رز': [
-                { id: 1001, name: 'ملك البنجاب 900 غرام', weight: '900 غرام', price: 2500, img: 'imgs_منظفات سائلة/.jpg' },
-                { id: 1002, name: 'افندي 900 غرام', weight: '900 غرام', price: 2000, img: 'imgs_منظفات سائلة/.jpg' },
-                { id: 1003, name: 'دينار 900 غرام', weight: '900 غرام', price: 2000, img: 'imgs_منظفات سائلة/.jpg' },
-                { id: 1004, name: 'هيرتج 900 غرام', weight: '900 غرام', price: 2500, img: 'imgs_منظفات سائلة/.jpg' },
-                { id: 1005, name: 'بشاور الذهب 900 غرام', weight: '900 غرام', price: 2500, img: 'imgs_منظفات سائلة/.jpg' },
-                { id: 1006, name: 'اهلنا 900 غرام', weight: '900 غرام', price: 2500, img: 'imgs_منظفات سائلة/.jpg' },
-                { id: 1007, name: 'اهلنا 4.5 كيلو', weight: '4.5 كيلو', price: 12000, img: 'imgs_منظفات سائلة/.jpg' }
+                { id: 1001, name: 'ملك البنجاب 900 غرام', weight: '900 غرام', price: 2500, img: 'imgs_liquid/.jpg' },
+                { id: 1002, name: 'افندي 900 غرام', weight: '900 غرام', price: 2000, img: 'imgs_liquid/.jpg' },
+                { id: 1003, name: 'دينار 900 غرام', weight: '900 غرام', price: 2000, img: 'imgs_liquid/.jpg' },
+                { id: 1004, name: 'هيرتج 900 غرام', weight: '900 غرام', price: 2500, img: 'imgs_liquid/.jpg' },
+                { id: 1005, name: 'بشاور الذهب 900 غرام', weight: '900 غرام', price: 2500, img: 'imgs_liquid/.jpg' },
+                { id: 1006, name: 'اهلنا 900 غرام', weight: '900 غرام', price: 2500, img: 'imgs_liquid/.jpg' },
+                { id: 1007, name: 'اهلنا 4.5 كيلو', weight: '4.5 كيلو', price: 12000, img: 'imgs_liquid/.jpg' }
+				
+			'مخبوزات': [
+                { id: 1110, name: 'خبز لبناني المطاحن الكويتية', weight: 'كيس', price: 1000, img: 'imgs_bread/.jpg' },
+                { id: 1111, name: 'افندي 900 غرام', weight: '900 غرام', price: 2000, img: 'imgs_bread/.jpg' },
+                { id: 1112, name: 'دينار 900 غرام', weight: '900 غرام', price: 2000, img: 'imgs_bread/.jpg' },
+                { id: 1113, name: 'هيرتج 900 غرام', weight: '900 غرام', price: 2500, img: 'imgs_bread/.jpg' }
                 
     ],
             
@@ -326,7 +335,12 @@ const data = {
 				{ id: 9107, name: 'مايونيز تيفاني تصلي', weight: 'علبة', price: 2500, img: 'imgs_salsa/مايونيز تيفاني اصلي.jpg' },
 				{ id: 9108, name: 'مايونيز تيفاني باربكيو', weight: 'علبة', price: 2500, img: 'imgs_salsa/مايونيز تيفاني باربكيو.jpg' },
 				{ id: 9109, name: 'مايونيز بالثوم كاله', weight: 'علبة', price: 2250, img: 'imgs_salsa/مايونيز بالثوم كاله.jpg' },
-				{ id: 9110, name: 'صلصة باربكيو كاله', weight: 'علبة', price: 1250, img: 'imgs_salsa/صلصة باربكيو كاله.jpg' }
+				{ id: 9110, name: 'صلصة باربكيو كاله', weight: 'علبة', price: 1250, img: 'imgs_salsa/صلصة باربكيو كاله.jpg' },
+				{ id: 9112, name: 'عجينة تندوري صلصة', weight: 'علبة', price: 3500, img: 'imgs_salsa/عجينة تندوري.jpg' },
+				{ id: 9113, name: 'معجون جارام ماسالا', weight: 'علبة', price: 3500, img: 'imgs_salsa/معجون جارام ماسالا.jpg' },
+				{ id: 9114, name: 'شطة ديك اصلي كبير', weight: 'علبة', price: 3500, img: 'imgs_salsa/شطة ديك اصلي كبير.jpg' },
+				{ id: 9115, name: 'شطة رنا سعودية', weight: 'علبة', price: 1000, img: 'imgs_salsa/شطة رنا سعودية.jpg' }
+				
             ],
             'معجون طماطم': [
                 { id: 9001, name: 'التونسا', weight: 'كبير', price: 2500, img: 'imgs_salsa/n11.jpg' },
@@ -384,7 +398,9 @@ const data = {
                 { id: 9206, name: 'خل تفاح عضوي', weight: 'علبة', price: 4000, img: 'imgs_salsa/n103.jpg' },
                 { id: 9207, name: 'ليمون', weight: 'بطل', price: 1000, img: 'imgs_salsa/n104.jpg' },
                 { id: 9208, name: 'مخلل مانجو', weight: 'علبة', price: 2500, img: 'imgs_salsa/n2.jpg' },
-                { id: 9209, name: 'عمبة مانجو', weight: 'بطل', price: 2500, img: 'imgs_salsa/n1.jpg' }
+                { id: 9209, name: 'عمبة مانجو', weight: 'بطل', price: 2500, img: 'imgs_salsa/n1.jpg' },
+				{ id: 9210, name: 'مخلل جمل حار', weight: 'علبة', price: 2500, img: 'imgs_salsa/مخلل جمل حار.jpg' },
+				{ id: 9211, name: 'طرشي ليمون حار', weight: 'علبة', price: 3500, img: 'imgs_salsa/طرشي ليمون حار.jpg' }
             ],
            'بهارات': [
                 { id: 7001, name: 'فلفل احمر', weight: 'علبة', price: 1000, img: 'imgs_bharat/flflred.jpg' },
