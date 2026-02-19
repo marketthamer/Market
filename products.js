@@ -443,6 +443,7 @@ const data = {
 				{ id: 9114, name: 'خبز صاج تركي', weight: 'كيس', price: 2500, img: 'imgs_freez/خبز صاج تركي.jpg', stock: 1 },
 				{ id: 9115, name: 'فنكر تركي ', weight: 'كيس', price: 3500, img: 'imgs_freez/فنكر تركي.jpg', stock: 1 },
 				{ id: 9116, name: 'فنكر ايراني', weight: 'كيس', price: 2500, img: 'imgs_freez/فنكر ايراني.jpg', stock: 1 }
+		 ],
 			
             'بسكويت': [
                 { id: 6001, name: 'فرخنده دايت دارسين وتفاح', weight: 'باكيت', price: 1000, img: 'imgs_bskt/farkhndaapple.jpg', stock: 1 },
