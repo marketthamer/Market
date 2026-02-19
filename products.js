@@ -425,6 +425,25 @@ const data = {
                 { id: 1206, name: 'حليب فراولة', weight: 'باكيت', price: 250, img: 'imgs_milk/حليب كي دي دي فراولة 250.jpg', stock: 1 }			
 			
 			],
+			
+			'لحوم مجمدة': [
+                { id: 9101, name: 'دجاج ساديا 1100', weight: 'قطعة', price: 5500, img: 'imgs_freez/ساديا دجاج1100.jpg', stock: 1 },
+                { id: 9102, name: 'اصابع دجاج مقرمشة ساديا', weight: 'علبة', price: 4500, img: 'imgs_freez/اصابع دجاج مقرمشة ساديا.jpg', stock: 1 },
+                { id: 9103, name: 'ناجتس دجاج بالجنبة ساديا', weight: 'علبة', price: 3000, img: 'imgs_freez/ناجتس دجاج بالجبنة ساديا.jpg', stock: 1 },
+                { id: 9104, name: 'صدر دجاج مقرمش ساديا', weight: 'علبة', price: 3000, img: 'imgs_freez/صدر دجاج مقرمش ساديا.jpg', stock: 1 },
+                { id: 9105, name: 'صوصج دجاج بالجبن ساديا', weight: 'كيس', price: 2000, img: 'imgs_freez/صوصج دجاج بالجبن ساديا.jpg', stock: 1 },
+                { id: 9106, name: 'صوصج دجاج عادي ساديا', weight: 'كيس', price: 2000, img: 'imgs_freez/صوصج دجاج عادي ساديا.jpg', stock: 1 },
+                { id: 9107, name: 'ستيك دجاج مقرمش ساديا', weight: 'كيس', price: 1000, img: 'imgs_freez/ستيك دجاج مقرمش ساديا.jpg', stock: 1 },
+                { id: 9108, name: 'كرسبي صدر دجاج جيكور', weight: 'كيس', price: 4500, img: 'imgs_freez/كرسبي صدر دجاج جيكور.jpg', stock: 1 },
+                { id: 9109, name: 'فلافل جيكور', weight: 'كيس', price: 2500, img: 'imgs_freez/فلافل جيكور.jpg', stock: 1 },
+                { id: 9110, name: 'كبة سندوبج صغير جيكور', weight: 'علبة', price: 2750, img: 'imgs_freez/كبة سندويج صغير جيكور.jpg', stock: 1 },
+                { id: 9111, name: 'كبة موصلية دجاج جيكور', weight: 'علبة', price: 4500, img: 'imgs_freez/كبة موصلية دجاج جيكور.jpg', stock: 1 },
+                { id: 9112, name: 'كبة برغل جيكور', weight: 'علبة', price: 3000, img: 'imgs_freez/كبة برغل جيكور.jpg', stock: 1 },
+                { id: 9113, name: 'خبز سمبوسة', weight: 'كيس', price: 1500, img: 'imgs_freez/خبز سمبوسة.jpg', stock: 1 },
+				{ id: 9114, name: 'خبز صاج تركي', weight: 'كيس', price: 2500, img: 'imgs_freez/خبز صاج تركي.jpg', stock: 1 },
+				{ id: 9115, name: 'فنكر تركي ', weight: 'كيس', price: 3500, img: 'imgs_freez/فنكر تركي.jpg', stock: 1 },
+				{ id: 9116, name: 'فنكر ايراني', weight: 'كيس', price: 2500, img: 'imgs_freez/فنكر ايراني.jpg', stock: 1 }
+			
             'بسكويت': [
                 { id: 6001, name: 'فرخنده دايت دارسين وتفاح', weight: 'باكيت', price: 1000, img: 'imgs_bskt/farkhndaapple.jpg', stock: 1 },
                 { id: 6002, name: 'فرخندة دايت كاكاو', weight: 'باكيت', price: 1000, img: 'imgs_bskt/farkhndacoco.jpg', stock: 1 },
@@ -508,3 +527,4 @@ const data = {
 				],
             
         };
+
