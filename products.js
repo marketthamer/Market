@@ -97,9 +97,7 @@ const data = {
                 { id: 3018, name: '4*4', weight: 'قطعة', price: 250, img: 'imgs_choclate/.jpg', stock: 1 },
                 { id: 3019, name: 'son soz', weight: 'قطعة', price: 250, img: 'imgs_choclate/.jpg', stock: 1 },
                 { id: 3020, name: 'سوداني', weight: 'قطعة', price: 250, img: 'imgs_choclate/.jpg', stock: 1 },
-				{ id: 3021, name: 'شوكو لبس عصارة', weight: 'قطعة', price: 250, img: 'imgs_choclate/.jpg', stock: 1 },
-				{ id: 3022, name: 'شوكو تربس', weight: 'قطعة', price: 250, img: 'imgs_choclate/.jpg', stock: 1 },
-                { id: 3023, name: 'كومبو', weight: 'قطعة', price: 500, img: 'imgs_choclate/b8.jpg', stock: 1 }
+                { id: 3021, name: 'كومبو', weight: 'قطعة', price: 500, img: 'imgs_choclate/b8.jpg', stock: 1 }
             ],
             'نستلة': [
                 { id: 3101, name: 'نمبر وان احمر', weight: 'قطعة', price: 250, img: 'imgs_choclate/b13.jpg', stock: 1 },
@@ -109,13 +107,7 @@ const data = {
                 { id: 3105, name: 'شوكتو تريبس', weight: 'قطعة', price: 250, img: 'imgs_choclate/b16.jpg', stock: 1 },
                 { id: 3106, name: 'كات كات كاكاو', weight: 'قطعة', price: 250, img: 'imgs_choclate/b15.jpg', stock: 1 },
                 { id: 3107, name: 'GO UP توت', weight: 'قطعة', price: 250, img: 'imgs_choclate/b23.jpg', stock: 1 },
-				{ id: 3108, name: 'ويفر موز', weight: 'قطعة', price: 250, img: 'imgs_choclate/.jpg', stock: 1 },
-				{ id: 3109, name: 'نستلة هيس 2', weight: 'قطعة', price: 250, img: 'imgs_choclate/.jpg', stock: 1 },
-				{ id: 3110, name: 'ويفر بالحليب', weight: 'قطعة', price: 250, img: 'imgs_choclate/.jpg', stock: 1 },
-				{ id: 3111, name: 'نستلة بطريق', weight: 'قطعة', price: 250, img: 'imgs_choclate/.jpg', stock: 1 },
-				{ id: 3112, name: 'نستلة بطريق', weight: 'قطعة', price: 250, img: 'imgs_choclate/.jpg', stock: 1 },
-				{ id: 3113, name: 'نستلة بطريق', weight: 'قطعة', price: 250, img: 'imgs_choclate/.jpg', stock: 1 },
-                { id: 3114, name: 'GO UP كاكاو داكن', weight: 'قطعة', price: 250, img: 'imgs_choclate/b22.jpg', stock: 1 }
+                { id: 3108, name: 'GO UP كاكاو داكن', weight: 'قطعة', price: 250, img: 'imgs_choclate/b22.jpg', stock: 1 }
             ],
             'كيك': [
                 { id: 3201, name: 'باب الاغا كاكاو', weight: 'قطعة', price: 250, img: 'imgs_choclate/no.jpg', stock: 1 },
@@ -454,29 +446,29 @@ const data = {
 		 ],
 			
             'بسكويت': [
-                { id: 6001, name: 'فرخنده دايت دارسين وتفاح', weight: 'باكيت', price: 1000, img: 'imgs_bskt/farkhndaapple.jpg', stock: 1 },
-                { id: 6002, name: 'فرخندة دايت كاكاو', weight: 'باكيت', price: 1000, img: 'imgs_bskt/farkhndacoco.jpg', stock: 1 },
-                { id: 6003, name: 'بسكويت ليدي فينغرز دايت', weight: 'علبة', price: 3000, img: 'imgs_bskt/bsktdiet.jpg', stock: 1 },
-                { id: 6004, name: 'باف باستري بالكرز', weight: 'علبة', price: 3000, img: 'imgs_bskt/bsktokrane.jpg', stock: 1 },
-                { id: 6005, name: 'كوكيز ايراني', weight: 'باكيت', price: 1000, img: 'imgs_bskt/kokez1000.jpg', stock: 1 },
-                { id: 6006, name: 'بسكويت اليوم بالموز', weight: 'قطعة', price: 250, img: 'imgs_bskt/todaybanana.jpg', stock: 1 },
-                { id: 6007, name: 'بسكت بالجبن', weight: 'قطعة', price: 250, img: 'imgs_bskt/bsktjubn.jpg', stock: 1 },
-                { id: 6008, name: 'بسكويت مالح', weight: 'قطعة', price: 250, img: 'imgs_bskt/bsktsalt.jpg', stock: 1 },
-                { id: 6009, name: 'بسكت لونا', weight: 'قطعة', price: 250, img: 'imgs_bskt/bsktluna.jpg', stock: 1 },
-                { id: 6010, name: 'بسكت بوك', weight: 'قطعة', price: 250, img: 'imgs_bskt/bsktbook.jpg', stock: 1 },
-                { id: 6011, name: 'بسكت بالكاكاو', weight: 'قطعة', price: 250, img: 'imgs_bskt/bsktcoco.jpg', stock: 1 },
-                { id: 6012, name: 'بسكت توركو بالكاكاو', weight: 'قطعة', price: 250, img: 'imgs_bskt/torkococo.jpg', stock: 1 },
-                { id: 6013, name: 'بسكت اولكر بالفانيلا', weight: 'قطعة', price: 250, img: 'imgs_bskt/torkowhite.jpg', stock: 1 },
-                { id: 6014, name: 'بسكت هايد سيك', weight: 'قطعة', price: 500, img: 'imgs_bskt/hideseek.jpg', stock: 1 },
-                { id: 6015, name: 'بسكت اولكر بالفراولة', weight: 'قطعة', price: 250, img: 'imgs_bskt/ulkerfrawla.jpg', stock: 1 },
-                { id: 6016, name: 'بسكت توركو بالموز', weight: 'قطعة', price: 250, img: 'imgs_bskt/torkobanana.jpg', stock: 1 },
-                { id: 6017, name: 'بسكت اولكر بالموز', weight: 'قطعة', price: 250, img: 'imgs_bskt/ulkerbanana.jpg', stock: 1 },
+                { id: 6001, name: 'فرخنده دايت دارسين وتفاح', weight: 'باكيت', price: 1000, img: 'imgs_bskt/فرخنده بالتفاح والدارسين.jpg', stock: 1 },
+                { id: 6002, name: 'فرخندة دايت كاكاو', weight: 'باكيت', price: 1000, img: 'imgs_bskt/فرخنده بالكاكاو.jpg', stock: 1 },
+                { id: 6003, name: 'بسكويت ليدي فينغرز دايت', weight: 'علبة', price: 3000, img: 'imgs_bskt/بسكت دايت بالبيض.jpg', stock: 1 },
+                { id: 6004, name: 'باف باستري بالكرز', weight: 'علبة', price: 3000, img: 'imgs_bskt/بف باستري.jpg', stock: 1 },
+                { id: 6005, name: 'كوكيز ايراني', weight: 'باكيت', price: 1000, img: 'imgs_bskt/كوكيز ايراني.jpg', stock: 1 },
+                { id: 6006, name: 'بسكويت اليوم بالموز', weight: 'قطعة', price: 250, img: 'imgs_bskt/بسكت اليوم بالموز.jpg', stock: 1 },
+                { id: 6007, name: 'بسكت بالجبن', weight: 'قطعة', price: 250, img: 'imgs_bskt/بسكت بالجبن.jpg', stock: 1 },
+                { id: 6008, name: 'بسكويت مالح', weight: 'قطعة', price: 250, img: 'imgs_bskt/بسكت مالح.jpg', stock: 1 },
+                { id: 6009, name: 'بسكت لونا', weight: 'قطعة', price: 250, img: 'imgs_bskt/بسكت لونا.jpg', stock: 1 },
+                { id: 6010, name: 'بسكت بوك', weight: 'قطعة', price: 250, img: 'imgs_bskt/بسكت بوك.jpg', stock: 1 },
+                { id: 6011, name: 'بسكت بالكاكاو', weight: 'قطعة', price: 250, img: 'imgs_bskt/بسكت بوك كاكاو.jpg', stock: 1 },
+                { id: 6012, name: 'بسكت توركو بالكاكاو', weight: 'قطعة', price: 250, img: 'imgs_bskt/بسكت توركو بالكاكاو.jpg', stock: 1 },
+                { id: 6013, name: 'بسكت اولكر بالفانيلا', weight: 'قطعة', price: 250, img: 'imgs_bskt/بسكت اولكر بالفانيلا.jpg', stock: 1 },
+                { id: 6014, name: 'بسكت هايد سيك', weight: 'قطعة', price: 500, img: 'imgs_bskt/هايد اند سيك.jpg', stock: 1 },
+                { id: 6015, name: 'بسكت اولكر بالفراولة', weight: 'قطعة', price: 250, img: 'imgs_bskt/بسكت اولكر بالفراولة.jpg', stock: 1 },
+                { id: 6016, name: 'بسكت توركو بالموز', weight: 'قطعة', price: 250, img: 'imgs_bskt/بسكت توركو بالموز.jpg', stock: 1 },
+                { id: 6017, name: 'بسكت اولكر بالموز', weight: 'قطعة', price: 250, img: 'imgs_bskt/بسكت اولكر بالموز.jpg', stock: 1 },
                 { id: 6018, name: 'اوريو وسط', weight: 'قطعة', price: 500, img: 'imgs_bskt/no.jpg', stock: 1 },
-                { id: 6019, name: 'كوكيز بالكاكاو', weight: 'قطعة', price: 250, img: 'imgs_bskt/kokez250.jpg', stock: 1 },
-                { id: 6020, name: 'كوكيز بجوز الهند', weight: 'قطعة', price: 250, img: 'imgs_bskt/kokezblue.jpg', stock: 1 },
-                { id: 6021, name: 'بسكت شعير', weight: 'قطعة', price: 250, img: 'imgs_bskt/shaaer.jpg', stock: 1 },
-                { id: 6022, name: 'كوكيز بالزبدة', weight: 'قطعة', price: 250, img: 'imgs_bskt/kokezzbda.jpg', stock: 1 },
-                { id: 6023, name: 'اوريو صغير', weight: 'قطعة', price: 250, img: 'imgs_bskt/oreo250.jpg', stock: 1 }
+                { id: 6019, name: 'كوكيز بالكاكاو', weight: 'قطعة', price: 250, img: 'imgs_bskt/كوكيز بابيل كاكاو.jpg', stock: 1 },
+                { id: 6020, name: 'كوكيز بجوز الهند', weight: 'قطعة', price: 250, img: 'imgs_bskt/كوكيز بابيل جوز الهند.jpg', stock: 1 },
+                { id: 6021, name: 'بسكت شعير', weight: 'قطعة', price: 250, img: 'imgs_bskt/بسكت شعير.jpg', stock: 1 },
+                { id: 6022, name: 'كوكيز بالزبدة', weight: 'قطعة', price: 250, img: 'imgs_bskt/كويز بالزبدة.jpg', stock: 1 },
+                { id: 6023, name: 'اوريو صغير', weight: 'قطعة', price: 250, img: 'imgs_bskt/اوريو صغير.jpg', stock: 1 }
             ],
            
 		   'جلاتين': [],
@@ -536,5 +528,4 @@ const data = {
 				],
             
         };
-
 
