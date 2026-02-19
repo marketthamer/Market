@@ -97,7 +97,9 @@ const data = {
                 { id: 3018, name: '4*4', weight: 'قطعة', price: 250, img: 'imgs_choclate/.jpg', stock: 1 },
                 { id: 3019, name: 'son soz', weight: 'قطعة', price: 250, img: 'imgs_choclate/.jpg', stock: 1 },
                 { id: 3020, name: 'سوداني', weight: 'قطعة', price: 250, img: 'imgs_choclate/.jpg', stock: 1 },
-                { id: 3021, name: 'كومبو', weight: 'قطعة', price: 500, img: 'imgs_choclate/b8.jpg', stock: 1 }
+				{ id: 3021, name: 'شوكو لبس عصارة', weight: 'قطعة', price: 250, img: 'imgs_choclate/.jpg', stock: 1 },
+				{ id: 3022, name: 'شوكو تربس', weight: 'قطعة', price: 250, img: 'imgs_choclate/.jpg', stock: 1 },
+                { id: 3023, name: 'كومبو', weight: 'قطعة', price: 500, img: 'imgs_choclate/b8.jpg', stock: 1 }
             ],
             'نستلة': [
                 { id: 3101, name: 'نمبر وان احمر', weight: 'قطعة', price: 250, img: 'imgs_choclate/b13.jpg', stock: 1 },
@@ -107,7 +109,13 @@ const data = {
                 { id: 3105, name: 'شوكتو تريبس', weight: 'قطعة', price: 250, img: 'imgs_choclate/b16.jpg', stock: 1 },
                 { id: 3106, name: 'كات كات كاكاو', weight: 'قطعة', price: 250, img: 'imgs_choclate/b15.jpg', stock: 1 },
                 { id: 3107, name: 'GO UP توت', weight: 'قطعة', price: 250, img: 'imgs_choclate/b23.jpg', stock: 1 },
-                { id: 3108, name: 'GO UP كاكاو داكن', weight: 'قطعة', price: 250, img: 'imgs_choclate/b22.jpg', stock: 1 }
+				{ id: 3108, name: 'ويفر موز', weight: 'قطعة', price: 250, img: 'imgs_choclate/.jpg', stock: 1 },
+				{ id: 3109, name: 'نستلة هيس 2', weight: 'قطعة', price: 250, img: 'imgs_choclate/.jpg', stock: 1 },
+				{ id: 3110, name: 'ويفر بالحليب', weight: 'قطعة', price: 250, img: 'imgs_choclate/.jpg', stock: 1 },
+				{ id: 3111, name: 'نستلة بطريق', weight: 'قطعة', price: 250, img: 'imgs_choclate/.jpg', stock: 1 },
+				{ id: 3112, name: 'نستلة بطريق', weight: 'قطعة', price: 250, img: 'imgs_choclate/.jpg', stock: 1 },
+				{ id: 3113, name: 'نستلة بطريق', weight: 'قطعة', price: 250, img: 'imgs_choclate/.jpg', stock: 1 },
+                { id: 3114, name: 'GO UP كاكاو داكن', weight: 'قطعة', price: 250, img: 'imgs_choclate/b22.jpg', stock: 1 }
             ],
             'كيك': [
                 { id: 3201, name: 'باب الاغا كاكاو', weight: 'قطعة', price: 250, img: 'imgs_choclate/no.jpg', stock: 1 },
@@ -528,4 +536,5 @@ const data = {
 				],
             
         };
+
 
