@@ -80,24 +80,24 @@ const data = {
     ],
             
             'شوكولاته':  [
-                { id: 3001, name: 'سنيكرز Original', weight: 'قطعة', price: 750, img: 'imgs_choclate/no.jpg', stock: 1 },
-                { id: 3003, name: 'سنيكرز موس ماراكوجا', weight: 'قطعة', price: 750, img: 'imgs_choclate/b3.jpg', stock: 1 },
-                { id: 3004, name: 'مارس', weight: 'قطعة', price: 750, img: 'imgs_choclate/b2.jpg', stock: 1 },
-                { id: 3005, name: 'ريسيز', weight: 'قطعة', price: 1500, img: 'imgs_choclate/b5.jpg', stock: 1 },
-                { id: 3006, name: 'كيندر 4 اصابع', weight: 'قطعة', price: 1250, img: 'imgs_choclate/b6.jpg', stock: 1 },
-                { id: 3007, name: 'باونتي', weight: 'قطعة', price: 750, img: 'imgs_choclate/no.jpg', stock: 1 },
-                { id: 3008, name: 'فلير', weight: 'قطعة', price: 1500, img: 'imgs_choclate/b9.jpg', stock: 1 },
-                { id: 3011, name: 'كيندر اصبع', weight: 'قطعة', price: 500, img: 'imgs_choclate/.jpg', stock: 1 },
-                { id: 3012, name: 'داريلو بالكاراميل', weight: 'قطعة', price: 500, img: 'imgs_choclate/.jpg', stock: 1 },
-                { id: 3013, name: 'داريلو بجوز الهند', weight: 'قطعة', price: 500, img: 'imgs_choclate/.jpg', stock: 1 },
-                { id: 3014, name: 'Roso lips', weight: 'قطعة', price: 250, img: 'imgs_choclate/.jpg', stock: 1 },
-                { id: 3015, name: 'ميلودي', weight: 'قطعة', price: 250, img: 'imgs_choclate/.jpg', stock: 1 },
-                { id: 3016, name: 'اريزونا حبيبات بسكويت', weight: 'قطعة', price: 250, img: 'imgs_choclate/.jpg', stock: 1 },
-                { id: 3017, name: 'شوكو بريك', weight: 'قطعة', price: 250, img: 'imgs_choclate/.jpg', stock: 1 },
-                { id: 3018, name: '4*4', weight: 'قطعة', price: 250, img: 'imgs_choclate/.jpg', stock: 1 },
-                { id: 3019, name: 'son soz', weight: 'قطعة', price: 250, img: 'imgs_choclate/.jpg', stock: 1 },
-                { id: 3020, name: 'سوداني', weight: 'قطعة', price: 250, img: 'imgs_choclate/.jpg', stock: 1 },
-                { id: 3021, name: 'كومبو', weight: 'قطعة', price: 500, img: 'imgs_choclate/b8.jpg', stock: 1 }
+                { id: 3001, name: 'سنيكرز Original', weight: 'قطعة', price: 750, img: 'imgs_choclate/سنيكرز عادي.jpg', stock: 1 },
+                { id: 3003, name: 'سنيكرز موس ماراكوجا', weight: 'قطعة', price: 750, img: 'imgs_choclate/سنيكرز استوائية.jpg', stock: 1 },
+                { id: 3004, name: 'مارس', weight: 'قطعة', price: 750, img: 'imgs_choclate/مارس.jpg', stock: 1 },
+                { id: 3005, name: 'ريسيز', weight: 'قطعة', price: 1500, img: 'imgs_choclate/ريسيز.jpg', stock: 1 },
+                { id: 3006, name: 'كيندر 4 اصابع', weight: 'قطعة', price: 1250, img: 'imgs_choclate/كيندر اصابع وسط.jpg', stock: 1 },
+                { id: 3007, name: 'باونتي', weight: 'قطعة', price: 750, img: 'imgs_choclate/باونتي.jpg', stock: 1 },
+                { id: 3008, name: 'فلير', weight: 'قطعة', price: 1500, img: 'imgs_choclate/فلير.jpg', stock: 1 },
+                { id: 3011, name: 'كيندر اصبع', weight: 'قطعة', price: 500, img: 'imgs_choclate/كيندر اصبع صغير.jpg', stock: 1 },
+                { id: 3012, name: 'داريلو بالكاراميل', weight: 'قطعة', price: 500, img: 'imgs_choclate/داريلو بالكراميل.jpg', stock: 1 },
+                { id: 3013, name: 'داريلو بجوز الهند', weight: 'قطعة', price: 500, img: 'imgs_choclate/داريلو بجوز الهند.jpg', stock: 1 },
+                { id: 3014, name: 'Roso lips', weight: 'قطعة', price: 250, img: 'imgs_choclate/روزو لبس.jpg', stock: 1 },
+                { id: 3015, name: 'ميلودي', weight: 'قطعة', price: 250, img: 'imgs_choclate/ميلودي.jpg', stock: 1 },
+                { id: 3016, name: 'اريزونا حبيبات بسكويت', weight: 'قطعة', price: 250, img: 'imgs_choclate/اريزونا كاكاو حبيبات.jpg', stock: 1 },
+                { id: 3017, name: 'شوكو بريك', weight: 'قطعة', price: 250, img: 'imgs_choclate/شوكو بريك.jpg', stock: 1 },
+                { id: 3018, name: '4*4', weight: 'قطعة', price: 250, img: 'imgs_choclate/4x4.jpg', stock: 1 },
+                { id: 3019, name: 'son soz', weight: 'قطعة', price: 250, img: 'imgs_choclate/سون سوز.jpg', stock: 1 },
+                { id: 3020, name: 'سوداني', weight: 'قطعة', price: 250, img: 'imgs_choclate/سوداني.jpg', stock: 1 },
+                { id: 3021, name: 'كومبو', weight: 'قطعة', price: 500, img: 'imgs_choclate/كومبو.jpg', stock: 1 }
             ],
             'نستلة': [
                 { id: 3101, name: 'نمبر وان احمر', weight: 'قطعة', price: 250, img: 'imgs_choclate/نمبر وان احمر.jpg', stock: 1 },
@@ -527,5 +527,6 @@ const data = {
 				],
             
         };
+
 
 
