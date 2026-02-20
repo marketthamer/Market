@@ -137,6 +137,13 @@
             0% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
             100% { opacity: 0; transform: translate(var(--tx), var(--ty)) scale(0); }
         }
+
+        /* تنسيق المنتجات المنتهية */
+        .product-item.out-of-stock { opacity: 0.6; pointer-events: none; user-select: none; }
+        .product-item.out-of-stock .img-box img { filter: grayscale(100%); }
+        .product-item.out-of-stock .btn-add { background: #475569; color: #cbd5e1; cursor: not-allowed; }
+        .product-item.out-of-stock .product-stock { color: #ef4444; background: rgba(239, 68, 68, 0.2); border-color: #ef4444; }
+        .search-item.out-of-stock { opacity: 0.6; filter: grayscale(100%); pointer-events: none; }
     </style>
 </head>
 <body>
@@ -472,21 +479,23 @@
             document.getElementById('prod-ui').style.display = 'block';
             document.getElementById('prod-back-btn').onclick = parent ? () => showSubMenu(parent) : goHome;
             const list = document.getElementById('prod-list');
-            const items = (data[cat] || []).filter(p => p.stock && p.stock > 0);
+            // تم إزالة فلتر إخفاء المنتجات المنتهية
+            const items = (data[cat] || []);
             list.innerHTML = items.length ? items.map(p => {
                 tempQtys[p.id] = 1;
-                return `<div class="product-item" onclick="openProductDetail(${p.id}, '${cat}')">
+                const isOut = !p.stock || p.stock <= 0;
+                return `<div class="product-item ${isOut ? 'out-of-stock' : ''}" onclick="${isOut ? '' : `openProductDetail(${p.id}, '${cat}')`}">
                     <div class="img-box"><img src="${p.img}" id="im-${p.id}"></div>
                     <h4 style="margin:5px 0;">${p.name}</h4>
                     <span class="product-weight">${p.weight}</span>
-                    <span class="product-stock">المتبقي: ${p.stock}</span>
+                    <span class="product-stock">${isOut ? 'نفذت الكمية' : 'المتبقي: ' + p.stock}</span>
                     <b style="color:var(--primary)">${p.price} د.ع</b>
-                    <div class="qty-row">
+                    ${isOut ? '' : `<div class="qty-row">
                         <button class="btn-qty" onclick="event.stopPropagation(); updateMainQty(${p.id}, -1)">-</button>
                         <span id="q-main-${p.id}">1</span>
                         <button class="btn-qty" onclick="event.stopPropagation(); updateMainQty(${p.id}, 1)">+</button>
-                    </div>
-                    <button class="btn-add" onclick="event.stopPropagation(); addToCart(${p.id}, '${cat}', false)">أضف للسلة</button>
+                    </div>`}
+                    <button class="btn-add" ${isOut ? 'disabled' : `onclick="event.stopPropagation(); addToCart(${p.id}, '${cat}', false)"`}>${isOut ? 'نفذت الكمية' : 'أضف للسلة'}</button>
                 </div>`;
             }).join('') : '<p style="text-align:center; grid-column:1/3;">قريباً...</p>';
         }
@@ -591,15 +600,18 @@
                 const isCategoryMatch = normalizeArabic(c).includes(q) || (searchKeywords[q] && searchKeywords[q] === c);
                 
                 data[c].forEach(p => { 
-                    // إضافة المنتج إذا تطابق اسمه أو القسم الخاص به، والتأكد من توفره
-                    if(p.stock > 0 && (normalizeArabic(p.name).includes(q) || isCategoryMatch)) { 
+                    // إضافة المنتج إذا تطابق اسمه أو القسم الخاص به (حتى لو الكمية 0)
+                    if(normalizeArabic(p.name).includes(q) || isCategoryMatch) { 
                         p.cat=c; 
                         found.push(p); 
                     } 
                 });
             }
             
-            res.innerHTML = found.map(p => `<div class="search-item" onclick="goToProd('${p.cat}', ${p.id})"><img src="${p.img}"><div><b>${p.name}</b><br><small>${p.price} د.ع</small></div></div>`).join('');
+            res.innerHTML = found.map(p => {
+                const isOut = !p.stock || p.stock <= 0;
+                return `<div class="search-item ${isOut ? 'out-of-stock' : ''}" onclick="${isOut ? '' : `goToProd('${p.cat}', ${p.id})`}"><img src="${p.img}"><div><b>${p.name}</b> ${isOut ? '<span style="color:red; font-size:10px">(نفذت)</span>' : ''}<br><small>${p.price} د.ع</small></div></div>`;
+            }).join('');
             res.style.display = found.length ? 'block' : 'none';
         }
 
