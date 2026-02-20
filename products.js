@@ -80,49 +80,49 @@ const data = {
     ],
             
             'شوكولاته':  [
-                { id: 3001, name: 'سنيكرز Original', weight: 'قطعة', price: 750, img: 'imgs_choclate/سنيكرز عادي.jpg', stock: 1 },
-                { id: 3003, name: 'سنيكرز موس ماراكوجا', weight: 'قطعة', price: 750, img: 'imgs_choclate/سنيكرز استوائية.jpg', stock: 1 },
-                { id: 3004, name: 'مارس', weight: 'قطعة', price: 750, img: 'imgs_choclate/مارس.jpg', stock: 1 },
-                { id: 3005, name: 'ريسيز', weight: 'قطعة', price: 1500, img: 'imgs_choclate/ريسيز.jpg', stock: 1 },
-                { id: 3006, name: 'كيندر 4 اصابع', weight: 'قطعة', price: 1250, img: 'imgs_choclate/كيندر اصابع وسط.jpg', stock: 1 },
-                { id: 3007, name: 'باونتي', weight: 'قطعة', price: 750, img: 'imgs_choclate/باونتي.jpg', stock: 1 },
-                { id: 3008, name: 'فلير', weight: 'قطعة', price: 1500, img: 'imgs_choclate/فلير.jpg', stock: 1 },
-                { id: 3011, name: 'كيندر اصبع', weight: 'قطعة', price: 500, img: 'imgs_choclate/كيندر اصبع صغير.jpg', stock: 1 },
-                { id: 3012, name: 'داريلو بالكاراميل', weight: 'قطعة', price: 500, img: 'imgs_choclate/داريلو بالكراميل.jpg', stock: 1 },
-                { id: 3013, name: 'داريلو بجوز الهند', weight: 'قطعة', price: 500, img: 'imgs_choclate/داريلو بجوز الهند.jpg', stock: 1 },
-                { id: 3014, name: 'Roso lips', weight: 'قطعة', price: 250, img: 'imgs_choclate/روزو لبس.jpg', stock: 1 },
-                { id: 3015, name: 'ميلودي', weight: 'قطعة', price: 250, img: 'imgs_choclate/ميلودي.jpg', stock: 1 },
-                { id: 3016, name: 'اريزونا حبيبات بسكويت', weight: 'قطعة', price: 250, img: 'imgs_choclate/اريزونا كاكاو حبيبات.jpg', stock: 1 },
-                { id: 3017, name: 'شوكو بريك', weight: 'قطعة', price: 250, img: 'imgs_choclate/شوكو بريك.jpg', stock: 1 },
-                { id: 3018, name: '4*4', weight: 'قطعة', price: 250, img: 'imgs_choclate/4x4.jpg', stock: 1 },
-                { id: 3019, name: 'son soz', weight: 'قطعة', price: 250, img: 'imgs_choclate/سون سوز.jpg', stock: 1 },
-                { id: 3020, name: 'سوداني', weight: 'قطعة', price: 250, img: 'imgs_choclate/سوداني.jpg', stock: 1 },
-                { id: 3021, name: 'كومبو', weight: 'قطعة', price: 500, img: 'imgs_choclate/كومبو.jpg', stock: 1 }
+                { id: 3001, name: 'سنيكرز Original', weight: 'قطعة', price: 750, img: 'imgs_chocolate/سنيكرز عادي.jpg', stock: 1 },
+                { id: 3003, name: 'سنيكرز موس ماراكوجا', weight: 'قطعة', price: 750, img: 'imgs_chocolate/سنيكرز استوائية.jpg', stock: 1 },
+                { id: 3004, name: 'مارس', weight: 'قطعة', price: 750, img: 'imgs_chocolate/مارس.jpg', stock: 1 },
+                { id: 3005, name: 'ريسيز', weight: 'قطعة', price: 1500, img: 'imgs_chocolate/ريسيز.jpg', stock: 1 },
+                { id: 3006, name: 'كيندر 4 اصابع', weight: 'قطعة', price: 1250, img: 'imgs_chocolate/كيندر اصبع وسط.jpg', stock: 1 },
+                { id: 3007, name: 'باونتي', weight: 'قطعة', price: 750, img: 'imgs_chocolate/باونتي.jpg', stock: 1 },
+                { id: 3008, name: 'فلير', weight: 'قطعة', price: 1500, img: 'imgs_chocolate/فلير.jpg', stock: 1 },
+                { id: 3011, name: 'كيندر اصبع', weight: 'قطعة', price: 500, img: 'imgs_chocolate/كيندر اصبع صغير.jpg', stock: 1 },
+                { id: 3012, name: 'داريلو بالكاراميل', weight: 'قطعة', price: 500, img: 'imgs_chocolate/داريلو بالكراميل.jpg', stock: 1 },
+                { id: 3013, name: 'داريلو بجوز الهند', weight: 'قطعة', price: 500, img: 'imgs_chocolate/داريلو بجوز الهند.jpg', stock: 1 },
+                { id: 3014, name: 'Roso lips', weight: 'قطعة', price: 250, img: 'imgs_chocolate/روزو لبس.jpg', stock: 1 },
+                { id: 3015, name: 'ميلودي', weight: 'قطعة', price: 250, img: 'imgs_chocolate/ميلودي.jpg', stock: 1 },
+                { id: 3016, name: 'اريزونا حبيبات بسكويت', weight: 'قطعة', price: 250, img: 'imgs_chocolate/اريزونا كاكاو حبيبات.jpg', stock: 1 },
+                { id: 3017, name: 'شوكو بريك', weight: 'قطعة', price: 250, img: 'imgs_chocolate/شوكو بريك.jpg', stock: 1 },
+                { id: 3018, name: '4*4', weight: 'قطعة', price: 250, img: 'imgs_chocolate/4x4.jpg', stock: 1 },
+                { id: 3019, name: 'son soz', weight: 'قطعة', price: 250, img: 'imgs_chocolate/سون سوز.jpg', stock: 1 },
+                { id: 3020, name: 'سوداني', weight: 'قطعة', price: 250, img: 'imgs_chocolate/سوداني.jpg', stock: 1 },
+                { id: 3021, name: 'كومبو', weight: 'قطعة', price: 500, img: 'imgs_chocolate/كومبو.jpg', stock: 1 }
             ],
             'نستلة': [
-                { id: 3101, name: 'نمبر وان احمر', weight: 'قطعة', price: 250, img: 'imgs_choclate/نمبر وان احمر.jpg', stock: 1 },
-                { id: 3102, name: 'نمبر وان اخضر', weight: 'قطعة', price: 250, img: 'imgs_choclate/نمبر وان اخضر.jpg', stock: 1 },
-                { id: 3103, name: 'مستر بايت بندق', weight: 'قطعة', price: 250, img: 'imgs_choclate/مستر بايت ابيض.jpg', stock: 1 },
-                { id: 3104, name: 'ويف اب كاكاو', weight: 'قطعة', price: 250, img: 'imgs_choclate/ويف اب كاكاو.jpg', stock: 1 },
-                { id: 3105, name: 'شوكتو تريبس', weight: 'قطعة', price: 250, img: 'imgs_choclate/شوكو تريبس.jpg', stock: 1 },
-                { id: 3106, name: 'كات كات كاكاو', weight: 'قطعة', price: 250, img: 'imgs_choclate/كات كات كاكاو.jpg', stock: 1 },
-                { id: 3107, name: 'GO UP توت', weight: 'قطعة', price: 250, img: 'imgs_choclate/كو اب توت.jpg', stock: 1 },
-                { id: 3108, name: 'GO UP كاكاو داكن', weight: 'قطعة', price: 250, img: 'imgs_choclate/كو اب كاكاو داكن.jpg', stock: 1 }
+                { id: 3101, name: 'نمبر وان احمر', weight: 'قطعة', price: 250, img: 'imgs_chocolate/نمبر وان احمر.jpg', stock: 1 },
+                { id: 3102, name: 'نمبر وان اخضر', weight: 'قطعة', price: 250, img: 'imgs_chocolate/نمبر وان اخضر.jpg', stock: 1 },
+                { id: 3103, name: 'مستر بايت بندق', weight: 'قطعة', price: 250, img: 'imgs_chocolate/مستر بايت ابيض.jpg', stock: 1 },
+                { id: 3104, name: 'ويف اب كاكاو', weight: 'قطعة', price: 250, img: 'imgs_chocolate/ويف اب كاكاو.jpg', stock: 1 },
+                { id: 3105, name: 'شوكتو تريبس', weight: 'قطعة', price: 250, img: 'imgs_chocolate/شوكو تريبس.jpg', stock: 1 },
+                { id: 3106, name: 'كات كات كاكاو', weight: 'قطعة', price: 250, img: 'imgs_chocolate/كات كات كاكاو.jpg', stock: 1 },
+                { id: 3107, name: 'GO UP توت', weight: 'قطعة', price: 250, img: 'imgs_chocolate/كو اب توت.jpg', stock: 1 },
+                { id: 3108, name: 'GO UP كاكاو داكن', weight: 'قطعة', price: 250, img: 'imgs_chocolate/كو اب كاكاو داكن.jpg', stock: 1 }
             ],
             'كيك': [
-                { id: 3201, name: 'باب الاغا كاكاو', weight: 'قطعة', price: 250, img: 'imgs_choclate/باب الاغا كاكاو.jpg', stock: 1 },
-                { id: 3202, name: 'باب الاغا سادة', weight: 'قطعة', price: 250, img: 'imgs_choclate/باب الاغا سادة.jpg', stock: 1 },
-                { id: 3203, name: 'تايني', weight: 'قطعة', price: 250, img: 'imgs_choclate/تايني.jpg', stock: 1 },
-                { id: 3204, name: 'لوبو', weight: 'قطعة', price: 250, img: 'imgs_choclate/لوبو.jpg', stock: 1 },
-                { id: 3205, name: 'كرواسون شيبابا', weight: 'قطعة', price: 250, img: 'imgs_choclate/كرواسون شيبابا.jpg', stock: 1 },
-                { id: 3206, name: 'اوتي بركر كاكاو', weight: 'قطعة', price: 250, img: 'imgs_choclate/اوتي بركر كاكاو.jpg', stock: 1 },
-                { id: 3207, name: 'بريك فاست فانيلا', weight: 'قطعة', price: 250, img: 'imgs_choclate/اوتي بركر فانيلا.jpg', stock: 1 },
-                { id: 3208, name: 'اوتي بركر كراميل', weight: 'قطعة', price: 250, img: 'imgs_choclate/اوتي بركر كراميل.jpg', stock: 1 },
-                { id: 3210, name: 'باب الاغا فراولة', weight: 'قطعة', price: 250, img: 'imgs_choclate/باب الاغا فراولة.jpg', stock: 1 },
-                { id: 3211, name: 'coco cake', weight: 'قطعة', price: 250, img: 'imgs_choclate/كوكو كيك.jpg', stock: 1 },
-                { id: 3212, name: 'بوند بالزبدة', weight: 'قطعة', price: 250, img: 'imgs_choclate/بوند بالزبدة.jpg', stock: 1 },
-                { id: 3213, name: 'كاسة شوكولاته', weight: 'قطعة', price: 250, img: 'imgs_choclate/كاسة شوكولاته.jpg', stock: 1 },
-                { id: 3214, name: 'Raisin بالكشمش', weight: 'قطعة', price: 250, img: 'imgs_choclate/رايسن بالكشمش.jpg', stock: 1 }
+                { id: 3201, name: 'باب الاغا كاكاو', weight: 'قطعة', price: 250, img: 'imgs_chocolate/باب الاغا كاكاو.jpg', stock: 1 },
+                { id: 3202, name: 'باب الاغا سادة', weight: 'قطعة', price: 250, img: 'imgs_chocolate/باب الاغا سادة.jpg', stock: 1 },
+                { id: 3203, name: 'تايني', weight: 'قطعة', price: 250, img: 'imgs_chocolate/تايني.jpg', stock: 1 },
+                { id: 3204, name: 'لوبو', weight: 'قطعة', price: 250, img: 'imgs_chocolate/لوبو.jpg', stock: 1 },
+                { id: 3205, name: 'كرواسون شيبابا', weight: 'قطعة', price: 250, img: 'imgs_chocolate/كرواسون شيبابا.jpg', stock: 1 },
+                { id: 3206, name: 'اوتي بركر كاكاو', weight: 'قطعة', price: 250, img: 'imgs_chocolate/اوتي بركر كاكاو.jpg', stock: 1 },
+                { id: 3207, name: 'بريك فاست فانيلا', weight: 'قطعة', price: 250, img: 'imgs_chocolate/اوتي بركر فانيلا.jpg', stock: 1 },
+                { id: 3208, name: 'اوتي بركر كراميل', weight: 'قطعة', price: 250, img: 'imgs_chocolate/اوتي بركر كراميل.jpg', stock: 1 },
+                { id: 3210, name: 'باب الاغا فراولة', weight: 'قطعة', price: 250, img: 'imgs_chocolate/باب الاغا فراولة.jpg', stock: 1 },
+                { id: 3211, name: 'coco cake', weight: 'قطعة', price: 250, img: 'imgs_chocolate/كوكو كيك.jpg', stock: 1 },
+                { id: 3212, name: 'بوند بالزبدة', weight: 'قطعة', price: 250, img: 'imgs_chocolate/بوند بالزبدة.jpg', stock: 1 },
+                { id: 3213, name: 'كاسة شوكولاته', weight: 'قطعة', price: 250, img: 'imgs_chocolate/كاسة شوكولاته.jpg', stock: 1 },
+                { id: 3214, name: 'Raisin بالكشمش', weight: 'قطعة', price: 250, img: 'imgs_chocolate/رايسن بالكشمش.jpg', stock: 1 }
             ],
             'غازيات': [
                 { id: 401, name: 'بيبسي رفيع', weight: '150 مل', price: 250, img: 'imgs_gaz/pepsi250.jpg', stock: 1 },
@@ -527,6 +527,7 @@ const data = {
 				],
             
         };
+
 
 
 
