@@ -1,7 +1,7 @@
 const data = {
             'شاي وقهوة': [
                 { id: 12, name: 'شاي أحمد تيباك', weight: 'صغير', price: 1250, img: 'imgs_tea/تيباك احمد صغير.jpg', stock: 0 },
-                { id: 15, name: 'شاي ليبتون تيباك', weight: 'صغير', price: 1500, img: 'imgs_tea/تيباك ليبتون صغير.jpg', stock: 1 },
+                { id: 15, name: 'شاي ليبتون تيباك', weight: 'صغير', price: 1500, img: 'imgs_tea/تيباك ليبتون صغير.jpg', stock: 6 },
                 { id: 14, name: 'شاي محمود تيباك', weight: 'صغير', price: 1250, img: 'imgs_tea/تيباك محمود صغير.jpg', stock: 1 },
                 { id: 13, name: 'شاي حسن تيباك', weight: 'صغير', price: 1250, img: 'imgs_tea/تيباك حسن صغير.jpg', stock: 1 },
                 { id: 16, name: 'شاي محمود بالهيل', weight: 'تيباك', price: 1250, img: 'imgs_tea/تيباك محمود صغير بالهيل.jpg', stock: 1 },
@@ -527,6 +527,7 @@ const data = {
 				],
             
         };
+
 
 
 
