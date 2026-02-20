@@ -301,8 +301,8 @@ const data = {
             'اندومي': [
                 { id: 8001, name: 'اندومي خضار', weight: 'كيس', price: 250, img: 'imgs_indome/اندومي خضار صغير.jpg', stock: 1 },
                 { id: 8002, name: 'اندومي دجاج بلدي', weight: 'كيس', price: 250, img: 'imgs_indome/اندومي دجاج بلدي صغير.jpg', stock: 1 },
-                { id: 8003, name: 'اندومي دجاج بالكاري', weight: 'كيس', price: 250, img: 'imgs_indome/اندومي دجاجا بالكاري صغير.jpg', stock: 1 },
-                { id: 8004, name: 'اندومي دجاج نكهة خاصة', weight: 'كيس', price: 250, img: 'imgs_indome/اندومي دجاج نكهة خاصة صغير.jpg', stock: 1 },
+                { id: 8003, name: 'اندومي دجاج بالكاري', weight: 'كيس', price: 250, img: 'imgs_indome/اندومي دجاج بالكاري صغير.jpg', stock: 1 },
+                { id: 8004, name: 'اندومي دجاج نكهة خاصة', weight: 'كيس', price: 250, img: 'imgs_indome/اندومي نكهة خاصة صغير.jpg', stock: 1 },
                 { id: 8005, name: 'اندومي قدح دجاج', weight: 'قدح', price: 500, img: 'imgs_indome/اندومي قدح دجاج وسط.jpg', stock: 1 },
                 { id: 8006, name: 'اندومي قدح دجاج', weight: 'قدح كبير', price: 750, img: 'imgs_indome/اندومي قدح دجاج كبير.jpg', stock: 1 },
                 { id: 8007, name: 'اندومي قدح خضار', weight: 'قدح كبير', price: 750, img: 'imgs_indome/اندومي قدح خضار كبير.jpg', stock: 1 }
@@ -527,6 +527,7 @@ const data = {
 				],
             
         };
+
 
 
 
