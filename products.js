@@ -1,11 +1,11 @@
 const data = {
             'شاي وقهوة': [
-                { id: 12, name: 'شاي أحمد تيباك', weight: 'صغير', price: 1250, img: 'imgs_tea/تيباك احمد صغير.jpg', stock: 0 },
-                { id: 15, name: 'شاي ليبتون تيباك', weight: 'صغير', price: 1500, img: 'imgs_tea/تيباك ليبتون صغير.jpg', stock: 6 },
-                { id: 14, name: 'شاي محمود تيباك', weight: 'صغير', price: 1250, img: 'imgs_tea/تيباك محمود صغير.jpg', stock: 1 },
-                { id: 13, name: 'شاي حسن تيباك', weight: 'صغير', price: 1250, img: 'imgs_tea/تيباك حسن صغير.jpg', stock: 1 },
-                { id: 16, name: 'شاي محمود بالهيل', weight: 'تيباك', price: 1250, img: 'imgs_tea/تيباك محمود صغير بالهيل.jpg', stock: 1 },
-                { id: 1, name: 'شاي أحمد', weight: '200 غرام', price: 2000, img: 'imgs_tea/احمد 2000.jpg', stock: 1 },
+                { id: 12, name: 'شاي أحمد تيباك', weight: 'صغير', price: 1250, img: 'imgs_tea/تيباك احمد صغير.jpg', stock: 6 },
+                { id: 15, name: 'شاي ليبتون تيباك', weight: 'صغير', price: 1500, img: 'imgs_tea/تيباك ليبتون صغير.jpg', stock: 2 },
+                { id: 14, name: 'شاي محمود تيباك', weight: 'صغير', price: 1250, img: 'imgs_tea/تيباك محمود صغير.jpg', stock: 2 },
+                { id: 13, name: 'شاي حسن تيباك', weight: 'صغير', price: 1250, img: 'imgs_tea/تيباك حسن صغير.jpg', stock: 7 },
+                { id: 16, name: 'شاي محمود بالهيل', weight: 'تيباك', price: 1250, img: 'imgs_tea/تيباك محمود صغير بالهيل.jpg', stock: 0 },
+                { id: 1, name: 'شاي أحمد', weight: '200 غرام', price: 2000, img: 'imgs_tea/احمد 2000.jpg', stock: 12 },
                 { id: 2, name: 'شاي عطور', weight: '200 غرام', price: 1750, img: 'imgs_tea/عطور 1750.jpg', stock: 1 },
                 { id: 3, name: 'شاي براري', weight: '200 غرام', price: 2000, img: 'imgs_tea/براري 2000.jpg', stock: 1 },
                 { id: 4, name: 'شاي حسن', weight: '200 غرام', price: 2000, img: 'imgs_tea/حسن 2000.jpg', stock: 1 },
