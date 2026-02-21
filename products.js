@@ -41,32 +41,32 @@ const data = {
                 { id: 9013, name: 'شوربة ماجي بالفطر', weight: 'ظرف', price: 1250, img: 'imgs_makrona/شوربة ماجي بالفطر.jpg', stock: 1 }
     ],
             'منظفات سائلة': [
-                { id: 5670, name: 'كلور مبيض زيرو', weight: '1000 مل', price: 1500, img: 'imgs_liquid/كلور زيرو 1500.jpg', stock: 1 },
-                { id: 5671, name: 'كلور مبيض زيرو', weight: '750 مل', price: 1000, img: 'imgs_liquid/كلور زيرو 1000.jpg', stock: 1 },
-                { id: 5672, name: 'كلور مبيض دبة', weight: '4 لتر', price: 4500, img: 'imgs_liquid/كلور زبرو 4500.jpg', stock: 1 },
-                { id: 5673, name: 'كلور مبيض صحت', weight: '500 مل', price: 500, img: 'imgs_liquid/كلور صحت 500.jpg', stock: 1 },
-                { id: 5674, name: 'مطهر عام زيرو', weight: '500 مل', price: 1000, img: 'imgs_liquid/مطهر زيرو.jpg', stock: 1 },
-                { id: 5675, name: 'فلاش زاكس', weight: '1 لتر', price: 1500, img: 'imgs_liquid/فلاش زاكس.jpg', stock: 1 },
-                { id: 5676, name: 'زاهي مكين', weight: 'بطل', price: 1000, img: 'imgs_liquid/زاهي مكين.jpg', stock: 1 },
+                { id: 5670, name: 'كلور مبيض زيرو', weight: '1000 مل', price: 1500, img: 'imgs_liquid/كلور زيرو 1500.jpg', stock: 11 },
+                { id: 5671, name: 'كلور مبيض زيرو', weight: '750 مل', price: 1000, img: 'imgs_liquid/كلور زيرو 1000.jpg', stock: 10 },
+                { id: 5672, name: 'كلور مبيض دبة', weight: '4 لتر', price: 4500, img: 'imgs_liquid/كلور زبرو 4500.jpg', stock: 2 },
+                { id: 5673, name: 'كلور مبيض صحت', weight: '500 مل', price: 500, img: 'imgs_liquid/كلور صحت 500.jpg', stock: 18 },
+                { id: 5674, name: 'مطهر عام زيرو', weight: '500 مل', price: 1000, img: 'imgs_liquid/مطهر زيرو.jpg', stock: 16 },
+                { id: 5675, name: 'فلاش زاكس', weight: '1 لتر', price: 1500, img: 'imgs_liquid/فلاش زاكس.jpg', stock: 6 },
+                { id: 5676, name: 'زاهي مكين', weight: 'بطل', price: 1000, img: 'imgs_liquid/زاهي مكين.jpg', stock: 0 },
                 { id: 5678, name: 'زاهي عملاق', weight: 'بطل', price: 1500, img: 'imgs_liquid/زاهي عملاق 1500.jpg', stock: 1 },
-                { id: 5679, name: 'زاهي دينا', weight: 'بطل', price: 2500, img: 'imgs_liquid/زاهي دينا.jpg', stock: 1 },
-                { id: 5680, name: 'معطر ارضية عملاق لافندر', weight: 'بطل', price: 2000, img: 'imgs_liquid/عملاق لافندر.jpg', stock: 1 },
-                { id: 5681, name: 'فلاش اصلي', weight: 'بطل', price: 3500, img: 'imgs_liquid/no.jpg', stock: 1 },
-                { id: 5682, name: 'زاهي O2 ', weight: '3 لتر', price: 3000, img: 'imgs_liquid/no.jpg', stock: 1 },
-                { id: 5683, name: 'جل عملاق', weight: 'علبة صغيرة', price: 1500, img: 'imgs_liquid/جل عملاق 1500.jpg', stock: 1 },
-                { id: 5684, name: 'جل عملاق', weight: 'علبة كبيرة', price: 2500, img: 'imgs_liquid/no.jpg', stock: 1 },
-                { id: 5685, name: 'معطر ارضية عملاق ورد', weight: 'بطل', price: 2000, img: 'imgs_liquid/عملاق ورد.jpg', stock: 1 },
-                { id: 5686, name: 'معطر ارضية عملاق بوكيه', weight: 'بطل', price: 2000, img: 'imgs_liquid/عملاق بوكيه.jpg', stock: 1 },
-                { id: 5687, name: 'معطر ارضية عملاق ياسمين', weight: 'بطل', price: 2000, img: 'imgs_liquid/عملاق ياسمين.jpg', stock: 1 },
-                { id: 5688, name: 'صابون مكين بالفواكه', weight: 'بطل', price: 1500, img: 'imgs_liquid/مكين فواكه.jpg', stock: 1 },
-                { id: 5689, name: 'صابون مكين بالزيتون', weight: 'بطل', price: 1500, img: 'imgs_liquid/مكين زيتون.jpg', stock: 1 },
-                { id: 5690, name: 'منظف اثاث واسطح المطبخ', weight: 'بخاخ', price: 2500, img: 'imgs_liquid/تنظيف اخشاب.jpg', stock: 1 },
-                { id: 5691, name: 'جل استحمام ذهبي', weight: 'بطل', price: 4000, img: 'imgs_liquid/جل استحمام ذهبي.jpg', stock: 1 },
-                { id: 5692, name: 'سائل غسيل للملابس السوداء', weight: 'بطل', price: 2000, img: 'imgs_liquid/سلطان سوداء.jpg', stock: 1 },
-                { id: 5693, name: 'ABC لملابس الاطفال', weight: 'بطل', price: 4000, img: 'imgs_liquid/ABC للاطفال.jpg', stock: 1 },
-                { id: 5694, name: 'ABC للملابس البيضاء', weight: 'بطل', price: 4000, img: 'imgs_liquid/ABC بيضاء.jpg', stock: 1 },
-                { id: 5695, name: 'ABC للملابس الحساسة والصوفية', weight: 'بطل', price: 4000, img: 'imgs_liquid/ABC حساسة.jpg', stock: 1 },
-                { id: 5696, name: 'ABC لكافة انواع الملابس', weight: 'بطل', price: 4000, img: 'imgs_liquid/ABC ملون.jpg', stock: 1 }
+                { id: 5679, name: 'زاهي دينا', weight: 'بطل', price: 2500, img: 'imgs_liquid/زاهي دينا.jpg', stock: 6 },
+                { id: 5680, name: 'معطر ارضية عملاق لافندر', weight: 'بطل', price: 2000, img: 'imgs_liquid/عملاق لافندر.jpg', stock: 2 },
+                { id: 5681, name: 'فلاش اصلي', weight: 'بطل', price: 3500, img: 'imgs_liquid/no.jpg', stock: 0 },
+                { id: 5682, name: 'زاهي O2 ', weight: '3 لتر', price: 3000, img: 'imgs_liquid/no.jpg', stock: 0 },
+                { id: 5683, name: 'جل عملاق', weight: 'علبة صغيرة', price: 1500, img: 'imgs_liquid/جل عملاق 1500.jpg', stock: 2 },
+                { id: 5684, name: 'جل عملاق', weight: 'علبة كبيرة', price: 2500, img: 'imgs_liquid/no.jpg', stock: 0 },
+                { id: 5685, name: 'معطر ارضية عملاق ورد', weight: 'بطل', price: 2000, img: 'imgs_liquid/عملاق ورد.jpg', stock: 2 },
+                { id: 5686, name: 'معطر ارضية عملاق بوكيه', weight: 'بطل', price: 2000, img: 'imgs_liquid/عملاق بوكيه.jpg', stock: 2 },
+                { id: 5687, name: 'معطر ارضية عملاق ياسمين', weight: 'بطل', price: 2000, img: 'imgs_liquid/عملاق ياسمين.jpg', stock: 3 },
+                { id: 5688, name: 'صابون مكين بالفواكه', weight: 'بطل', price: 1500, img: 'imgs_liquid/مكين فواكه.jpg', stock: 2 },
+                { id: 5689, name: 'صابون مكين بالزيتون', weight: 'بطل', price: 1500, img: 'imgs_liquid/مكين زيتون.jpg', stock: 5 },
+                { id: 5690, name: 'منظف اثاث واسطح المطبخ', weight: 'بخاخ', price: 2500, img: 'imgs_liquid/تنظيف اخشاب.jpg', stock: 3 },
+                { id: 5691, name: 'جل استحمام ذهبي', weight: 'بطل', price: 4000, img: 'imgs_liquid/جل استحمام ذهبي.jpg', stock: 3 },
+                { id: 5692, name: 'سائل غسيل للملابس السوداء', weight: 'بطل', price: 2000, img: 'imgs_liquid/سلطان سوداء.jpg', stock: 8 },
+                { id: 5693, name: 'ABC لملابس الاطفال', weight: 'بطل', price: 4000, img: 'imgs_liquid/ABC للاطفال.jpg', stock: 3 },
+                { id: 5694, name: 'ABC للملابس البيضاء', weight: 'بطل', price: 4000, img: 'imgs_liquid/ABC بيضاء.jpg', stock: 2 },
+                { id: 5695, name: 'ABC للملابس الحساسة والصوفية', weight: 'بطل', price: 4000, img: 'imgs_liquid/ABC حساسة.jpg', stock: 3 },
+                { id: 5696, name: 'ABC لكافة انواع الملابس', weight: 'بطل', price: 4000, img: 'imgs_liquid/ABC ملون.jpg', stock: 2 }
             
     ],
            'رز': [
@@ -531,6 +531,7 @@ const data = {
 	    ],
             
         };
+
 
 
 
