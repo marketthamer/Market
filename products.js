@@ -1,381 +1,543 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>الموقع تحت الصيانة</title>
-    <!-- استدعاء خط عربي احترافي من جوجل -->
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        /* تنسيقات الصفحة */
-        body {
-            margin: 0;
-            padding: 0;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364); /* خلفية متدرجة داكنة */
-            font-family: 'Cairo', sans-serif;
-            color: #ffffff;
-            overflow: hidden;
-        }
-
-        /* الحاوية الرئيسية بتأثير الزجاج */
-        .container {
-            text-align: center;
-            background: rgba(255, 255, 255, 0.05);
-            padding: 3rem;
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
-            border: 1px solid rgba(255,255,255,0.1);
-            max-width: 90%;
-            width: 500px;
-            transition: transform 0.3s ease;
-        }
-
-        .container:hover {
-            transform: translateY(-5px);
-        }
-
-        /* تنسيق الشعار المتحرك */
-        .icon-wrapper {
-            margin-bottom: 20px;
-            display: inline-block;
-        }
-
-        .gear-icon {
-            width: 80px;
-            height: 80px;
-            fill: #f39c12; /* لون ذهبي مميز */
-            animation: spin 4s linear infinite; /* حركة الدوران */
-        }
-
-        @keyframes spin {
-            100% { transform: rotate(360deg); }
-        }
-
-        /* النصوص */
-        h1 {
-            font-size: 2.5rem;
-            margin: 0 0 15px 0;
-            color: #f39c12;
-        }
-
-        p {
-            font-size: 1.1rem;
-            line-height: 1.6;
-            color: #e0e0e0;
-            margin-bottom: 30px;
-        }
-
-        .footer {
-            font-size: 0.85rem;
-            opacity: 0.6;
-            margin-top: 20px;
-        }
-
-        /* تنسيقات زر اللعبة */
-        .game-btn {
-            background: linear-gradient(45deg, #FF512F, #F09819); /* تدرج لوني جذاب */
-            border: none;
-            color: #ffffff;
-            padding: 15px 45px;
-            border-radius: 50px;
-            cursor: pointer;
-            font-family: 'Cairo', sans-serif;
-            font-weight: 700;
-            font-size: 1.6rem;
-            margin: 20px 0 30px 0;
-            transition: all 0.3s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 15px;
-            box-shadow: 0 10px 20px rgba(240, 152, 25, 0.3);
-        }
-
-        .game-btn:hover {
-            transform: scale(1.1) translateY(-2px);
-            box-shadow: 0 15px 30px rgba(240, 152, 25, 0.5);
-        }
-
-        .game-btn svg {
-            width: 35px;
-            height: 35px;
-        }
-
-        /* تنسيقات اللعبة (X-O) */
-        #xo-container {
-            display: none; /* مخفي افتراضياً */
-            flex-direction: column;
-            align-items: center;
-            animation: fadeIn 0.5s;
-        }
-
-        .board {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin: 20px 0;
-        }
-
-        .cell {
-            width: 60px;
-            height: 60px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 2rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-
-        .cell:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
-
-        .cell.x { color: #e74c3c; }
-        .cell.o { color: #3498db; }
-
-        .back-btn {
-            background: transparent;
-            border: 1px solid rgba(255,255,255,0.3);
-            color: #fff;
-            padding: 5px 15px;
-            border-radius: 15px;
-            cursor: pointer;
-            font-family: 'Cairo', sans-serif;
-            margin-top: 10px;
-        }
-
-        /* أزرار الصعوبة */
-        .difficulty-controls {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 15px;
-        }
-
-        .diff-btn {
-            background: rgba(255,255,255,0.1);
-            border: 1px solid rgba(255,255,255,0.2);
-            color: #ccc;
-            padding: 5px 15px;
-            border-radius: 15px;
-            cursor: pointer;
-            font-family: 'Cairo', sans-serif;
-            font-size: 0.9rem;
-            transition: all 0.3s;
-        }
-
-        .diff-btn.active, .diff-btn:hover {
-            background: #f39c12;
-            color: #fff;
-            border-color: #f39c12;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <!-- القسم الرئيسي: رسالة الصيانة -->
-        <div id="main-content">
-            <div class="icon-wrapper">
-                <!-- أيقونة الترس SVG -->
-                <svg class="gear-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M19.14,12.94c0.04-0.3,0.06-0.61,0.06-0.94c0-0.32-0.02-0.64-0.07-0.94l2.03-1.58c0.18-0.14,0.23-0.41,0.12-0.61 l-1.92-3.32c-0.12-0.22-0.37-0.29-0.59-0.22l-2.39,0.96c-0.5-0.38-1.03-0.7-1.62-0.94L14.4,2.81c-0.04-0.24-0.24-0.41-0.48-0.41 h-3.84c-0.24,0-0.43,0.17-0.47,0.41L9.25,5.35C8.66,5.59,8.12,5.92,7.63,6.29L5.24,5.33c-0.22-0.08-0.47,0-0.59,0.22L2.74,8.87 C2.62,9.08,2.66,9.34,2.86,9.48l2.03,1.58C4.84,11.36,4.8,11.69,4.8,12s0.02,0.64,0.07,0.94l-2.03,1.58 c-0.18,0.14-0.23,0.41-0.12,0.61l1.92,3.32c0.12,0.22,0.37,0.29,0.59,0.22l2.39-0.96c0.5,0.38,1.03,0.7,1.62,0.94l0.36,2.54 c0.05,0.24,0.24,0.41,0.48,0.41h3.84c0.24,0,0.43-0.17,0.47-0.41l0.36-2.54c0.59-0.24,1.13-0.56,1.62-0.94l2.39,0.96 c0.22,0.08,0.47,0,0.59-0.22l1.92-3.32c0.12-0.22,0.07-0.47-0.12-0.61L19.14,12.94z M12,15.6c-1.98,0-3.6-1.62-3.6-3.6 s1.62-3.6,3.6-3.6s3.6,1.62,3.6,3.6S13.98,15.6,12,15.6z"/>
-                </svg>
-            </div>
+const data = {
+            'شاي وقهوة': [
+                { id: 12, name: 'شاي أحمد تيباك', weight: 'صغير', price: 1250, img: 'imgs_tea/تيباك احمد صغير.jpg', stock: 6 },
+                { id: 15, name: 'شاي ليبتون تيباك', weight: 'صغير', price: 1500, img: 'imgs_tea/تيباك ليبتون صغير.jpg', stock: 1 },
+                { id: 14, name: 'شاي محمود تيباك', weight: 'صغير', price: 1250, img: 'imgs_tea/تيباك محمود صغير.jpg', stock: 1 },
+                { id: 13, name: 'شاي حسن تيباك', weight: 'صغير', price: 1250, img: 'imgs_tea/تيباك حسن صغير.jpg', stock: 1 },
+                { id: 16, name: 'شاي محمود بالهيل', weight: 'تيباك', price: 1250, img: 'imgs_tea/تيباك محمود صغير بالهيل.jpg', stock: 1 },
+                { id: 1, name: 'شاي أحمد', weight: '200 غرام', price: 2000, img: 'imgs_tea/احمد 2000.jpg', stock: 1 },
+                { id: 2, name: 'شاي عطور', weight: '200 غرام', price: 1750, img: 'imgs_tea/عطور 1750.jpg', stock: 1 },
+                { id: 3, name: 'شاي براري', weight: '200 غرام', price: 2000, img: 'imgs_tea/براري 2000.jpg', stock: 1 },
+                { id: 4, name: 'شاي حسن', weight: '200 غرام', price: 2000, img: 'imgs_tea/حسن 2000.jpg', stock: 1 },
+                { id: 5, name: 'شاي محمود', weight: '200 غرام', price: 2000, img: 'imgs_tea/محمود اسود 2000.jpg', stock: 1 },
+                { id: 6, name: 'شاي الوزة', weight: '200 غرام', price: 2000, img: 'imgs_tea/وزة 2000.jpg', stock: 1 },
+                { id: 17, name: 'شاي كرك', weight: 'مفرد', price: 250, img: 'imgs_tea/كرك 250.jpg', stock: 1 },
+                { id: 19, name: 'قهوة برنس', weight: 'ظرف', price: 1500, img: 'imgs_tea/برنس.jpg', stock: 1 },
+                { id: 20, name: 'كابتشينو كودي دايت', weight: 'ظرف', price: 250, img: 'imgs_tea/كودي دايت.jpg', stock: 1 },
+                { id: 21, name: 'كابتشينو كودي', weight: 'عادي', price: 250, img: 'imgs_tea/كودي عادي.jpg', stock: 1 },
+                { id: 23, name: 'شاي أحمد تيباك', weight: 'كبير', price: 4000, img: 'imgs_tea/تيباك احمد كبير.jpg', stock: 1 },
+                { id: 18, name: 'كوكو تيباك', weight: 'باكيت', price: 1500, img: 'imgs_tea/شوكولاته باودر صغير.jpg', stock: 1 },
+                { id: 22, name: 'كوكو تيباك', weight: 'كبير', price: 3000, img: 'imgs_tea/شوكولاته باودر وسط.jpg', stock: 1 },
+                { id: 24, name: 'قهوة لونا', weight: 'قوطي', price: 1500, img: 'imgs_tea/لونا.jpg', stock: 1 },
+                { id: 25, name: 'قهوة كودي', weight: 'بطل', price: 1000, img: 'imgs_tea/كودي بطل.jpg', stock: 1 },
+                { id: 26, name: 'قهوة أهواك', weight: 'باكيت', price: 500, img: 'imgs_tea/اهواك.jpg', stock: 1 },
+                { id: 27, name: 'حليب أنكور', weight: '400 غرام', price: 4000, img: 'imgs_tea/انكور.jpg', stock: 1 },
+                { id: 28, name: 'حليب مدهش', weight: '400 غرام', price: 4000, img: 'imgs_tea/مدهش.jpg', stock: 1 },
+                { id: 29, name: 'شاي عطور', weight: '80 غرام', price: 750, img: 'imgs_tea/عطور صغير.jpg', stock: 1 },
+            ],
+            'معكرونة وشعرية': [
+                { id: 9001, name: 'معكرونة كويتيه عكس', weight: 'كيس', price: 1500, img: 'imgs_makrona/معكرونة كويتية عكس.jpg', stock: 1 },
+                { id: 9002, name: 'شعرية كويتيه', weight: 'كيس', price: 1500, img: 'imgs_makrona/شعرية كويتية مكسرة.jpg', stock: 1 },
+                { id: 9003, name: 'عراقنا الحبيب عكس', weight: 'كيس', price: 1000, img: 'imgs_makrona/عراقنا الحبيب عكس.jpg', stock: 1 },
+                { id: 9004, name: 'معكرونة الرؤى برينه', weight: 'كيس', price: 1000, img: 'imgs_makrona/الرؤى برينه.jpg', stock: 1 },
+                { id: 9005, name: 'شعرية ملفوفة', weight: 'كيس', price: 500, img: 'imgs_makrona/شعرية ملفوفة.jpg', stock: 1 },
+                { id: 9006, name: 'معكرونة زير قلم', weight: 'كيس', price: 1000, img: 'imgs_makrona/زير قلم.jpg', stock: 1 },
+                { id: 9007, name: 'معكرونة زير ريكاتي', weight: 'كيس', price: 1000, img: 'imgs_makrona/زير ريكاتي.jpg', stock: 1 },
+                { id: 9008, name: 'سباكتي معمورة', weight: 'كيس', price: 500, img: 'imgs_makrona/سباكتي معمورة.jpg', stock: 1 },
+                { id: 9009, name: 'معكرونة QAD', weight: 'كيس', price: 250, img: 'imgs_makrona/قاد.jpg', stock: 1 },
+                { id: 9010, name: 'مونة شوربة دجاج', weight: 'ظرف', price: 1000, img: 'imgs_makrona/شوربة مونة بالدجاج.jpg', stock: 1 },
+                { id: 9011, name: 'مونة شوربة خضار', weight: 'ظرف', price: 1000, img: 'imgs_makrona/شوربة مونة بالخضار.jpg', stock: 1 },
+                { id: 9012, name: 'شوربة الين بالدجاج', weight: 'ظرف', price: 500, img: 'imgs_makrona/شوربة الين بالدجاج.jpg', stock: 1 },
+                { id: 9013, name: 'شوربة ماجي بالفطر', weight: 'ظرف', price: 1250, img: 'imgs_makrona/شوربة ماجي بالفطر.jpg', stock: 1 }
+    ],
+            'منظفات سائلة': [
+                { id: 5670, name: 'كلور مبيض زيرو', weight: '1000 مل', price: 1500, img: 'imgs_liquid/كلور زيرو 1500.jpg', stock: 11 },
+                { id: 5671, name: 'كلور مبيض زيرو', weight: '750 مل', price: 1000, img: 'imgs_liquid/كلور زيرو 1000.jpg', stock: 10 },
+                { id: 5672, name: 'كلور مبيض دبة', weight: '4 لتر', price: 4500, img: 'imgs_liquid/كلور زبرو 4500.jpg', stock: 2 },
+                { id: 5673, name: 'كلور مبيض صحت', weight: '500 مل', price: 500, img: 'imgs_liquid/كلور صحت 500.jpg', stock: 18 },
+                { id: 5674, name: 'مطهر عام زيرو', weight: '500 مل', price: 1000, img: 'imgs_liquid/مطهر زيرو.jpg', stock: 16 },
+                { id: 5675, name: 'فلاش زاكس', weight: '1 لتر', price: 1500, img: 'imgs_liquid/فلاش زاكس.jpg', stock: 6 },
+                { id: 5676, name: 'زاهي مكين', weight: 'بطل', price: 1000, img: 'imgs_liquid/زاهي مكين.jpg', stock: 0 },
+                { id: 5678, name: 'زاهي عملاق', weight: 'بطل', price: 1500, img: 'imgs_liquid/زاهي عملاق 1500.jpg', stock: 1 },
+                { id: 5679, name: 'زاهي دينا', weight: 'بطل', price: 2500, img: 'imgs_liquid/زاهي دينا.jpg', stock: 6 },
+                { id: 5680, name: 'معطر ارضية عملاق لافندر', weight: 'بطل', price: 2000, img: 'imgs_liquid/عملاق لافندر.jpg', stock: 2 },
+                { id: 5681, name: 'فلاش اصلي', weight: 'بطل', price: 3500, img: 'imgs_liquid/no.jpg', stock: 0 },
+                { id: 5682, name: 'زاهي O2 ', weight: '3 لتر', price: 3000, img: 'imgs_liquid/no.jpg', stock: 0 },
+                { id: 5683, name: 'جل عملاق', weight: 'علبة صغيرة', price: 1500, img: 'imgs_liquid/جل عملاق 1500.jpg', stock: 2 },
+                { id: 5684, name: 'جل عملاق', weight: 'علبة كبيرة', price: 2500, img: 'imgs_liquid/no.jpg', stock: 0 },
+                { id: 5685, name: 'معطر ارضية عملاق ورد', weight: 'بطل', price: 2000, img: 'imgs_liquid/عملاق ورد.jpg', stock: 2 },
+                { id: 5686, name: 'معطر ارضية عملاق بوكيه', weight: 'بطل', price: 2000, img: 'imgs_liquid/عملاق بوكيه.jpg', stock: 2 },
+                { id: 5687, name: 'معطر ارضية عملاق ياسمين', weight: 'بطل', price: 2000, img: 'imgs_liquid/عملاق ياسمين.jpg', stock: 3 },
+                { id: 5688, name: 'صابون مكين بالفواكه', weight: 'بطل', price: 1500, img: 'imgs_liquid/مكين فواكه.jpg', stock: 2 },
+                { id: 5689, name: 'صابون مكين بالزيتون', weight: 'بطل', price: 1500, img: 'imgs_liquid/مكين زيتون.jpg', stock: 5 },
+                { id: 5690, name: 'منظف اثاث واسطح المطبخ', weight: 'بخاخ', price: 2500, img: 'imgs_liquid/تنظيف اخشاب.jpg', stock: 3 },
+                { id: 5691, name: 'جل استحمام ذهبي', weight: 'بطل', price: 4000, img: 'imgs_liquid/جل استحمام ذهبي.jpg', stock: 3 },
+                { id: 5692, name: 'سائل غسيل للملابس السوداء', weight: 'بطل', price: 2000, img: 'imgs_liquid/سلطان سوداء.jpg', stock: 8 },
+                { id: 5693, name: 'ABC لملابس الاطفال', weight: 'بطل', price: 4000, img: 'imgs_liquid/ABC للاطفال.jpg', stock: 3 },
+                { id: 5694, name: 'ABC للملابس البيضاء', weight: 'بطل', price: 4000, img: 'imgs_liquid/ABC بيضاء.jpg', stock: 2 },
+                { id: 5695, name: 'ABC للملابس الحساسة والصوفية', weight: 'بطل', price: 4000, img: 'imgs_liquid/ABC حساسة.jpg', stock: 3 },
+                { id: 5696, name: 'ABC لكافة انواع الملابس', weight: 'بطل', price: 4000, img: 'imgs_liquid/ABC ملون.jpg', stock: 2 }
             
-            <!-- زر تشغيل اللعبة -->
-            <div>
-                <button class="game-btn" onclick="startXO()">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M21 6H3C1.89 6 1 6.89 1 8V16C1 17.11 1.89 18 3 18H21C22.11 18 23 17.11 23 16V8C23 6.89 22.11 6 21 6ZM6 13C5.45 13 5 12.55 5 12C5 11.45 5.45 11 6 11C6.55 11 7 11.45 7 12C7 12.55 6.55 13 6 13ZM9 13C8.45 13 8 12.55 8 12C8 11.45 8.45 11 9 11C9.55 11 10 11.45 10 12C10 12.55 9.55 13 9 13ZM12 16H18V14H12V16ZM18 10H12V8H18V10Z"/>
-                    </svg>
-                    العب الآن
-                </button>
-            </div>
-
-            <h1>الموقع تحت الصيانة</h1>
-            <p>نعتذر عن الإزعاج، نقوم حالياً بإجراء بعض التحسينات والتحديثات لتقديم تجربة أفضل لكم.<br>سنعود للعمل قريباً جداً.</p>
-            
-            <div class="footer">
-                &copy; 2024 اسم موقعك. جميع الحقوق محفوظة.
-            </div>
-        </div>
-        
-        <!-- لعبة X-O -->
-        <div id="xo-container">
-            <h2 style="color:#f39c12; margin:0;">X-O ضد الذكاء</h2>
-            <div class="board" id="board">
-                <div class="cell" onclick="play(0)"></div>
-                <div class="cell" onclick="play(1)"></div>
-                <div class="cell" onclick="play(2)"></div>
-                <div class="cell" onclick="play(3)"></div>
-                <div class="cell" onclick="play(4)"></div>
-                <div class="cell" onclick="play(5)"></div>
-                <div class="cell" onclick="play(6)"></div>
-                <div class="cell" onclick="play(7)"></div>
-                <div class="cell" onclick="play(8)"></div>
-            </div>
-            <div id="status" style="margin-bottom:10px; height:20px;"></div>
-            
-            <!-- خيارات الصعوبة -->
-            <div class="difficulty-controls">
-                <button class="diff-btn" id="btn-easy" onclick="setDifficulty('easy')">سهلة</button>
-                <button class="diff-btn active" id="btn-medium" onclick="setDifficulty('medium')">متوسطة</button>
-                <button class="diff-btn" id="btn-hard" onclick="setDifficulty('hard')">صعبة</button>
-            </div>
-
-            <div style="display:flex; gap:10px;">
-                <button class="back-btn" onclick="resetXO()" style="background:rgba(243, 156, 18, 0.2); border-color:#f39c12; color:#f39c12;">لعبة جديدة</button>
-                <button class="back-btn" onclick="closeGame()">خروج</button>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        // --- منطق لعبة X-O (ضد الكمبيوتر) ---
-        let currentPlayer = 'X';
-        let gameBoard = ['', '', '', '', '', '', '', '', ''];
-        let gameActive = true;
-        let difficulty = 'medium';
-
-        function startXO() {
-            document.getElementById('main-content').style.display = 'none';
-            document.getElementById('xo-container').style.display = 'flex';
-            resetXO();
-        }
-
-        function closeGame() {
-            document.getElementById('xo-container').style.display = 'none';
-            document.getElementById('main-content').style.display = 'block';
-        }
-
-        function setDifficulty(level) {
-            difficulty = level;
-            document.querySelectorAll('.diff-btn').forEach(btn => btn.classList.remove('active'));
-            document.getElementById('btn-' + level).classList.add('active');
-            resetXO();
-        }
-
-        function play(index) {
-            if (gameBoard[index] === '' && gameActive && currentPlayer === 'X') {
-                // دور اللاعب
-                gameBoard[index] = currentPlayer;
-                updateCell(index, 'X');
+    ],
+           'رز': [
+                { id: 1001, name: 'ملك البنجاب 900 غرام', weight: '900 غرام', price: 2500, img: 'imgs_منظفات سائلة/.jpg', stock: 1 },
+                { id: 1002, name: 'افندي 900 غرام', weight: '900 غرام', price: 2000, img: 'imgs_منظفات سائلة/.jpg', stock: 1 },
+                { id: 1003, name: 'دينار 900 غرام', weight: '900 غرام', price: 2000, img: 'imgs_منظفات سائلة/.jpg', stock: 1 },
+                { id: 1004, name: 'هيرتج 900 غرام', weight: '900 غرام', price: 2500, img: 'imgs_منظفات سائلة/.jpg', stock: 1 },
+                { id: 1005, name: 'بشاور الذهب 900 غرام', weight: '900 غرام', price: 2500, img: 'imgs_منظفات سائلة/.jpg', stock: 1 },
+                { id: 1006, name: 'اهلنا 900 غرام', weight: '900 غرام', price: 2500, img: 'imgs_منظفات سائلة/.jpg', stock: 1 },
+                { id: 1007, name: 'اهلنا 4.5 كيلو', weight: '4.5 كيلو', price: 12000, img: 'imgs_منظفات سائلة/.jpg', stock: 1 }
                 
-                if (!checkWinner()) {
-                    currentPlayer = 'O';
-                    // دور الكمبيوتر (تأخير بسيط للواقعية)
-                    setTimeout(computerMove, 500);
-                }
-            }
-        }
+    ],
+            
+            'شوكولاته':  [
+                { id: 3001, name: 'سنيكرز Original', weight: 'قطعة', price: 750, img: 'imgs_chocolate/سنيكرز عادي.jpg', stock: 1 },
+                { id: 3003, name: 'سنيكرز موس ماراكوجا', weight: 'قطعة', price: 750, img: 'imgs_chocolate/سنيكرز استوائية.jpg', stock: 1 },
+                { id: 3004, name: 'مارس', weight: 'قطعة', price: 750, img: 'imgs_chocolate/مارس.jpg', stock: 1 },
+                { id: 3005, name: 'ريسيز', weight: 'قطعة', price: 1500, img: 'imgs_chocolate/ريسيز.jpg', stock: 1 },
+                { id: 3006, name: 'كيندر 4 اصابع', weight: 'قطعة', price: 1250, img: 'imgs_chocolate/كيندر اصبع وسط.jpg', stock: 1 },
+                { id: 3007, name: 'باونتي', weight: 'قطعة', price: 750, img: 'imgs_chocolate/باونتي.jpg', stock: 1 },
+                { id: 3008, name: 'فلير', weight: 'قطعة', price: 1500, img: 'imgs_chocolate/فلير.jpg', stock: 1 },
+                { id: 3011, name: 'كيندر اصبع', weight: 'قطعة', price: 500, img: 'imgs_chocolate/كيندر اصبع صغير.jpg', stock: 1 },
+                { id: 3012, name: 'داريلو بالكاراميل', weight: 'قطعة', price: 500, img: 'imgs_chocolate/داريلو كراميل.jpg', stock: 1 },
+                { id: 3013, name: 'داريلو بجوز الهند', weight: 'قطعة', price: 500, img: 'imgs_chocolate/داريلو بجوز الهند.jpg', stock: 1 },
+                { id: 3014, name: 'Roso lips', weight: 'قطعة', price: 250, img: 'imgs_chocolate/روزو لبس.jpg', stock: 1 },
+                { id: 3015, name: 'ميلودي', weight: 'قطعة', price: 250, img: 'imgs_chocolate/ميلودي.jpg', stock: 1 },
+                { id: 3016, name: 'اريزونا حبيبات بسكويت', weight: 'قطعة', price: 250, img: 'imgs_chocolate/اريزونا كاكاو.jpg', stock: 1 },
+                { id: 3017, name: 'شوكو بريك', weight: 'قطعة', price: 250, img: 'imgs_chocolate/شوكو بريك.jpg', stock: 1 },
+                { id: 3018, name: '4*4', weight: 'قطعة', price: 250, img: 'imgs_chocolate/4x4.jpg', stock: 1 },
+                { id: 3019, name: 'son soz', weight: 'قطعة', price: 250, img: 'imgs_chocolate/سون سوز.jpg', stock: 1 },
+                { id: 3020, name: 'سوداني', weight: 'قطعة', price: 250, img: 'imgs_chocolate/سوداني.jpg', stock: 1 },
+                { id: 3021, name: 'كومبو', weight: 'قطعة', price: 500, img: 'imgs_chocolate/كومبو.jpg', stock: 1 }
+            ],
+            'نستلة': [
+                { id: 3101, name: 'نمبر وان احمر', weight: 'قطعة', price: 250, img: 'imgs_chocolate/نمبر وان احمر.jpg', stock: 1 },
+                { id: 3102, name: 'نمبر وان اخضر', weight: 'قطعة', price: 250, img: 'imgs_chocolate/نمبر وان اخضر.jpg', stock: 1 },
+                { id: 3103, name: 'مستر بايت بندق', weight: 'قطعة', price: 250, img: 'imgs_chocolate/مستر بايت ابيض.jpg', stock: 1 },
+                { id: 3104, name: 'ويف اب كاكاو', weight: 'قطعة', price: 250, img: 'imgs_chocolate/ويف اب كاكاو.jpg', stock: 1 },
+                { id: 3105, name: 'شوكتو تريبس', weight: 'قطعة', price: 250, img: 'imgs_chocolate/شوكو تريبس.jpg', stock: 1 },
+                { id: 3106, name: 'كات كات كاكاو', weight: 'قطعة', price: 250, img: 'imgs_chocolate/كات كات كاكاو.jpg', stock: 1 },
+                { id: 3107, name: 'GO UP توت', weight: 'قطعة', price: 250, img: 'imgs_chocolate/كو اب توت.jpg', stock: 1 },
+                { id: 3108, name: 'GO UP كاكاو داكن', weight: 'قطعة', price: 250, img: 'imgs_chocolate/كو اب كاكاو داكن.jpg', stock: 1 }
+            ],
+            'كيك': [
+                { id: 3201, name: 'باب الاغا كاكاو', weight: 'قطعة', price: 250, img: 'imgs_chocolate/باب الاغا كاكاو.jpg', stock: 1 },
+                { id: 3202, name: 'باب الاغا سادة', weight: 'قطعة', price: 250, img: 'imgs_chocolate/باب الاغا سادة.jpg', stock: 1 },
+                { id: 3203, name: 'تايني', weight: 'قطعة', price: 250, img: 'imgs_chocolate/تايني.jpg', stock: 1 },
+                { id: 3204, name: 'لوبو', weight: 'قطعة', price: 250, img: 'imgs_chocolate/لوبو.jpg', stock: 1 },
+                { id: 3205, name: 'كرواسون شيبابا', weight: 'قطعة', price: 250, img: 'imgs_chocolate/كرواسون شيبابا.jpg', stock: 1 },
+                { id: 3206, name: 'اوتي بركر كاكاو', weight: 'قطعة', price: 250, img: 'imgs_chocolate/اوتي بركر كاكاو.jpg', stock: 1 },
+                { id: 3207, name: 'بريك فاست فانيلا', weight: 'قطعة', price: 250, img: 'imgs_chocolate/اوتي بركر فانيلا.jpg', stock: 1 },
+                { id: 3208, name: 'اوتي بركر كراميل', weight: 'قطعة', price: 250, img: 'imgs_chocolate/اوتي بركر كراميل.jpg', stock: 1 },
+                { id: 3210, name: 'باب الاغا فراولة', weight: 'قطعة', price: 250, img: 'imgs_chocolate/باب الاغا فراولة.jpg', stock: 1 },
+                { id: 3211, name: 'coco cake', weight: 'قطعة', price: 250, img: 'imgs_chocolate/كوكو كيك.jpg', stock: 1 },
+                { id: 3212, name: 'بوند بالزبدة', weight: 'قطعة', price: 250, img: 'imgs_chocolate/بوند بالزبدة.jpg', stock: 1 },
+                { id: 3213, name: 'كاسة شوكولاته', weight: 'قطعة', price: 250, img: 'imgs_chocolate/كاسة شوكولاته.jpg', stock: 1 },
+                { id: 3214, name: 'Raisin بالكشمش', weight: 'قطعة', price: 250, img: 'imgs_chocolate/رايسن بالكشمش.jpg', stock: 1 }
+            ],
+            'غازيات': [
+                { id: 401, name: 'بيبسي رفيع', weight: '150 مل', price: 250, img: 'imgs_gaz/pepsi250.jpg', stock: 1 },
+                { id: 402, name: 'سفن رفيع', weight: '150 مل', price: 250, img: 'imgs_gaz/7up250.jpg', stock: 1 },
+                { id: 403, name: 'شاني رفيع', weight: '150 مل', price: 250, img: 'imgs_gaz/shani250.jpg', stock: 1 },
+                { id: 404, name: 'ميرندا رفيع', weight: '150 مل', price: 250, img: 'imgs_gaz/mirinda250.jpg', stock: 1 },
+                { id: 405, name: 'حمضيات رفيع', weight: '150 مل', price: 250, img: 'imgs_gaz/mirinda250green.jpg', stock: 1 },
+                { id: 406, name: 'كولا رفيع', weight: '150 مل', price: 250, img: 'imgs_gaz/cola250.jpg', stock: 1 },
+                { id: 407, name: 'كولا دايت رفيع', weight: '150 مل', price: 250, img: 'imgs_gaz/cola250zero.jpg', stock: 1 },
+                { id: 408, name: 'ديو رفيع', weight: '150 مل', price: 250, img: 'imgs_gaz/dew250.jpg', stock: 1 },
+                { id: 422, name: 'فانتا برتقال رفيع', weight: '150 مل', price: 250, img: 'imgs_gaz/fanta250mirinda.jpg', stock: 1 },
+                { id: 423, name: 'فانتا كرز رفيع', weight: '150 مل', price: 250, img: 'imgs_gaz/fanta250shani.jpg', stock: 1 },
+                { id: 424, name: 'فانتا تفاح رفيع', weight: '150 مل', price: 250, img: 'imgs_gaz/fanta250apple.jpg', stock: 1 },
+                { id: 425, name: 'سبرايت رفيع أخضر', weight: '150 مل', price: 250, img: 'imgs_gaz/sprite250green.jpg', stock: 1 },
+                { id: 426, name: 'سبرايت رفيع أزرق', weight: '150 مل', price: 250, img: 'imgs_gaz/sprite250blue.jpg', stock: 1 },
+                { id: 409, name: 'بيبسي وسط', weight: '330 مل', price: 500, img: 'imgs_gaz/pepsi500.jpg', stock: 1 },
+                { id: 410, name: 'شاني وسط', weight: '330 مل', price: 500, img: 'imgs_gaz/shani500.jpg', stock: 1 },
+                { id: 411, name: 'ديو وسط', weight: '330 مل', price: 500, img: 'imgs_gaz/dew500.jpg', stock: 1 },
+                { id: 412, name: 'سفن أب وسط', weight: '330 مل', price: 500, img: 'imgs_gaz/7up500.jpg', stock: 1 },
+                { id: 413, name: 'ميرندا وسط', weight: '330 مل', price: 500, img: 'imgs_gaz/mirinda500.jpg', stock: 1 },
+                { id: 414, name: 'حمضيات وسط', weight: '330 مل', price: 500, img: 'imgs_gaz/mirinda500green.jpg', stock: 1 },
+                { id: 415, name: 'كولا وسط', weight: '330 مل', price: 500, img: 'imgs_gaz/cola500.jpg', stock: 1 },
+                { id: 416, name: 'كولا دايت وسط', weight: '330 مل', price: 500, img: 'imgs_gaz/cola500zero.jpg', stock: 1 },
+                { id: 427, name: 'سبرايت وسط أخضر', weight: '330 مل', price: 500, img: 'imgs_gaz/sprite500green.jpg', stock: 1 },
+                { id: 428, name: 'سبرايت وسط أزرق', weight: '330 مل', price: 500, img: 'imgs_gaz/sprite500blue.jpg', stock: 1 },
+                { id: 429, name: 'فانتا وسط برتقال', weight: '330 مل', price: 500, img: 'imgs_gaz/fanta500mirinda.jpg', stock: 1 },
+                { id: 501, name: 'بيبسي جوال', weight: '750 مل', price: 750, img: 'imgs_gaz/pepsi750.jpg', stock: 1 },
+                { id: 502, name: 'شاني جوال', weight: '750 مل', price: 750, img: 'imgs_gaz/shani750.jpg', stock: 1 },
+                { id: 503, name: 'ميرندا جوال', weight: '750 مل', price: 750, img: 'imgs_gaz/mirinda750.jpg', stock: 1 },
+                { id: 504, name: 'ديو جوال', weight: '750 مل', price: 750, img: 'imgs_gaz/dew750.jpg', stock: 1 },
+                { id: 505, name: 'سفن أب جوال', weight: '750 مل', price: 750, img: 'imgs_gaz/7up750.jpg', stock: 1 },
+                { id: 506, name: 'كولا جوال', weight: '750 مل', price: 750, img: 'imgs_gaz/cola750.jpg', stock: 1 },
+                { id: 507, name: 'بيبسي لتر', weight: '1 لتر', price: 1000, img: 'imgs_gaz/pepsi1000.jpg', stock: 1 },
+                { id: 508, name: 'شاني لتر', weight: '1 لتر', price: 1000, img: 'imgs_gaz/shani1000.jpg', stock: 1 },
+                { id: 509, name: 'سفن أب لتر', weight: '1 لتر', price: 1000, img: 'imgs_gaz/7up1000.jpg', stock: 1 },
+                { id: 510, name: 'ديو لتر', weight: '1 لتر', price: 1000, img: 'imgs_gaz/dew1000.jpg', stock: 1 },
+                { id: 511, name: 'كولا عائلية', weight: '1.75 لتر', price: 1250, img: 'imgs_gaz/cola1250.jpg', stock: 1 },
+                { id: 417, name: 'بيبسي زجاج', weight: 'زجاج', price: 500, img: 'imgs_gaz/pepsi500glass.jpg', stock: 1 },
+                { id: 418, name: 'ميرندا زجاج', weight: 'زجاج', price: 500, img: 'imgs_gaz/mirinda500glass.jpg', stock: 1 },
+                { id: 419, name: 'سفن زجاج', weight: 'زجاج', price: 500, img: 'imgs_gaz/7up500glass.jpg', stock: 1 },
+                { id: 420, name: 'ديو زجاج', weight: 'زجاج', price: 500, img: 'imgs_gaz/dew500glass.jpg', stock: 1 },
+                { id: 421, name: 'كولا زجاج', weight: 'زجاج', price: 500, img: 'imgs_gaz/cola500glass.jpg', stock: 1 },
+                { id: 422, name: 'سبرايت زجاج', weight: 'زجاج', price: 500, img: 'imgs_gaz/spriteglass.jpg', stock: 1 },
+                { id: 423, name: 'كولا بلاستك', weight: 'بطل', price: 250, img: 'imgs_gaz/كولا بلاستك 250.jpg', stock: 1 },
+		        { id: 424, name: 'سبرايت بلاستك', weight: 'بطل', price: 250, img: 'imgs_gaz/سبرايت بلاستك 250.jpg', stock: 1 },
+		        { id: 425, name: 'سنابل شعير ليمون', weight: 'علبة', price: 500, img: 'imgs_gaz/سنابل شعير ليمون 500.jpg', stock: 1 },
+		        { id: 426, name: 'سنابل شعير فراولة', weight: 'علبة', price: 500, img: 'imgs_gaz/سنابل شعير فراولة 500.jpg', stock: 1 },
+		        { id: 427, name: 'سنابل شعير تفاح', weight: 'علبة', price: 500, img: 'imgs_gaz/سنابل شعير تفاح 500.jpg', stock: 1 },
+		        { id: 428, name: 'مالت شعير سادة', weight: 'علبة', price: 500, img: 'imgs_gaz/مالت شعير سادة 500.jpg', stock: 1 },
+		        { id: 429, name: 'دايموند ليمون', weight: 'زجاج', price: 250, img: 'imgs_gaz/دايموند ليمون.jpg', stock: 1 },
+		        { id: 430, name: 'دايموند فواكه', weight: 'زجاج', price: 250, img: 'imgs_gaz/دايموند فواكه.jpg', stock: 1 },
+		        { id: 431, name: 'دايموند مشمش', weight: 'زجاج', price: 250, img: 'imgs_gaz/دايموند مشمش.jpg', stock: 1 },
+		        { id: 432, name: 'بربيكان فراولة', weight: 'علبة', price: 500, img: 'imgs_gaz/بربيكان فراولة 500.jpg', stock: 1 },
+		        { id: 433, name: 'بربيكان اناناس', weight: 'علبة', price: 500, img: 'imgs_gaz/بربيكان اناناس 500.jpg', stock: 1 }
+            ],
+            'معلبات غذائية': [
+                { id: 2001, name: 'دولمة بالليمون', weight: 'علبة', price: 3000, img: 'imgs_m3lbat/m1.jpg', stock: 1 },
+                { id: 2002, name: 'دولمة بدبس الرمان', weight: 'علبة', price: 3000, img: 'imgs_m3lbat/m2.jpg', stock: 1 },
+                { id: 2003, name: 'دولمة بزيت الزيتون', weight: 'علبة', price: 3000, img: 'imgs_m3lbat/m3.jpg', stock: 1 },
+                { id: 2004, name: 'صوصج لحم بقري', weight: 'علبة', price: 2000, img: 'imgs_m3lbat/m4.jpg', stock: 1 },
+                { id: 2005, name: 'لونشون لحم بقري', weight: 'علبة', price: 1000, img: 'imgs_m3lbat/m5.jpg', stock: 1 },
+                { id: 2006, name: 'بوردون مثروم الاصلي', weight: 'علبة', price: 3000, img: 'imgs_m3lbat/m6.jpg', stock: 1 },
+                { id: 2007, name: 'بوردون لونشون لحم', weight: 'علبة', price: 1000, img: 'imgs_m3lbat/m7.jpg', stock: 1 },
+                { id: 2008, name: 'بوردون لونشون دجاج', weight: 'علبة', price: 1000, img: 'imgs_m3lbat/m8.jpg', stock: 1 },
+                { id: 2009, name: 'لونشون لحم صغير', weight: 'صغير', price: 500, img: 'imgs_m3lbat/m9.jpg', stock: 1 },
+                { id: 2010, name: 'لونشون دجاج صغير', weight: 'صغير', price: 500, img: 'imgs_m3lbat/m10.jpg', stock: 1 },
+                { id: 2011, name: 'مرق بامية', weight: 'علبة', price: 2000, img: 'imgs_m3lbat/m11.jpg', stock: 1 },
+                { id: 2012, name: 'مرق فاصوليا', weight: 'علبة', price: 2000, img: 'imgs_m3lbat/m12.jpg', stock: 1 },
+                { id: 2013, name: 'مرق قيمة النجفية', weight: 'علبة', price: 2000, img: 'imgs_m3lbat/m13.jpg', stock: 1 },
+                { id: 2014, name: 'مرق باذنجان', weight: 'علبة', price: 2000, img: 'imgs_m3lbat/m14.jpg', stock: 1 },
+                { id: 2015, name: 'حميسة بالفطر Silvana', weight: 'علبة', price: 1000, img: 'imgs_m3lbat/m15.jpg', stock: 1 },
+                { id: 2016, name: 'يخني خضروات', weight: 'علبة', price: 1000, img: 'imgs_m3lbat/m16.jpg', stock: 1 },
+                { id: 2017, name: 'مخلمة Delveseh', weight: 'علبة', price: 1000, img: 'imgs_m3lbat/m17.jpg', stock: 1 },
+                { id: 2018, name: 'حميسة أصالت', weight: 'علبة', price: 1000, img: 'imgs_m3lbat/m18.jpg', stock: 1 },
+                { id: 2019, name: 'قلية الخضروات', weight: 'علبة', price: 1000, img: 'imgs_m3lbat/m19.jpg', stock: 1 },
+                { id: 2020, name: 'مخلمة Silvana', weight: 'علبة', price: 1000, img: 'imgs_m3lbat/m20.jpg', stock: 1 },
+                { id: 2021, name: 'بزاليا بجزر', weight: 'علبة', price: 750, img: 'imgs_m3lbat/m21.jpg', stock: 1 },
+                { id: 2022, name: 'فول ليزا', weight: 'علبة', price: 500, img: 'imgs_m3lbat/m22.jpg', stock: 1 },
+                { id: 2023, name: 'بزاليا بجزر الرائد', weight: 'علبة', price: 750, img: 'imgs_m3lbat/m23.jpg', stock: 1 },
+                { id: 2024, name: 'بزاليا', weight: 'علبة', price: 750, img: 'imgs_m3lbat/m24.jpg', stock: 1 },
+                { id: 2025, name: 'فول الطازج كبير', weight: 'كبير', price: 1000, img: 'imgs_m3lbat/m25.jpg', stock: 1 },
+                { id: 2026, name: 'فول الرائد', weight: 'علبة', price: 750, img: 'imgs_m3lbat/m26.jpg', stock: 1 },
+                { id: 2027, name: 'حمص', weight: 'علبة', price: 750, img: 'imgs_m3lbat/m27.jpg', stock: 1 },
+                { id: 2028, name: 'فطر مقطع', weight: 'علبة', price: 1250, img: 'imgs_m3lbat/m28.jpg', stock: 1 },
+                { id: 2029, name: 'زيتون مقطع', weight: 'علبة', price: 1250, img: 'imgs_m3lbat/m29.jpg', stock: 1 },
+                { id: 2030, name: 'ذرة ابو الورد', weight: 'علبة', price: 1000, img: 'imgs_m3lbat/m30.jpg', stock: 1 },
+                { id: 2031, name: 'فواكه مشكلة كبير', weight: 'كبير', price: 3500, img: 'imgs_m3lbat/m31.jpg', stock: 1 },
+                { id: 2032, name: 'صدر دجاج معلب', weight: 'علبة', price: 1500, img: 'imgs_m3lbat/m32.jpg', stock: 1 },
+                { id: 2033, name: 'تونة مفتتة بالفلفل', weight: 'علبة', price: 1250, img: 'imgs_m3lbat/m33.jpg', stock: 1 },
+                { id: 2034, name: 'تونة بركة بالماء', weight: 'علبة', price: 1500, img: 'imgs_m3lbat/m34.jpg', stock: 1 },
+                { id: 2035, name: 'تونة نواجل كبير', weight: 'كبير', price: 3750, img: 'imgs_m3lbat/m35.jpg', stock: 1 },
+                { id: 2036, name: 'تونة مفتتة بارد', weight: 'علبة', price: 1250, img: 'imgs_m3lbat/m36.jpg', stock: 1 },
+                { id: 2037, name: 'تونة هوسم بالفلفل', weight: 'علبة', price: 1500, img: 'imgs_m3lbat/m37.jpg', stock: 1 },
+                { id: 2038, name: 'تونة بركة بالزيت', weight: 'علبة', price: 1500, img: 'imgs_m3lbat/m38.jpg', stock: 1 },
+                { id: 2039, name: 'تونة نازك بالفلفل', weight: 'علبة', price: 1500, img: 'imgs_m3lbat/m39.jpg', stock: 1 },
+                { id: 2040, name: 'حمص زجاج', weight: 'زجاج', price: 1500, img: 'imgs_m3lbat/m40.jpg', stock: 1 },
+                { id: 2041, name: 'فاصوليا زجاج', weight: 'زجاج', price: 1500, img: 'imgs_m3lbat/m41.jpg', stock: 1 },
+                { id: 2042, name: 'كاكاو زجاج', weight: 'زجاج', price: 1000, img: 'imgs_m3lbat/m42.jpg', stock: 1 }
+            ],
+             'شيبس': [
+                { id: 2011, name: 'بوشار تغاريد', weight: 'كيس', price: 250, img: 'imgs_chips/بوشار تغاريد.jpg', stock: 1 },
+                { id: 2012, name: 'شامية بالزبدة', weight: 'كيس', price: 250, img: 'imgs_chips/شامية باندا.jpg', stock: 1 },
+                { id: 2013, name: 'البنفسج بالبصل', weight: 'كيس', price: 250, img: 'imgs_chips/البنفسج.jpg', stock: 1 },
+                { id: 2014, name: 'لوسي برتقالي', weight: 'كيس', price: 250, img: 'imgs_chips/لوسي برتقالي.jpg', stock: 1 },
+                { id: 2015, name: 'لوسي اخضر ', weight: 'كيس', price: 250, img: 'imgs_chips/لوسي اخضر.jpg', stock: 1 },
+                { id: 2016, name: 'فواز', weight: 'كيس', price: 250, img: 'imgs_chips/فواز.jpg', stock: 1 },
+                { id: 2017, name: 'مانشيز اصابع', weight: 'كيس', price: 250, img: 'imgs_chips/مانشيز اصابع.jpg', stock: 1 },
+                { id: 2018, name: 'نايس جبن صغير', weight: 'كيس', price: 250, img: 'imgs_chips/نايس جبن 250.jpg', stock: 1 },
+                { id: 2019, name: 'دانا سمايل', weight: 'كيس', price: 250, img: 'imgs_chips/ابو الوجه.jpg', stock: 1 },
+                { id: 2020, name: 'نايس اعشاب وسط', weight: 'كيس', price: 500, img: 'imgs_chips/نايس اعشاب 500.jpg', stock: 1 },
+                { id: 2021, name: 'نايس جبن وسط', weight: 'كيس', price: 500, img: 'imgs_chips/نايس جبن 500.jpg', stock: 1 },
+                { id: 2022, name: 'نايس خل وسط', weight: 'كيس', price: 500, img: 'imgs_chips/نايس خل 500.jpg', stock: 1 },
+                { id: 2023, name: 'جوانة', weight: 'كيس', price: 250, img: 'imgs_chips/جوانة.jpg', stock: 1 },
+                { id: 2024, name: 'ماركو حار', weight: 'كيس', price: 250, img: 'imgs_chips/ماركو حار.jpg', stock: 1 },
+                { id: 2025, name: 'ماكس جبن وسط', weight: 'كيس', price: 500, img: 'imgs_chips/ماكس جبن 500.jpg', stock: 1 },
+                { id: 2026, name: 'ليز كاتشب وسط', weight: 'كيس', price: 500, img: 'imgs_chips/ليز كاتشب 500.jpg', stock: 1 },
+                { id: 2027, name: 'ليز اصلي وسط', weight: 'كيس', price: 500, img: 'imgs_chips/no.jpg', stock: 1 },
+                { id: 2028, name: 'دوريتوس حار حلو وسط', weight: 'كيس', price: 500, img: 'imgs_chips/دوريتوس ازرق 500.jpg', stock: 1 },
+                { id: 2029, name: 'ليز خل وملح وسط', weight: 'كيس', price: 500, img: 'imgs_chips/ليز خل 500.jpg', stock: 1 },
+                { id: 2030, name: 'ماكس مشاوي وسط', weight: 'كيس', price: 500, img: 'imgs_chips/ماكس مشاوي 500.jpg', stock: 1 },
+                { id: 2031, name: 'ليز جبن وسط', weight: 'كيس', price: 500, img: 'imgs_chips/ليز جبن 500.jpg', stock: 1 },
+                { id: 2032, name: 'ليز كاتشب صغير', weight: 'كيس', price: 250, img: 'imgs_chips/ليز كاتشب 250.jpg', stock: 1 },
+                { id: 2033, name: 'ماكس حار صغير', weight: 'كيس', price: 250, img: 'imgs_chips/ماكس حار 250.jpg', stock: 1 },
+                { id: 2034, name: 'دوريتوس حار حلو صغير', weight: 'كيس', price: 250, img: 'imgs_chips/دوريتوس ازرق 250.jpg', stock: 1 },
+                { id: 2035, name: 'ليز جبن صغير', weight: 'كيس', price: 250, img: 'imgs_chips/ليز جبن 250.jpg', stock: 1 },
+                { id: 2036, name: 'ماكس جبن صغير', weight: 'كيس', price: 250, img: 'imgs_chips/ماكس جبن 250.jpg', stock: 1 },
+                { id: 2037, name: 'ليز اعشاب صغير', weight: 'كيس', price: 250, img: 'imgs_chips/ليز اعشاب 250.jpg', stock: 1 },
+                { id: 2038, name: 'ماكس مشاوي صغير', weight: 'كيس', price: 250, img: 'imgs_chips/ماكس مشاوي 250.jpg', stock: 1 },
+                { id: 2039, name: 'ماكس اعشاب صغير', weight: 'كيس', price: 250, img: 'imgs_chips/ماكس اعشاب 250.jpg', stock: 1 },
+                { id: 2040, name: 'ليز جبن كبير', weight: 'كيس', price: 1000, img: 'imgs_chips/ليز جبن 1000.jpg', stock: 1 }
+            ],
+            
+            'سكائر': [
+                { id: 101, name: 'ماستر ابيض', weight: 'باكيت', price: 1250, img: 'imgs_smoke/ماستر ابيض.jpg', stock: 1 },
+                { id: 102, name: 'ماستر رصاصي', weight: 'باكيت', price: 750, img: 'imgs_smoke/ماستر رصاصي.jpg', stock: 1 },
+                { id: 103, name: 'ميلانو', weight: 'باكيت', price: 750, img: 'imgs_smoke/ميلانو.jpg', stock: 1 },
+                { id: 104, name: 'كنت توت', weight: 'باكيت', price: 1500, img: 'imgs_smoke/كنت توت.jpg', stock: 1 },
+                { id: 105, name: 'كنت رقم 1', weight: 'باكيت', price: 1500, img: 'imgs_smoke/كنت 1.jpg', stock: 1 },
+                { id: 106, name: 'كنت رقم 4', weight: 'باكيت', price: 1500, img: 'imgs_smoke/كنت 4.jpg', stock: 1 },
+                { id: 107, name: 'ايسي رصاصي', weight: 'باكيت', price: 1750, img: 'imgs_smoke/ايسي رصاصي.jpg', stock: 1 },
+                { id: 108, name: 'ايسي نعناع طويل', weight: 'باكيت', price: 1500, img: 'imgs_smoke/ايسي ازرق طويل.jpg', stock: 1 },
+                { id: 109, name: 'ايسي اسود', weight: 'باكيت', price: 1500, img: 'imgs_smoke/ايسي اسود.jpg', stock: 1 },
+                { id: 110, name: 'ام تي توت', weight: 'باكيت', price: 1000, img: 'imgs_smoke/ام تي توت.jpg', stock: 1 },
+                { id: 111, name: 'ام تي نعناع', weight: 'باكيت', price: 1000, img: 'imgs_smoke/ام تي نعناع.jpg', stock: 1 },
+                { id: 112, name: 'ام تي علكة', weight: 'باكيت', price: 1000, img: 'imgs_smoke/ام تي علكة.jpg', stock: 1 },
+                { id: 113, name: 'كلواز اصفر', weight: 'باكيت', price: 1000, img: 'imgs_smoke/كلواز.jpg', stock: 1 },
+                { id: 114, name: 'مارلبورو رفيع ابيض', weight: 'باكيت', price: 1500, img: 'imgs_smoke/مارلبورو ابيض.jpg', stock: 1 },
+                { id: 115, name: 'مارلبورو مضلع ابيض', weight: 'باكيت', price: 2000, img: 'imgs_smoke/مارلبورو ابيض مضلع.jpg', stock: 1 },
+                { id: 116, name: 'مارلبورو رفيع ازرق', weight: 'باكيت', price: 1500, img: 'imgs_smoke/مارلبورو ازرق.jpg', stock: 1 },
+                { id: 117, name: 'اوسكار رصاصي', weight: 'باكيت', price: 500, img: 'imgs_smoke/اوسكار رصاصي.jpg', stock: 1 },
+                { id: 118, name: 'ماك عادي', weight: 'باكيت', price: 500, img: 'imgs_smoke/ماك عادي.jpg', stock: 1 },
+                { id: 119, name: 'ماك نعناع', weight: 'باكيت', price: 750, img: 'imgs_smoke/ماك نعناع.jpg', stock: 1 },
+                { id: 120, name: 'ايسي نعناع صغير', weight: 'باكيت', price: 2000, img: 'imgs_smoke/ايسي ازرق قصير.jpg', stock: 1 },
+                { id: 121, name: 'ايسي نعناع مضلع', weight: 'باكيت', price: 1500, img: 'imgs_smoke/ايسي ازرق مضلع.jpg', stock: 1 },
+                { id: 122, name: 'موند تفاح', weight: 'باكيت', price: 750, img: 'imgs_smoke/موند تفاح.jpg', stock: 1 },
+                { id: 123, name: 'معسل تفاحتين مصري', weight: 'باكيت', price: 1500, img: 'imgs_smoke/تفاحتين.jpg', stock: 1 },
+                { id: 124, name: 'معسل نعناع', weight: 'باكيت', price: 1500, img: 'imgs_smoke/نعناع.jpg', stock: 1 },
+                { id: 125, name: 'معسل انكليزي', weight: 'باكيت', price: 1500, img: 'imgs_smoke/انجليزي.jpg', stock: 1 },
+                { id: 126, name: 'معسل ليمون', weight: 'باكيت', price: 1500, img: 'imgs_smoke/ليمون.jpg', stock: 1 }
+            ],
+            'صلصة': [
+                { id: 9101, name: 'شطة ديك اصلي', weight: 'بطل', price: 1000, img: 'imgs_salsa/n3.jpg', stock: 1 },
+                { id: 9102, name: 'شطة صغيرة', weight: 'بطل', price: 500, img: 'imgs_salsa/n4.jpg', stock: 1 },
+                { id: 9103, name: 'شطة كبيرة', weight: 'بطل', price: 1000, img: 'imgs_salsa/n6.jpg', stock: 1 },
+                { id: 9104, name: 'صلصة ريزو', weight: 'بطل', price: 2500, img: 'imgs_salsa/n5.jpg', stock: 1 },
+                { id: 9105, name: 'صاص العربي', weight: 'بطل', price: 1000, img: 'imgs_salsa/n7.jpg', stock: 1 },
+                { id: 9106, name: 'دبس الرمان', weight: 'صغير', price: 1000, img: 'imgs_salsa/n8.jpg', stock: 1 }
+            ],
+            'معجون طماطم': [
+                { id: 9001, name: 'التونسا', weight: 'كبير', price: 2500, img: 'imgs_salsa/n11.jpg', stock: 1 },
+                { id: 9002, name: 'عراقنا الحبيب', weight: 'وسط', price: 1000, img: 'imgs_salsa/n10.jpg', stock: 1 },
+                { id: 9003, name: 'KDD', weight: 'علبة', price: 1500, img: 'imgs_salsa/n9.jpg', stock: 1 },
+                { id: 9004, name: 'الرياض صغير', weight: 'علبة', price: 500, img: 'imgs_salsa/alriadh500.jpg', stock: 1 },
+                { id: 9005, name: 'الرياض وسط', weight: 'علبة', price: 1000, img: 'imgs_salsa/alriadh1000.jpg', stock: 1 }
+            ],
+            'اندومي': [
+                { id: 8001, name: 'اندومي خضار', weight: 'كيس', price: 250, img: 'imgs_indome/اندومي خضار صغير.jpg', stock: 1 },
+                { id: 8002, name: 'اندومي دجاج بلدي', weight: 'كيس', price: 250, img: 'imgs_indome/اندومي دجاج بلدي صغير.jpg', stock: 1 },
+                { id: 8003, name: 'اندومي دجاج بالكاري', weight: 'كيس', price: 250, img: 'imgs_indome/اندومي دجاج بالكاري صغير.jpg', stock: 1 },
+                { id: 8004, name: 'اندومي دجاج نكهة خاصة', weight: 'كيس', price: 250, img: 'imgs_indome/اندومي نكهة خاصة صغير.jpg', stock: 1 },
+                { id: 8005, name: 'اندومي قدح دجاج', weight: 'قدح', price: 500, img: 'imgs_indome/اندومي قدح دجاج وسط.jpg', stock: 1 },
+                { id: 8006, name: 'اندومي قدح دجاج', weight: 'قدح كبير', price: 750, img: 'imgs_indome/اندومي قدح دجاج كبير.jpg', stock: 1 },
+                { id: 8007, name: 'اندومي قدح خضار', weight: 'قدح كبير', price: 750, img: 'imgs_indome/اندومي قدح خضار كبير.jpg', stock: 1 }
+            ], 
+            'عصائر': [
+                { id: 1001, name: 'بلو دانه برتقال', weight: '250 مل', price: 250, img: 'imgs_aser/dana250orange.jpg', stock: 1 },
+                { id: 1002, name: 'بلو دانه مانجو', weight: '250 مل', price: 250, img: 'imgs_aser/dana250mango.jpg', stock: 1 },
+                { id: 1003, name: 'بلو دانه فواكه', weight: '250 مل', price: 250, img: 'imgs_aser/dana250frote.jpg', stock: 1 },
+                { id: 1004, name: 'دادا برتقال', weight: '250 مل', price: 250, img: 'imgs_aser/dada250orange.jpg', stock: 1 },
+                { id: 1005, name: 'دادا فراولة وتوت', weight: '250 مل', price: 250, img: 'imgs_aser/no.jpg', stock: 1 },
+                { id: 1006, name: 'دادا موز وفواولة', weight: '250 مل', price: 250, img: 'imgs_aser/no.jpg', stock: 1 },
+                { id: 1007, name: 'دادا مانجو', weight: '250 مل', price: 250, img: 'imgs_aser/dada250mango.jpg', stock: 1 },
+                { id: 1008, name: 'دادا لومي بصرة', weight: '250 مل', price: 250, img: 'imgs_aser/dada250lome.jpg', stock: 1 },
+                { id: 1009, name: 'دادا فواكه', weight: '250 مل', price: 250, img: 'imgs_aser/dada250frote.jpg', stock: 1 },
+                { id: 1010, name: 'دادا رمان', weight: '250 مل', price: 250, img: 'imgs_aser/no.jpg', stock: 1 },
+                { id: 1011, name: 'رند برتقال', weight: '500 مل', price: 500, img: 'imgs_aser/rend500orange.jpg', stock: 1 },
+                { id: 1012, name: 'رند ليمون ونعناع', weight: '500 مل', price: 500, img: 'imgs_aser/rend500lemon.jpg', stock: 1 },
+                { id: 1013, name: 'رند موز وفواولة', weight: '500 مل', price: 500, img: 'imgs_aser/rend500banana.jpg', stock: 1 },
+                { id: 1014, name: 'رند رمان', weight: '500 مل', price: 500, img: 'imgs_aser/rend500rman.jpg', stock: 1 },
+                { id: 1015, name: 'رند عنب', weight: '500 مل', price: 500, img: 'imgs_aser/rend5003nb.jpg', stock: 1 },
+                { id: 1016, name: 'رند ليمون', weight: '500 مل', price: 500, img: 'imgs_aser/rend500lemon2.jpg', stock: 1 },
+                { id: 1017, name: 'رند مشمش', weight: '500 مل', price: 500, img: 'imgs_aser/rend500mshmsh.jpg', stock: 1 },
+                { id: 1018, name: 'تانج اناناس باودر', weight: '1 later', price: 500, img: 'imgs_aser/tangananas.jpg', stock: 1 },
+                { id: 1019, name: 'تانج ليمون باودر', weight: '1 later', price: 500, img: 'imgs_aser/tanglemon.jpg', stock: 1 },
+                { id: 1020, name: 'توت باودر', weight: '1 later', price: 250, img: 'imgs_aser/iraqunatoot.jpg', stock: 1 },
+                { id: 1021, name: 'ليمون باودر', weight: '1 later', price: 250, img: 'imgs_aser/iraqunalemon.jpg', stock: 1 },
+                { id: 1022, name: 'تمر هند باودر', weight: '1 later', price: 250, img: 'imgs_aser/iraqunahinde.jpg', stock: 1 },
+                { id: 1023, name: 'مانجو باودر', weight: '1 later', price: 250, img: 'imgs_aser/iraqunamango.jpg', stock: 1 },
+                { id: 1024, name: 'راني برتقال', weight: 'علبة', price: 500, img: 'imgs_aser/راني برتقال 500.jpg', stock: 1 },
+		        { id: 1024, name: 'راني اناناس وجوز هند', weight: 'علبة', price: 500, img: 'imgs_aser/راني اناناس وجوز هند 500.jpg', stock: 1 },
+		        { id: 1024, name: 'راني خوخ اناناس برتقال', weight: 'علبة', price: 250, img: 'imgs_aser/راني خوخ اناناس برتقال 500.jpg', stock: 1 },
+		        { id: 1024, name: 'راني موز وفراولة', weight: 'علبة', price: 500, img: 'imgs_aser/راني موز وفراولة 500.jpg', stock: 1 }
 
-        function updateCell(index, player) {
-            const cell = document.getElementsByClassName('cell')[index];
-            cell.innerText = player;
-            cell.classList.add(player.toLowerCase());
-        }
+				
+            ],
+            'مخللات': [
+                { id: 9201, name: 'خل ابيض', weight: 'بطل', price: 1000, img: 'imgs_salsa/n13.jpg', stock: 1 },
+                { id: 9202, name: 'خل تفاح', weight: 'بطل', price: 1000, img: 'imgs_salsa/n12.jpg', stock: 1 },
+                { id: 9203, name: 'خل العربي', weight: 'وسط', price: 1000, img: 'imgs_salsa/n14.jpg', stock: 1 },
+                { id: 9204, name: 'خل العربي', weight: 'كبير', price: 1500, img: 'imgs_salsa/n15.jpg', stock: 1 },
+                { id: 9205, name: 'خل صغير', weight: 'صغير', price: 500, img: 'imgs_salsa/n100.jpg', stock: 1 },
+                { id: 9206, name: 'خل تفاح عضوي', weight: 'علبة', price: 4000, img: 'imgs_salsa/n103.jpg', stock: 1 },
+                { id: 9207, name: 'ليمون', weight: 'بطل', price: 1000, img: 'imgs_salsa/n104.jpg', stock: 1 },
+                { id: 9208, name: 'مخلل مانجو', weight: 'علبة', price: 2500, img: 'imgs_salsa/n2.jpg', stock: 1 },
+                { id: 9209, name: 'عمبة مانجو', weight: 'بطل', price: 2500, img: 'imgs_salsa/n1.jpg', stock: 1 }
+            ],
+           'بهارات': [
+                { id: 7001, name: 'فلفل احمر', weight: 'علبة', price: 1000, img: 'imgs_bharat/flflred.jpg', stock: 1 },
+                { id: 7002, name: 'فلفل اسود', weight: 'علبة', price: 1250, img: 'imgs_bharat/flflblack.jpg', stock: 1 },
+                { id: 7003, name: 'بصل مطحون', weight: 'علبة', price: 1000, img: 'imgs_bharat/basal.jpg', stock: 1 },
+                { id: 7004, name: 'بهارات دجاج', weight: 'علبة', price: 1000, img: 'imgs_bharat/chiken.jpg', stock: 1 },
+                { id: 7005, name: 'بابريكا', weight: 'علبة', price: 1000, img: 'imgs_bharat/babreka.jpg', stock: 1 },
+                { id: 7006, name: 'بهارات شاورما لحم', weight: 'علبة', price: 1000, img: 'imgs_bharat/shawrma.jpg', stock: 1 },
+                { id: 7007, name: 'بهارات كبة', weight: 'علبة', price: 1000, img: 'imgs_bharat/kuba.jpg', stock: 1 },
+                { id: 7008, name: 'خلطة سبع بهارات', weight: 'علبة', price: 1000, img: 'imgs_bharat/7.jpg', stock: 1 },
+                { id: 7009, name: 'بهارات فنكر', weight: 'علبة', price: 1000, img: 'imgs_bharat/finger.jpg', stock: 1 },
+                { id: 7010, name: 'بهارات جدر', weight: 'علبة', price: 1000, img: 'imgs_bharat/gder.jpg', stock: 1 },
+                { id: 7011, name: 'قرنفل', weight: 'علبة', price: 1000, img: 'imgs_bharat/grnful.jpg', stock: 1 },
+                { id: 7012, name: 'زنجبيل', weight: 'علبة', price: 1000, img: 'imgs_bharat/zngabel.jpg', stock: 1 },
+                { id: 7013, name: 'دارسين', weight: 'علبة', price: 1000, img: 'imgs_bharat/darsen.jpg', stock: 1 },
+                { id: 7014, name: 'كزبرة', weight: 'علبة', price: 1000, img: 'imgs_bharat/kuzbra.jpg', stock: 1 },
+                { id: 7015, name: 'نعناع', weight: 'علبة', price: 1000, img: 'imgs_bharat/n3na3.jpg', stock: 1 },
+                { id: 7016, name: 'بهارات لحم مشوي', weight: 'علبة', price: 1000, img: 'imgs_bharat/mashawe.jpg', stock: 1 },
+                { id: 7017, name: 'هيل', weight: 'علبة', price: 250, img: 'imgs_bharat/hail.jpg', stock: 1 },
+                { id: 7018, name: 'كاري', weight: 'علبة', price: 250, img: 'imgs_bharat/kare.jpg', stock: 1 }
+            ],
+            'جبن': [
+                { id: 7001, name: 'صباح كرات', weight: 'علبة', price: 1250, img: 'imgs_alban/sabahball.jpg', stock: 1 },
+                { id: 7002, name: 'جبن شرائح', weight: 'قطعة', price: 500, img: 'imgs_alban/taste.jpg', stock: 1 },
+                { id: 7003, name: 'كنوز شيدر', weight: 'علبة', price: 1000, img: 'imgs_alban/knoz.jpg', stock: 1 },
+                { id: 7004, name: 'صباح مالح', weight: 'علبة', price: 1250, img: 'imgs_alban/sabahsalt.jpg', stock: 1 }, 
+                { id: 7005, name: 'بف صغير', weight: 'صغير', price: 500, img: 'imgs_alban/bafsmall.jpg', stock: 1 },
+                { id: 7006, name: 'بف كبير', weight: 'علبة', price: 1500, img: 'imgs_alban/bafbig.jpg', stock: 1 },
+                { id: 7007, name: 'قيمر كي دي دي', weight: 'علبة', price: 500, img: 'imgs_alban/kddkshta.jpg', stock: 1 },
+                { id: 7008, name: 'صباح لبنة', weight: 'علبة', price: 1500, img: 'imgs_alban/sabahlabna.jpg', stock: 1 },
+                { id: 7009, name: 'صباح عرب', weight: 'قطعة', price: 1500, img: 'imgs_alban/sabaharab.jpg', stock: 1 },
+                { id: 7010, name: 'كيري صغير', weight: 'صغير', price: 1000, img: 'imgs_alban/kirismall.jpg', stock: 1 },
+                { id: 7011, name: 'كرافت صغير', weight: 'صغير', price: 1500, img: 'imgs_alban/kraftsmall.jpg', stock: 1 },
+                { id: 7012, name: 'كرافت كبير', weight: 'كبير', price: 2500, img: 'imgs_alban/kraftbig.jpg', stock: 1 },
+                { id: 7013, name: 'ابو الولد مثلث', weight: 'باكيت', price: 1500, img: 'imgs_alban/aboalwalad.jpg', stock: 1 },
+                { id: 7014, name: 'قيمر نجود', weight: 'قطعة', price: 500, img: 'imgs_alban/njod.jpg', stock: 1 },
+                { id: 7015, name: 'قيمر كالة', weight: 'قطعة', price: 500, img: 'imgs_alban/kala.jpg', stock: 1 },
+                { id: 7016, name: 'مراعي صغير شيدر', weight: 'قطعة', price: 1500, img: 'imgs_alban/maraismallgold.jpg', stock: 1 },
+                { id: 7017, name: 'كيري وسط 6 قطع', weight: 'وسط', price: 2500, img: 'imgs_alban/kirimedil.jpg', stock: 1 },
+                { id: 7018, name: 'كيبي وسط 6 قطع', weight: 'وسط', price: 1500, img: 'imgs_alban/kibimedil.jpg', stock: 1 },
+                { id: 7019, name: 'بوك زجاجي', weight: 'وسط', price: 3000, img: 'imgs_alban/puck.jpg', stock: 1 },
+                { id: 7020, name: 'مراعي وسط', weight: 'وسط', price: 2500, img: 'imgs_alban/maraimedilblue.jpg', stock: 1 },
+                { id: 7021, name: 'مراعي صغير', weight: 'صغير', price: 1500, img: 'imgs_alban/maraismallblue.jpg', stock: 1 },
+                { id: 7022, name: 'فونك ', weight: 'وسط', price: 2000, img: 'imgs_alban/vonkmedil.jpg', stock: 1 },
+                { id: 7023, name: 'كيري عائلي*24', weight: '24 قطعة', price: 7500, img: 'imgs_alban/kiribigbig.jpg', stock: 1 },
+                { id: 7024, name: 'صباح مالح قوطي', weight: 'علبة', price: 1250, img: 'imgs_alban/sabahsaltwhite.jpg', stock: 1 },
+                { id: 7025, name: 'جبنة شيدر لوكس', weight: 'علبة', price: 500, img: 'imgs_alban/lux.jpg', stock: 1 },
+                { id: 7026, name: 'زبدة معجنات', weight: 'قطعة', price: 500, img: 'imgs_alban/zbda.jpg', stock: 1 },
+                { id: 7027, name: 'جبنة بالقشطة سليمانية', weight: 'علبة', price: 500, img: 'imgs_alban/slemani.jpg', stock: 1 },
+                { id: 7028, name: 'شيدر اليما', weight: 'قطعة', price: 500, img: 'imgs_alban/alima.jpg', stock: 1 },
+                { id: 7029, name: 'لنبة ايراني', weight: 'قطعة', price: 500, img: 'imgs_alban/labna.jpg', stock: 1 },
+                { id: 7030, name: 'جبنة البقرة سليمانية', weight: 'قطعة', price: 500, img: 'imgs_alban/slemaniblue.jpg', stock: 1 }
+            ],
+            'لبن': [
+                { id: 3201, name: 'لبن الامير سادة', weight: 'قطعة', price: 250, img: 'imgs_laban/الامير سادة 250.jpg', stock: 1 },
+                { id: 3202, name: 'لبن الامير ليمون', weight: 'قطعة', price: 250, img: 'imgs_laban/الامير ليمون 250.jpg', stock: 1 },
+                { id: 3203, name: 'لبن الامير نعناع', weight: 'قطعة', price: 250, img: 'imgs_laban/الامير نعناع 250.jpg', stock: 1 },
+                { id: 3204, name: 'لبن الامير مدخن', weight: 'قطعة', price: 250, img: 'imgs_laban/الامير مدخن 250.jpg', stock: 1 },
+                { id: 3205, name: 'لبن دوغ', weight: 'قطعة', price: 500, img: 'imgs_laban/لبن دوغ 500.jpg', stock: 1 },
+                { id: 3206, name: 'لبن جياو', weight: 'قطعة', price: 500, img: 'imgs_laban/لبن جياو 500.jpg', stock: 1 },                     
+                { id: 3207, name: 'زبادي سطل', weight: 'قطعة', price: 1750, img: 'imgs_laban/زبادي سطل.jpg', stock: 1 },
+                { id: 3208, name: 'زبادي مانيزان وسط', weight: 'قطعة', price: 1000, img: 'imgs_laban/زبادي مانيزان 1000.jpg', stock: 1 },
+                { id: 3209, name: 'زبادي الامير صغير', weight: 'قطعة', price: 250, img: 'imgs_laban/زبادي الامير 250.jpg', stock: 1 },
+                { id: 3210, name: 'جاموس ايراني', weight: 'قطعة', price: 1000, img: 'imgs_laban/جاموس ايراني 1000.jpg', stock: 1 },
+                { id: 3211, name: 'سفن دبة', weight: 'قطعة', price: 4000, img: 'imgs_laban/سفن دبة 4000.jpg', stock: 1 },                        
+                { id: 3212, name: 'زبادي كالة صغير', weight: 'قطعة', price: 500, img: 'imgs_laban/زبادي كالة 500.jpg', stock: 1 }                        
+            ],
+            'حليب': [
+                { id: 1201, name: 'حليب فراولة', weight: 'باكيت', price: 750, img: 'imgs_milk/حليب كي دي دي فراولة 500.jpg', stock: 1 },         
+                { id: 1202, name: 'حليب موز', weight: 'باكيت', price: 750, img: 'imgs_milk/حليب كي دي دي موز 500.jpg', stock: 1 },
+                { id: 1203, name: 'حليب شوكولاته', weight: 'باكيت', price: 750, img: 'imgs_milk/حليب كي دي دي شوكولاته 500.jpg', stock: 1 },
+                { id: 1204, name: 'حليب سادة', weight: 'باكيت', price: 750, img: 'imgs_milk/حليب كي دي دي ابيض 500.jpg', stock: 1 },
+                { id: 1205, name: 'حليب سعودية شوكولاته', weight: 'باكيت', price: 500, img: 'imgs_milk/حليب سعودية شوكولاته.jpg', stock: 1 },
+                { id: 1206, name: 'حليب فراولة', weight: 'باكيت', price: 250, img: 'imgs_milk/حليب كي دي دي فراولة 250.jpg', stock: 1 }			
+			
+	    ],
+			
+	    'لحوم مجمدة': [
+                { id: 9101, name: 'دجاج ساديا 1100', weight: 'قطعة', price: 5500, img: 'imgs_freez/ساديا دجاج1100.jpg', stock: 1 },
+                { id: 9102, name: 'اصابع دجاج مقرمشة ساديا', weight: 'علبة', price: 4500, img: 'imgs_freez/اصابع دجاج مقرمشة ساديا.jpg', stock: 1 },
+                { id: 9103, name: 'ناجتس دجاج بالجنبة ساديا', weight: 'علبة', price: 3000, img: 'imgs_freez/ناجتس دجاج بالجبنة ساديا.jpg', stock: 1 },
+                { id: 9104, name: 'صدر دجاج مقرمش ساديا', weight: 'علبة', price: 3000, img: 'imgs_freez/صدر دجاج مقرمش ساديا.jpg', stock: 1 },
+                { id: 9105, name: 'صوصج دجاج بالجبن ساديا', weight: 'كيس', price: 2000, img: 'imgs_freez/صوصج دجاج بالجبن ساديا.jpg', stock: 1 },
+                { id: 9106, name: 'صوصج دجاج عادي ساديا', weight: 'كيس', price: 2000, img: 'imgs_freez/صوصج دجاج عادي ساديا.jpg', stock: 1 },
+                { id: 9107, name: 'ستيك دجاج مقرمش ساديا', weight: 'كيس', price: 1000, img: 'imgs_freez/ستيك دجاج مقرمش ساديا.jpg', stock: 1 },
+                { id: 9108, name: 'كرسبي صدر دجاج جيكور', weight: 'كيس', price: 4500, img: 'imgs_freez/كرسبي صدر دجاج جيكور.jpg', stock: 1 },
+                { id: 9109, name: 'فلافل جيكور', weight: 'كيس', price: 2500, img: 'imgs_freez/فلافل جيكور.jpg', stock: 1 },
+                { id: 9110, name: 'كبة سندويج جيكور', weight: 'كيس', price: 2750, img: 'imgs_freez/كبة سندويج لحم جيكور.jpg', stock: 1 },
+                { id: 9111, name: 'كبة موصلية دجاج جيكور', weight: 'علبة', price: 4500, img: 'imgs_freez/كبة موصلية دجاج جيكور.jpg', stock: 1 },
+                { id: 9112, name: 'كبة برغل جيكور', weight: 'علبة', price: 3000, img: 'imgs_freez/كبة برغل جيكور.jpg', stock: 1 },
+                { id: 9113, name: 'خبز سمبوسة', weight: 'كيس', price: 1500, img: 'imgs_freez/خبز سمبوسة.jpg', stock: 1 },
+	            { id: 9114, name: 'خبز صاج تركي', weight: 'كيس', price: 2500, img: 'imgs_freez/خبز صاج تركي.jpg', stock: 1 },
+		        { id: 9115, name: 'فنكر تركي ', weight: 'كيس', price: 3500, img: 'imgs_freez/فنكر تركي.jpg', stock: 1 },
+		        { id: 9116, name: 'فنكر ايراني', weight: 'كيس', price: 2500, img: 'imgs_freez/فنكر ايراني.jpg', stock: 1 },
+                { id: 9117, name: 'كرات لحم جيكور', weight: 'كيس', price: 3000, img: 'imgs_freez/كرات لحم جيكور.jpg', stock: 1 },
+			    { id: 9118, name: 'شاورما دجاج جيكور', weight: 'كيس', price: 4500, img: 'imgs_freez/شاورما دجاج جيكور.jpg', stock: 1 }
 
-        function computerMove() {
-            if (!gameActive) return;
+	    ],
+			
+            'بسكويت': [
+                { id: 6001, name: 'فرخنده دايت دارسين وتفاح', weight: 'باكيت', price: 1000, img: 'imgs_bskt/فرخنده بالتفاح والدارسين.jpg', stock: 1 },
+                { id: 6002, name: 'فرخندة دايت كاكاو', weight: 'باكيت', price: 1000, img: 'imgs_bskt/فرخنده بالكاكاو.jpg', stock: 1 },
+                { id: 6003, name: 'بسكويت ليدي فينغرز دايت', weight: 'علبة', price: 3000, img: 'imgs_bskt/بسكت دايت بالبيض.jpg', stock: 1 },
+                { id: 6004, name: 'باف باستري بالكرز', weight: 'علبة', price: 3000, img: 'imgs_bskt/بف باستري.jpg', stock: 1 },
+                { id: 6005, name: 'كوكيز ايراني', weight: 'باكيت', price: 1000, img: 'imgs_bskt/كوكيز ايراني كبير.jpg', stock: 1 },
+                { id: 6006, name: 'بسكويت اليوم بالموز', weight: 'قطعة', price: 250, img: 'imgs_bskt/بسكت اليوم بالموز.jpg', stock: 1 },
+                { id: 6007, name: 'بسكت بالجبن', weight: 'قطعة', price: 250, img: 'imgs_bskt/بسكت بالجبن.jpg', stock: 1 },
+                { id: 6008, name: 'بسكويت مالح', weight: 'قطعة', price: 250, img: 'imgs_bskt/بسكت مالح.jpg', stock: 1 },
+                { id: 6009, name: 'بسكت لونا', weight: 'قطعة', price: 250, img: 'imgs_bskt/بسكت لونا.jpg', stock: 1 },
+                { id: 6010, name: 'بسكت بوك', weight: 'قطعة', price: 250, img: 'imgs_bskt/بسكت بوك.jpg', stock: 1 },
+                { id: 6011, name: 'بسكت بالكاكاو', weight: 'قطعة', price: 250, img: 'imgs_bskt/بسكت بوك كاكاو.jpg', stock: 1 },
+                { id: 6012, name: 'بسكت توركو بالكاكاو', weight: 'قطعة', price: 250, img: 'imgs_bskt/بسكت توركو بالكاكاو.jpg', stock: 1 },
+                { id: 6013, name: 'بسكت اولكر بالفانيلا', weight: 'قطعة', price: 250, img: 'imgs_bskt/بسكت اولكر بالفانيلا.jpg', stock: 1 },
+                { id: 6014, name: 'بسكت هايد سيك', weight: 'قطعة', price: 500, img: 'imgs_bskt/هايد اند سيك.jpg', stock: 1 },
+                { id: 6015, name: 'بسكت اولكر بالفراولة', weight: 'قطعة', price: 250, img: 'imgs_bskt/بسكت اولكر بالفراولة.jpg', stock: 1 },
+                { id: 6016, name: 'بسكت توركو بالموز', weight: 'قطعة', price: 250, img: 'imgs_bskt/بسكت توركو بالموز.jpg', stock: 1 },
+                { id: 6017, name: 'بسكت اولكر بالموز', weight: 'قطعة', price: 250, img: 'imgs_bskt/بسكت اولكر بالموز.jpg', stock: 1 },
+                { id: 6018, name: 'اوريو وسط', weight: 'قطعة', price: 500, img: 'imgs_bskt/no.jpg', stock: 1 },
+                { id: 6019, name: 'كوكيز بالكاكاو', weight: 'قطعة', price: 250, img: 'imgs_bskt/كوكيز بابيل كاكاو.jpg', stock: 1 },
+                { id: 6020, name: 'كوكيز بجوز الهند', weight: 'قطعة', price: 250, img: 'imgs_bskt/كوكيز بابيل جوز هند.jpg', stock: 1 },
+                { id: 6021, name: 'بسكت شعير', weight: 'قطعة', price: 250, img: 'imgs_bskt/بسكت شعير.jpg', stock: 1 },
+                { id: 6022, name: 'كوكيز بالزبدة', weight: 'قطعة', price: 250, img: 'imgs_bskt/كوكيز بالزبدة.jpg', stock: 1 },
+                { id: 6023, name: 'اوريو صغير', weight: 'قطعة', price: 250, img: 'imgs_bskt/اوريو صغير.jpg', stock: 1 }
+            ],
+           
+	    'جلاتين': [],
+        
+  	    'طاقة': [
+                
+                { id: 1200, name: 'K9 ازرق', weight: 'علبة', price: 500, img: 'imgs_power/k9blue.jpg', stock: 1 },         
+                { id: 1201, name: 'K9 احمر', weight: 'علبة', price: 500, img: 'imgs_power/k9red.jpg', stock: 1 },
+                { id: 1202, name: 'K9 اصفر', weight: 'علبة', price: 500, img: 'imgs_power/k9yellow.jpg', stock: 1 },
+                { id: 1203, name: 'K9 وردي', weight: 'علبة', price: 500, img: 'imgs_power/k9purpel.jpg', stock: 1 },
+                { id: 1204, name: 'اسبي رش احمر', weight: 'علبة', price: 500, img: 'imgs_power/aspirshred.jpg', stock: 1 },
+                { id: 1205, name: 'تايگر', weight: 'علبة', price: 1000, img: 'imgs_power/tiger.jpg', stock: 1 }
+            ],
+			
+            'مواد غذائية': [
+			
+	        { id: 9011, name: ' خميرة فورية صغيرة', weight: 'كيس', price: 500, img: 'imgs_mawad/خميرة سريعة.jpg', stock: 1 },
+                { id: 9012, name: 'بيكنج باودر 2', weight: 'كيس', price: 250, img: 'imgs_mawad/بيكنج باودر.jpg', stock: 1 },
+                { id: 9013, name: 'فانيلا 2', weight: 'كيس', price: 250, img: 'imgs_mawad/فانيلا.jpg', stock: 1 },
+                { id: 9014, name: 'سكر 1 كيلو', weight: 'كيس', price: 1250, img: 'imgs_mawad/سكر.jpg', stock: 1 },
+                { id: 9015, name: 'كشمش ربع كيلو', weight: 'كيس', price: 2000, img: 'imgs_mawad/كشمش.jpg', stock: 1 },
+                { id: 9016, name: 'حوز هند مبروش', weight: 'كيس', price: 500, img: 'imgs_mawad/جوز هند مبروش.jpg', stock: 1 },
+                { id: 9017, name: 'زيتون زير اسود', weight: 'علبة', price: 1250, img: 'imgs_mawad/زيتون زير اسود.jpg', stock: 1 },
+                { id: 9018, name: 'زيتون زير اخضر', weight: 'علبة', price: 1500, img: 'imgs_mawad/زيتون زير اخضر.jpg', stock: 1 },
+                { id: 9019, name: 'ملح زارا وسط', weight: 'كيس', price: 500, img: 'imgs_mawad/ملح زارا 500.jpg', stock: 1 },
+                { id: 9020, name: 'ملح زارا 2.5 كيلو', weight: 'كيس', price: 1500, img: 'imgs_mawad/ملح زارا 1500.jpg', stock: 1 },
+                { id: 9021, name: 'ملح صغير', weight: 'كيس', price: 250, img: 'imgs_mawad/ملح 250.jpg', stock: 1 },
+                { id: 9022, name: 'تمر سيف نبوت', weight: 'كيس', price: 3000, img: 'imgs_mawad/تمر سيف نبوت سعودي.jpg', stock: 1 },
+                { id: 9023, name: 'عجينة تمر كليجة', weight: 'كيس', price: 2000, img: 'imgs_mawad/عجينة تمر للكليجة.jpg', stock: 1 },
+                { id: 9024, name: 'مربى الطازج فراولة', weight: 'زجاج', price: 1500, img: 'imgs_mawad/مربى الطازج فراولة.jpg', stock: 1 },
+                { id: 9025, name: 'مربى الطازج مشمش', weight: 'زجاج', price: 1500, img: 'imgs_mawad/مربى الطازج مشمش.jpg', stock: 1 },
+                { id: 9026, name: 'مربى سيمرة مشمش', weight: 'علبة', price: 1000, img: 'imgs_mawad/مربى سيمرة مشمش.jpg', stock: 1 },
+                { id: 9027, name: 'مربى سيمرة جزر', weight: 'علبة', price: 1000, img: 'imgs_mawad/مربى سيمرة بالجزر.jpg', stock: 1 },
+                { id: 9028, name: 'مربى سيمرة تين', weight: 'علبة', price: 1000, img: 'imgs_mawad/مربى سيمرة تين.jpg', stock: 1 }
+		
+		],
+            'مكسرات': [
+                { id: 8001, name: 'فستق صغير', weight: 'كيس', price: 250, img: 'imgs_muksrat/fustk250.jpg', stock: 1 },
+                { id: 8002, name: 'حب ابيض صغير', weight: 'كيس', price: 250, img: 'imgs_muksrat/white250.jpg', stock: 1 },
+                { id: 8003, name: 'لوز صغير', weight: 'كيس', price: 250, img: 'imgs_muksrat/loz250.jpg', stock: 1 },
+                { id: 8004, name: 'كاجو صغير', weight: 'كيس', price: 250, img: 'imgs_muksrat/kajo250.jpg', stock: 1 },
+                { id: 8005, name: 'حب شمس صغير', weight: 'كيس', price: 250, img: 'imgs_muksrat/shams250.jpg', stock: 1 },
+                { id: 8006, name: 'مخلط وسط', weight: 'كيس', price: 500, img: 'imgs_muksrat/mukhalat500.jpg', stock: 1 },
+                { id: 8007, name: 'فستق وسط', weight: 'كيس', price: 1000, img: 'imgs_muksrat/fuskt1000.jpg', stock: 1 },
+                { id: 8008, name: 'حب ابيض كبير', weight: 'كيس', price: 1000, img: 'imgs_muksrat/white1000.jpg', stock: 1 },
+                { id: 8009, name: 'مخلط كبير', weight: 'كيس', price: 1000, img: 'imgs_muksrat/mukhalat1000.jpg', stock: 1 },
+                { id: 8010, name: 'حب شمس كبير', weight: 'كيس', price: 1000, img: 'imgs_muksrat/shams1000.jpg', stock: 1 },
+                { id: 8011, name: 'مكسرات عائلي', weight: 'كيس كبير', price: 2500, img: 'imgs_muksrat/mukhalat2500.jpg', stock: 1 },
+                { id: 8012, name: 'كاجو عائلي', weight: 'كيس كبير', price: 2500, img: 'imgs_muksrat/kajo2500.jpg', stock: 1 }
+            ],
+            'زيت وسمن نباتي': [
+		     	{ id: 8011, name: 'زيت الدار ', weight: '900 مل', price: 2500, img: 'imgs_oil/زيت الدار 900 غرام.jpg', stock: 1 },
+                { id: 8012, name: 'زيت زيتون الطازج', weight: 'زجاج', price: 2500, img: 'imgs_oil/زيت زيتون الطازج 2500.jpg', stock: 1 },
+                { id: 8013, name: 'سمن نباتي جنة', weight: '700 غرام', price: 3500, img: 'imgs_oil/دهن جنة.jpg', stock: 1 },
+                { id: 8014, name: 'سمن نباتي دلال الكويتي', weight: '1 كيلو', price: 4000, img: 'imgs_oil/دهن دلال 4000.jpg', stock: 1 },
+                { id: 8015, name: 'سمن نباتي دلال الكويتي', weight: '2 كيلو', price: 7500, img: 'imgs_oil/دهن دلال 7500.jpg', stock: 1 }
+	    ],
+            
+        };
 
-            let move = null;
 
-            if (difficulty === 'easy') {
-                move = getRandomMove();
-            } else if (difficulty === 'medium') {
-                // يحاول الفوز، وإذا لم يستطع يمنع الخصم بنسبة 50%، وإلا عشوائي
-                move = findBestMove('O');
-                if (move === null && Math.random() > 0.5) move = findBestMove('X');
-                if (move === null) move = getRandomMove();
-            } else {
-                // صعب: يحاول الفوز، ثم يمنع الخصم، ثم عشوائي
-                move = findBestMove('O');
-                if (move === null) move = findBestMove('X');
-                if (move === null) move = getRandomMove();
-            }
 
-            if (move !== -1 && move !== null) {
-                gameBoard[move] = 'O';
-                updateCell(move, 'O');
-                if (!checkWinner()) currentPlayer = 'X';
-            }
-        }
 
-        function findBestMove(player) {
-            const winConditions = [
-                [0, 1, 2], [3, 4, 5], [6, 7, 8],
-                [0, 3, 6], [1, 4, 7], [2, 5, 8],
-                [0, 4, 8], [2, 4, 6]
-            ];
 
-            for (let condition of winConditions) {
-                const [a, b, c] = condition;
-                // البحث عن خانتين ممتلئتين والثالثة فارغة
-                if (gameBoard[a] === player && gameBoard[b] === player && gameBoard[c] === '') return c;
-                if (gameBoard[a] === player && gameBoard[c] === player && gameBoard[b] === '') return b;
-                if (gameBoard[b] === player && gameBoard[c] === player && gameBoard[a] === '') return a;
-            }
-            return null;
-        }
 
-        function getRandomMove() {
-            let available = [];
-            gameBoard.forEach((cell, index) => {
-                if (cell === '') available.push(index);
-            });
-            if (available.length === 0) return -1;
-            // تفضيل المنتصف إذا كان فارغاً
-            if (available.includes(4)) return 4;
-            return available[Math.floor(Math.random() * available.length)];
-        }
 
-        function checkWinner() {
-            const winConditions = [
-                [0, 1, 2], [3, 4, 5], [6, 7, 8],
-                [0, 3, 6], [1, 4, 7], [2, 5, 8],
-                [0, 4, 8], [2, 4, 6]
-            ];
 
-            for (let condition of winConditions) {
-                const [a, b, c] = condition;
-                if (gameBoard[a] && gameBoard[a] === gameBoard[b] && gameBoard[a] === gameBoard[c]) {
-                    document.getElementById('status').innerText = gameBoard[a] === 'X' ? 'أنت فزت!' : 'الكمبيوتر فاز!';
-                    gameActive = false;
-                    return true;
-                }
-            }
 
-            if (!gameBoard.includes('')) {
-                document.getElementById('status').innerText = 'تعادل!';
-                gameActive = false;
-                return true;
-            }
-            return false;
-        }
 
-        function resetXO() {
-            gameBoard = ['', '', '', '', '', '', '', '', ''];
-            gameActive = true;
-            currentPlayer = 'X';
-            document.getElementById('status').innerText = '';
-            const cells = document.getElementsByClassName('cell');
-            for (let cell of cells) {
-                cell.innerText = '';
-                cell.classList.remove('x', 'o');
-            }
-        }
-    </script>
-</body>
-</html>
