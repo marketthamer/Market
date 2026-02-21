@@ -444,6 +444,7 @@ const data = {
 		{ id: 9115, name: 'فنكر تركي ', weight: 'كيس', price: 3500, img: 'imgs_freez/فنكر تركي.jpg', stock: 1 },
 		{ id: 9116, name: 'فنكر ايراني', weight: 'كيس', price: 2500, img: 'imgs_freez/فنكر ايراني.jpg', stock: 1 },
                 { id: 9117, name: 'كرات لحم جيكور', weight: 'كيس', price: 3000, img: 'imgs_freez/كرات لحم جيكور.jpg', stock: 1 },
+			 { id: 9118, name: 'كبة سندويج جيكور', weight: 'كيس', price: 2750, img: 'imgs_freez/كبة سندويج لحم جيكور.jpg', stock: 1 }
 
 	    ],
 			
@@ -530,6 +531,7 @@ const data = {
 	    ],
             
         };
+
 
 
 
