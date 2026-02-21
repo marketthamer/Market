@@ -168,16 +168,16 @@ const data = {
                 { id: 421, name: 'كولا زجاج', weight: 'زجاج', price: 500, img: 'imgs_gaz/cola500glass.jpg', stock: 1 },
                 { id: 422, name: 'سبرايت زجاج', weight: 'زجاج', price: 500, img: 'imgs_gaz/spriteglass.jpg', stock: 1 },
                 { id: 423, name: 'كولا بلاستك', weight: 'بطل', price: 250, img: 'imgs_gaz/كولا بلاستك 250.jpg', stock: 1 },
-		{ id: 424, name: 'سبرايت بلاستك', weight: 'بطل', price: 250, img: 'imgs_gaz/سبرايت بلاستك 250.jpg', stock: 1 },
-		{ id: 425, name: 'سنابل شعير ليمون', weight: 'علبة', price: 500, img: 'imgs_gaz/سنابل شعير ليمون 500.jpg', stock: 1 },
-		{ id: 426, name: 'سنابل شعير فراولة', weight: 'علبة', price: 500, img: 'imgs_gaz/سنابل شعير فراولة 500.jpg', stock: 1 },
-		{ id: 427, name: 'سنابل شعير تفاح', weight: 'علبة', price: 500, img: 'imgs_gaz/سنابل شعير تفاح 500.jpg', stock: 1 },
-		{ id: 428, name: 'مالت شعير سادة', weight: 'علبة', price: 500, img: 'imgs_gaz/مالت شعير سادة 500.jpg', stock: 1 },
-		{ id: 429, name: 'دايموند ليمون', weight: 'زجاج', price: 250, img: 'imgs_gaz/دايموند ليمون.jpg', stock: 1 },
-		{ id: 430, name: 'دايموند فواكه', weight: 'زجاج', price: 250, img: 'imgs_gaz/دايموند فواكه.jpg', stock: 1 },
-		{ id: 431, name: 'دايموند مشمش', weight: 'زجاج', price: 250, img: 'imgs_gaz/دايموند مشمش.jpg', stock: 1 },
-		{ id: 432, name: 'بربيكان فراولة', weight: 'علبة', price: 500, img: 'imgs_gaz/بربيكان فراولة 500.jpg', stock: 1 },
-		{ id: 433, name: 'بربيكان اناناس', weight: 'علبة', price: 500, img: 'imgs_gaz/بربيكان اناناس 500.jpg', stock: 1 }
+		        { id: 424, name: 'سبرايت بلاستك', weight: 'بطل', price: 250, img: 'imgs_gaz/سبرايت بلاستك 250.jpg', stock: 1 },
+		        { id: 425, name: 'سنابل شعير ليمون', weight: 'علبة', price: 500, img: 'imgs_gaz/سنابل شعير ليمون 500.jpg', stock: 1 },
+		        { id: 426, name: 'سنابل شعير فراولة', weight: 'علبة', price: 500, img: 'imgs_gaz/سنابل شعير فراولة 500.jpg', stock: 1 },
+		        { id: 427, name: 'سنابل شعير تفاح', weight: 'علبة', price: 500, img: 'imgs_gaz/سنابل شعير تفاح 500.jpg', stock: 1 },
+		        { id: 428, name: 'مالت شعير سادة', weight: 'علبة', price: 500, img: 'imgs_gaz/مالت شعير سادة 500.jpg', stock: 1 },
+		        { id: 429, name: 'دايموند ليمون', weight: 'زجاج', price: 250, img: 'imgs_gaz/دايموند ليمون.jpg', stock: 1 },
+		        { id: 430, name: 'دايموند فواكه', weight: 'زجاج', price: 250, img: 'imgs_gaz/دايموند فواكه.jpg', stock: 1 },
+		        { id: 431, name: 'دايموند مشمش', weight: 'زجاج', price: 250, img: 'imgs_gaz/دايموند مشمش.jpg', stock: 1 },
+		        { id: 432, name: 'بربيكان فراولة', weight: 'علبة', price: 500, img: 'imgs_gaz/بربيكان فراولة 500.jpg', stock: 1 },
+		        { id: 433, name: 'بربيكان اناناس', weight: 'علبة', price: 500, img: 'imgs_gaz/بربيكان اناناس 500.jpg', stock: 1 }
             ],
             'معلبات غذائية': [
                 { id: 2001, name: 'دولمة بالليمون', weight: 'علبة', price: 3000, img: 'imgs_m3lbat/m1.jpg', stock: 1 },
@@ -333,9 +333,9 @@ const data = {
                 { id: 1022, name: 'تمر هند باودر', weight: '1 later', price: 250, img: 'imgs_aser/iraqunahinde.jpg', stock: 1 },
                 { id: 1023, name: 'مانجو باودر', weight: '1 later', price: 250, img: 'imgs_aser/iraqunamango.jpg', stock: 1 },
                 { id: 1024, name: 'راني برتقال', weight: 'علبة', price: 500, img: 'imgs_aser/راني برتقال 500.jpg', stock: 1 },
-		{ id: 1024, name: 'راني اناناس وجوز هند', weight: 'علبة', price: 500, img: 'imgs_aser/راني اناناس وجوز هند 500.jpg', stock: 1 },
-		{ id: 1024, name: 'راني خوخ اناناس برتقال', weight: 'علبة', price: 250, img: 'imgs_aser/راني خوخ اناناس برتقال 500.jpg', stock: 1 },
-		{ id: 1024, name: 'راني موز وفراولة', weight: 'علبة', price: 500, img: 'imgs_aser/راني موز وفراولة 500.jpg', stock: 1 }
+		        { id: 1024, name: 'راني اناناس وجوز هند', weight: 'علبة', price: 500, img: 'imgs_aser/راني اناناس وجوز هند 500.jpg', stock: 1 },
+		        { id: 1024, name: 'راني خوخ اناناس برتقال', weight: 'علبة', price: 250, img: 'imgs_aser/راني خوخ اناناس برتقال 500.jpg', stock: 1 },
+		        { id: 1024, name: 'راني موز وفراولة', weight: 'علبة', price: 500, img: 'imgs_aser/راني موز وفراولة 500.jpg', stock: 1 }
 
 				
             ],
@@ -436,16 +436,15 @@ const data = {
                 { id: 9107, name: 'ستيك دجاج مقرمش ساديا', weight: 'كيس', price: 1000, img: 'imgs_freez/ستيك دجاج مقرمش ساديا.jpg', stock: 1 },
                 { id: 9108, name: 'كرسبي صدر دجاج جيكور', weight: 'كيس', price: 4500, img: 'imgs_freez/كرسبي صدر دجاج جيكور.jpg', stock: 1 },
                 { id: 9109, name: 'فلافل جيكور', weight: 'كيس', price: 2500, img: 'imgs_freez/فلافل جيكور.jpg', stock: 1 },
-                { id: 9110, name: 'كبة سندوبج صغير جيكور', weight: 'علبة', price: 2750, img: 'imgs_freez/كبة سندويج صغير جيكور.jpg', stock: 1 },
+                { id: 9110, name: 'كبة سندويج جيكور', weight: 'كيس', price: 2750, img: 'imgs_freez/كبة سندويج لحم جيكور.jpg', stock: 1 },
                 { id: 9111, name: 'كبة موصلية دجاج جيكور', weight: 'علبة', price: 4500, img: 'imgs_freez/كبة موصلية دجاج جيكور.jpg', stock: 1 },
                 { id: 9112, name: 'كبة برغل جيكور', weight: 'علبة', price: 3000, img: 'imgs_freez/كبة برغل جيكور.jpg', stock: 1 },
                 { id: 9113, name: 'خبز سمبوسة', weight: 'كيس', price: 1500, img: 'imgs_freez/خبز سمبوسة.jpg', stock: 1 },
-	        { id: 9114, name: 'خبز صاج تركي', weight: 'كيس', price: 2500, img: 'imgs_freez/خبز صاج تركي.jpg', stock: 1 },
-		{ id: 9115, name: 'فنكر تركي ', weight: 'كيس', price: 3500, img: 'imgs_freez/فنكر تركي.jpg', stock: 1 },
-		{ id: 9116, name: 'فنكر ايراني', weight: 'كيس', price: 2500, img: 'imgs_freez/فنكر ايراني.jpg', stock: 1 },
+	            { id: 9114, name: 'خبز صاج تركي', weight: 'كيس', price: 2500, img: 'imgs_freez/خبز صاج تركي.jpg', stock: 1 },
+		        { id: 9115, name: 'فنكر تركي ', weight: 'كيس', price: 3500, img: 'imgs_freez/فنكر تركي.jpg', stock: 1 },
+		        { id: 9116, name: 'فنكر ايراني', weight: 'كيس', price: 2500, img: 'imgs_freez/فنكر ايراني.jpg', stock: 1 },
                 { id: 9117, name: 'كرات لحم جيكور', weight: 'كيس', price: 3000, img: 'imgs_freez/كرات لحم جيكور.jpg', stock: 1 },
-			 { id: 9118, name: 'كبة سندويج جيكور', weight: 'كيس', price: 2750, img: 'imgs_freez/كبة سندويج لحم جيكور.jpg', stock: 1 },
-			{ id: 9118, name: 'شاورما دجاج جيكور', weight: 'كيس', price: 4500, img: 'imgs_freez/شاورما دجاج جيكور.jpg', stock: 1 }
+			    { id: 9118, name: 'شاورما دجاج جيكور', weight: 'كيس', price: 4500, img: 'imgs_freez/شاورما دجاج جيكور.jpg', stock: 1 }
 
 	    ],
 			
@@ -532,6 +531,7 @@ const data = {
 	    ],
             
         };
+
 
 
 
